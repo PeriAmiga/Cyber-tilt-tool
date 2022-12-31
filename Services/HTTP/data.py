@@ -1,12 +1,14 @@
-FAKE = {
- "admin": "admin"
+FAKE_ADMIN = {
+    "admin": "admin",
+    "peri": "123456",
+    "moshe": "thecup"
 }
 
-USERS = [
+FAKE_USERS = [
     {
         "PrivateName" : "Moshe",
         "LastName" : "Frankipour",
-        "ID" : "",
+        "ID" : "21312312",
         "Phone" : "054-55987541",
         "Email": "blalb@gmail.com",
         "City": "jr"
@@ -14,7 +16,7 @@ USERS = [
     {
         "PrivateName" : "Peri",
         "LastName" : "Amiga",
-        "ID" : "",
+        "ID" : "213213213",
         "Phone" : "054-55987541",
         "Email": "blalb@gmail.com",
         "City": "jr"
@@ -22,7 +24,7 @@ USERS = [
     {
         "PrivateName" : "Tomer",
         "LastName" : "Idan",
-        "ID" : "",
+        "ID" : "213213",
         "Phone" : "054-55987541",
         "Email": "blalb@gmail.com",
         "City": "jr"
@@ -30,9 +32,69 @@ USERS = [
     {
         "PrivateName" : "Ron",
         "LastName" : "Frankipour",
-        "ID" : "",
+        "ID" : "21321321",
         "Phone" : "054-55987541",
         "Email": "blalb@gmail.com",
         "City": "jr"
+    }
+]
+
+FAKE_EMPLOYMENTS = [
+    {
+        "UserID":"rirani",
+        "JobTitleName":"Developer",
+        "PrivateName":"Romin",
+        "LastName":"Irani",
+        "Region":"CA",
+        "Phone":"408-1234567",
+        "Email":"romin.k.irani@gmail.com"
     },
+    {
+        "UserID":"nirani",
+        "JobTitleName":"Developer",
+        "PrivateName":"Neil",
+        "LastName":"Irani",
+        "Region":"CA",
+        "Phone":"408-1111111",
+        "Email":"neilrirani@gmail.com"
+    },
+    {
+        "UserID":"thanks",
+        "JobTitleName":"Program Directory",
+        "PrivateName":"Tom",
+        "LastName":"Hanks",
+        "Region":"CA",
+        "Phone":"408-2222222",
+        "Email":"tomhanks@gmail.com"
+    }
+]
+
+FAKE_ADMINS_DETAILS = [
+    {
+        "UserID":"MosheF",
+        "JobTitleName":"Developer",
+        "PrivateName":"Moshe",
+        "LastName":"Frankipour",
+        "Region":"IL",
+        "Phone":"050-5165165",
+        "Email":"moshe.f@gmail.com"
+    },
+    {
+        "UserID":"TomerI",
+        "JobTitleName":"Developer",
+        "PrivateName":"Tomer",
+        "LastName":"Idan",
+        "Region":"IL",
+        "Phone":"050-1111111",
+        "Email":"tomer.i@gmail.com"
+    },
+    {
+        "UserID":"PeriA",
+        "JobTitleName":"Developer",
+        "PrivateName":"Peri",
+        "LastName":"Amiga",
+        "Region":"IL",
+        "Phone":"050-2222222",
+        "Email":"peri.a@gmail.com"
+    }
 ]

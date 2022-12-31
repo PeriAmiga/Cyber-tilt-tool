@@ -14,7 +14,7 @@
         <div class="background"></div>
     </div>
 
-    <form id="accesspanel" action="login" method="get">
+    <form id="accesspanel">
         <h1 id="litheader">Login</h1>
         <div class="inset">
             <p>
@@ -24,12 +24,71 @@
                 <input type="password" name="password" id="password" placeholder="Password">
             </p>
         </div>
+        <div class="p-container" id="loginError"></div>
         <p class="p-container">
-            <input type="submit" value="Login">
+            <input type="submit" id="login" value="Login">
         </p>
     </form>
+    <script>
+        function loginFunction(event){
+            let username = document.querySelector("#username").value;
+            let password = document.querySelector("#password").value;
+            if(validate(username, password))
+            {
+                fetch(`/login?username=${username}&password=${password}`, {
+                    method: 'GET',
+                })
+                    .then((response) => response.text())
+                    .then((response) => {
+                        if (response == "No permissions!")
+                            throw "No permissions";
 
-    <script src="script.js"> </script>
+                        document.querySelector("body").innerHTML = response;
+                        var scripts = document.querySelector("body").querySelectorAll("script");
+                        for (var i = 0; i < scripts.length; i++) {
+                            if (scripts[i].innerText) {
+                                eval(scripts[i].innerText);
+                            }
+                            else
+                            {
+                                fetch(scripts[i].src).then(function (data) {
+                                    data.text().then(function (r) {
+                                        eval(r);
+                                        })
+                                    });
+                                }
+                                // To not repeat the element
+                                scripts[i].parentNode.removeChild(scripts[i]);
+                            }
+                    })
+                    .catch((error) => {
+                        alert(error)
+                    });
+            }
+            event.preventDefault();
+        }
+
+        function validate(username,password) {
+            let status = true;
+            if (username === "" || password === "")
+            {
+                let msg;
+                if (username === "" && password === "")
+                    msg = "Invalid Details";
+                else if(username === "")
+                    msg = "Invalid Username";
+                else
+                    msg = "Invalid Password";
+                document.getElementById("loginError").innerHTML = msg;
+                status = false;
+            }
+            else
+                document.getElementById("loginError").innerHTML = "";
+
+            return status;
+        }
+
+        document.getElementById("accesspanel").addEventListener("submit", loginFunction);
+    </script>
 </body>
-
 </html>

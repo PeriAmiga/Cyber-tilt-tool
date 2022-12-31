@@ -49,7 +49,6 @@ body {
 }
 
 .background {
-  background: url('https://myrror.co/etc/419062774_1385132057.jpg');
   background-position: center;
   background-size: cover;
   filter: blur(10px);
@@ -109,7 +108,7 @@ form:before {
 
 .inset {
   border-top: 1px solid #19191a;
-  padding: 20px;
+  padding: 20px 20px 0 20px;
 }
 
 form h1 {
@@ -416,4 +415,53 @@ input[type="checkbox"]:checked ~ .checkbox {
   left: 50%;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
+}
+
+.table {
+  width: 100%;
+}
+table {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  border-collapse: collapse;
+  background: #34495e;
+  color: #f3f3f3;
+}
+
+table td, table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+
+table tr:hover {background-color: rgba(255, 230, 0, 0.7);}
+
+table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  /*background-color: #ff0014;*/
+  /*color: white;*/
+  height: 50%;
+  text-align: center;
+}
+
+tr:nth-of-type(odd) {
+  background: #16a085;
+}
+
+th {
+  background: #2c3e50;
+  font-weight: bold;
+}
+
+#loginError {
+  color: red;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 0;
+  padding-top: 0;
 }
