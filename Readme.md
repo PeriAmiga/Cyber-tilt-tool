@@ -1,7 +1,7 @@
 <h1 align="center"> Cyber HIT project - traps for attackers on services </h1>
 
 
-### Commands
+## Commands
 #### Services
 ```
 HTTP  ->  python -m uvicorn main:app --reload 
@@ -18,7 +18,8 @@ RDP   ->
 Run   ->
 Stop  ->
 ```
-#### Routing
+
+## Routing
 ```
 API:          :5000
 GUI:          :5001
@@ -28,7 +29,6 @@ Services -
   SMTP:       :25
   RDP:        :3389
 ```
-
 
 ## Roadmap
 - [ ] Backend (API)
