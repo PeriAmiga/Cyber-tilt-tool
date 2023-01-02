@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Login HTTP service</title>
+    <title>HTTP service</title>
 </head>
 
 <body>
@@ -35,15 +35,21 @@
             let password = document.querySelector("#password").value;
             if(validate(username, password))
             {
-                fetch(`/login?username=${username}&password=${password}`, {
-                    method: 'GET',
+                const data = {'username': username, 'password': password}
+                const headers = {
+                    'Content-Type': 'application/json'
+                }
+                fetch(`/login`, {
+                    method: 'post',
+                    headers: headers,
+                    body: JSON.stringify(data),
                 })
                     .then((response) => response.text())
-                    .then((response) => {
-                        if (response == "No permissions!")
+                    .then((res) => {
+                        if (res == "No permissions!")
                             throw "No permissions";
 
-                        document.querySelector("body").innerHTML = response;
+                        document.querySelector("body").innerHTML = res;
                         var scripts = document.querySelector("body").querySelectorAll("script");
                         for (var i = 0; i < scripts.length; i++) {
                             if (scripts[i].innerText) {

@@ -216,6 +216,18 @@ function administratordetails(){
         });
 }
 
-document.querySelector("#btn1").addEventListener("click", usersdetails);
-document.querySelector("#btn2").addEventListener("click", employmentsdetails);
-document.querySelector("#btn3").addEventListener("click", administratordetails);
+const logout = async() => {
+    await fetch('/logout', {
+        method: 'post',
+    })
+        .then((response) => response.text())
+        .then((result) => {
+            location.reload();
+        })
+        .catch((error) => console.error($`ERROR logout: ${error}`))
+}
+
+document.querySelector("#usersDetails").addEventListener("click", usersdetails);
+document.querySelector("#employmentsDetails").addEventListener("click", employmentsdetails);
+document.querySelector("#administratorDetails").addEventListener("click", administratordetails);
+document.querySelector("#logout").addEventListener("click", logout);

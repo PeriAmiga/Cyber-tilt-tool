@@ -402,11 +402,16 @@ input[type="checkbox"]:checked ~ .checkbox {
 }
 
 .container {
-  margin-top: 10%;
+  margin-top: 10px;
   margin-right: 25%;
   margin-left: 25%;
   position: relative;
 }
+.container .vertical-center {
+  margin-top: 10%;
+}
+
+
 
 .center {
   margin: 0;
@@ -464,4 +469,29 @@ th {
   text-align: center;
   margin-top: 0;
   padding-top: 0;
+}
+
+/*  nav  */
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+nav li {
+  float: left;
+}
+
+nav li button,nav li span {
+  display: block;
+  color: white;
+  background: rgba(255, 255, 255, 0);
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+nav li button:hover {
+  background-color: #111;
 }
