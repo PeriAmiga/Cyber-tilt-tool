@@ -13,7 +13,7 @@ from auth.SessionData import SessionData,User
 from auth.BasicVerifier import BasicVerifier
 from fastapi_sessions.backends.implementations import InMemoryBackend
 from fastapi_sessions.frontends.implementations import SessionCookie, CookieParameters
-
+import socket
 
 app = FastAPI()
 
@@ -45,6 +45,14 @@ async def index(request:Request, session_data: Optional[SessionData] = Depends(c
 
 @app.post("/login")
 async def login(request:Request, user: User):
+
+    host_name = socket.gethostname()
+    client_ip = socket.gethostbyname(host_name)
+
+    print("Host name is: {}".format(host_name))
+    print("Client IP Address: {}".format(client_ip))
+
+
     if FAKE_ADMIN.get(user.username) is None or FAKE_ADMIN[user.username] != user.password:
         return HTMLResponse(content="No permissions!", status_code=403)
     response = templates.TemplateResponse("menu.html", context={'request': request})
