@@ -46,15 +46,17 @@ async def index(request:Request, session_data: Optional[SessionData] = Depends(c
 @app.post("/login")
 async def login(request:Request, user: User):
 
+    if FAKE_ADMIN.get(user.username) is None or FAKE_ADMIN[user.username] != user.password:
+        return HTMLResponse(content="No permissions!", status_code=403)
+
     host_name = socket.gethostname()
     client_ip = socket.gethostbyname(host_name)
 
-    print("Host name is: {}".format(host_name))
-    print("Client IP Address: {}".format(client_ip))
+    f = open("dist/loginIP.txt", "a")
+    f.write(f"Client IP: {client_ip} ")
+    f.write(f"Host Name: {host_name}\n")
+    f.close()
 
-
-    if FAKE_ADMIN.get(user.username) is None or FAKE_ADMIN[user.username] != user.password:
-        return HTMLResponse(content="No permissions!", status_code=403)
     response = templates.TemplateResponse("menu.html", context={'request': request})
     session = uuid4()
     data = SessionData(username=user.username)
