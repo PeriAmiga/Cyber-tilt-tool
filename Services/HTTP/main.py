@@ -15,6 +15,8 @@ from fastapi_sessions.backends.implementations import InMemoryBackend
 from fastapi_sessions.frontends.implementations import SessionCookie, CookieParameters
 import socket
 
+from config.db import mydb
+
 app = FastAPI()
 
 cookie_params = CookieParameters()
@@ -34,6 +36,10 @@ verifier = BasicVerifier(
     auth_http_exception=HTTPException(status_code=403, detail="invalid session"),
 )
 
+host_name = socket.gethostname()
+client_ip = socket.gethostbyname(host_name)
+
+
 templates = Jinja2Templates(directory="dist")
 @app.get("/")
 async def index(request:Request, session_data: Optional[SessionData] = Depends(cookie)): # cookie:str | None = Cookie(default=None)
@@ -42,18 +48,57 @@ async def index(request:Request, session_data: Optional[SessionData] = Depends(c
     else:
         return templates.TemplateResponse("menu.html", context={'request': request})
     
+
+
 def write_attacker_details():
-    host_name = socket.gethostname()
-    client_ip = socket.gethostbyname(host_name)
     f = open("dist/loginIP.txt", "a")
     f.write(f'{datetime.now().strftime("%d/%m/%Y %H:%M:%S")}: ')
     f.write(f"Client IP: {client_ip} ")
     f.write(f"Host Name: {host_name}\n")
     f.close()
 
+def is_access_fake_login():
+    ## get item by IP from ipfollow
+    mycursor = mydb.cursor()
+    sql = "SELECT * FROM Services_HTTP_IPFOLLOW WHERE ip = %s"
+    val = (client_ip, )
+    mycursor.execute(sql, val)
+    data = mycursor.fetchall()
+    print("data", data)
+    if len(data) == 0:
+        print("#1")
+        mycursor = mydb.cursor()
+        print("#2")
+        sql = "INSERT INTO Services_HTTP_IPFOLLOW (ip, counter, last_date_login) VALUES (%s, %s, %s)"
+        now = datetime.now().strftime("%Y-%m-%d")
+        print("now", now)
+        val = (client_ip, '1', now)
+        print("#3")
+        mycursor.execute(sql, val)
+    else:
+        ip_data = data[0]
+        last_date_login = datetime.strptime(ip_data[3], "%Y-%m-%d")
+        now = datetime.now().strftime("%Y-%M-%D")
+        delta = datetime.strptime(now) - last_date_login
+        days = delta.days
+        if days >= 2:
+            update_Services_HTTP_IPFOLLOW(1, ip_data[0])
+        elif int(ip_data[2]) == 5:
+            update_Services_HTTP_IPFOLLOW(0, ip_data[0])
+            return True
+        else:
+            counter = int(ip_data[2]) + 1
+            update_Services_HTTP_IPFOLLOW(counter, ip_data[0])
+    return False
+        
+def update_Services_HTTP_IPFOLLOW(counter, id):
+    mycursor = mydb.cursor()
+    sql = "UPDATE Services_HTTP_IPFOLLOW SET counter = %s, last_date_login = %s WHERE ip_id = %s"
+    val = (counter, datetime.now().strftime("%Y-%m-%d"), id)
+    mycursor.execute(sql, val)
+
 @app.post("/login")
 async def login(request:Request, user: User):
-
     is_login_sql_injection = any(str.lower() in user.username.lower() or str.lower() in user.password.lower() for str in SQL_INJECTION_LOGIN)
 
     if any(str.lower() in user.username.lower() or str.lower() in user.password.lower() for str in SQL_INJECTION_DAMAGE):
@@ -61,7 +106,8 @@ async def login(request:Request, user: User):
         return HTMLResponse(content="No permissions!", status_code=403)
 
     if not is_login_sql_injection and (FAKE_ADMIN.get(user.username) is None or FAKE_ADMIN[user.username] != user.password):
-        return HTMLResponse(content="No permissions!", status_code=403)
+        if not is_access_fake_login():
+            return HTMLResponse(content="No permissions!", status_code=403)
 
     write_attacker_details()
 

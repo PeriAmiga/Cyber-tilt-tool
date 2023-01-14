@@ -5,9 +5,15 @@ services:
   service_http:
     build: /Services/HTTP
     ports:
-      - 8080:80
+      - 8000:80
     volumes:
       - ./Services/HTTP:/app
+    environment:
+      - USERNAME_DB=${USERNAME_DB}
+      - PASSWORD_DB=${PASSWORD_DB}
+    depends_on:
+      db:
+        condition: service_healthy
 
   ## Logger
 

@@ -2,4 +2,6 @@ fastapi
 fastapi_sessions
 uvicorn[standard]
 jinja2
-# mysql-connector-python
+mysql
+mysql-connector
+mysql-connector-python
