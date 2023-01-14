@@ -1,8 +1,16 @@
 FAKE_ADMIN = {
     "admin": "admin",
-    "peri": "123456",
-    "moshe": "thecup"
+    "dev": "fullaccess",
+    "administrator": "P@sw0rd"
 }
+
+SQL_INJECTION_LOGIN = [
+    '" or ""="', ';', 'OR 1=1'
+]
+
+SQL_INJECTION_DAMAGE = [
+    'DROP TABLE'
+]
 
 FAKE_USERS = [
     {

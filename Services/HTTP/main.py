@@ -2,8 +2,8 @@ from fastapi import FastAPI,Response, HTTPException, Depends,Request,Cookie
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse, JSONResponse
-from data import FAKE_ADMIN,FAKE_USERS,FAKE_EMPLOYMENTS,FAKE_ADMINS_DETAILS
-from datetime import timedelta
+from data import FAKE_ADMIN,FAKE_USERS,FAKE_EMPLOYMENTS,FAKE_ADMINS_DETAILS, SQL_INJECTION_LOGIN, SQL_INJECTION_DAMAGE
+from datetime import timedelta, datetime
 from typing import Tuple, Optional, Any
 
 from fastapi.responses import StreamingResponse
@@ -42,20 +42,28 @@ async def index(request:Request, session_data: Optional[SessionData] = Depends(c
     else:
         return templates.TemplateResponse("menu.html", context={'request': request})
     
+def write_attacker_details():
+    host_name = socket.gethostname()
+    client_ip = socket.gethostbyname(host_name)
+    f = open("dist/loginIP.txt", "a")
+    f.write(f'{datetime.now().strftime("%d/%m/%Y %H:%M:%S")}: ')
+    f.write(f"Client IP: {client_ip} ")
+    f.write(f"Host Name: {host_name}\n")
+    f.close()
 
 @app.post("/login")
 async def login(request:Request, user: User):
 
-    if FAKE_ADMIN.get(user.username) is None or FAKE_ADMIN[user.username] != user.password:
+    is_login_sql_injection = any(str.lower() in user.username.lower() or str.lower() in user.password.lower() for str in SQL_INJECTION_LOGIN)
+
+    if any(str.lower() in user.username.lower() or str.lower() in user.password.lower() for str in SQL_INJECTION_DAMAGE):
+        write_attacker_details()
         return HTMLResponse(content="No permissions!", status_code=403)
 
-    host_name = socket.gethostname()
-    client_ip = socket.gethostbyname(host_name)
+    if not is_login_sql_injection and (FAKE_ADMIN.get(user.username) is None or FAKE_ADMIN[user.username] != user.password):
+        return HTMLResponse(content="No permissions!", status_code=403)
 
-    f = open("dist/loginIP.txt", "a")
-    f.write(f"Client IP: {client_ip} ")
-    f.write(f"Host Name: {host_name}\n")
-    f.close()
+    write_attacker_details()
 
     response = templates.TemplateResponse("menu.html", context={'request': request})
     session = uuid4()
