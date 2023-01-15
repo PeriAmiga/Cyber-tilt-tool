@@ -23,6 +23,10 @@ services:
     environment:
       - USERNAME_DB=${USERNAME_DB}
       - PASSWORD_DB=${PASSWORD_DB}
+      - FTP_PORT=${FTP_PORT}
+      - FTP_USER=${FTP_USER}
+      - FTP_PASSWORD=${FTP_PASSWORD}
+      - FTP_DIRECTORY=${FTP_DIRECTORY}
     depends_on:
       db:
         condition: service_healthy
