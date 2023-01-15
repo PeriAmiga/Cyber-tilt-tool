@@ -5,7 +5,7 @@ services:
   service_http:
     build: /Services/HTTP
     ports:
-      - 8000:80
+      - 8080:80
     volumes:
       - ./Services/HTTP:/app
     environment:
@@ -17,7 +17,7 @@ services:
   service_ftp:
     build: /Services/FTP
     ports:
-      - 21:21
+      - 2121:21
     volumes:
       - ./Services/FTP:/app
     environment:

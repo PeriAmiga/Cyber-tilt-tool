@@ -5,4 +5,4 @@ RUN pip3 install -r /app/requirements.txt
 COPY ./ /app/
 EXPOSE 21
 
-CMD ["main.py"]
+CMD ["python", "main.py"]
