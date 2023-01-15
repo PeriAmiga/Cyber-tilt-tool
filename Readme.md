@@ -5,7 +5,7 @@
 #### Services
 ```
 HTTP  ->  python -m uvicorn main:app --reload 
-FTP   ->
+FTP   ->  python main.py
 SMTP  ->
 RDP   ->
 ```
@@ -13,7 +13,7 @@ RDP   ->
 ```
 
 ```
-#### Docker
+## Docker Command
 ```
 Run     -> docker compose up
 Stop    -> docker compose down
@@ -25,7 +25,7 @@ Testing ->
 API:          :5000
 GUI:          :5001
 Services -
-  HTTP:       :8080
+  HTTP:       :8000
   FTP:        :21
   SMTP:       :25
   RDP:        :3389
@@ -41,14 +41,16 @@ Services -
 - [ ] DB (MySQL)
   - [ ] Design
   - [ ] Init table
+    - [x] Services_HTTP_IPFOLLOW
+    - [ ] Services_
+    - [ ] Services_
 - [ ] Services
   - [ ] HTTP
     - [x] Client
     - [x] API
-    - [ ] Traps
+    - [x] Traps
   - [ ] FTP
-    - [ ] Client
-    - [ ] API
+    - [x] Client
     - [ ] Traps
   - [ ] SMTP
     - [ ] Client
