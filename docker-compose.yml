@@ -14,6 +14,18 @@ services:
     depends_on:
       db:
         condition: service_healthy
+  service_ftp:
+    build: /Services/FTP
+    ports:
+      - 21:21
+    volumes:
+      - ./Services/FTP:/app
+    environment:
+      - USERNAME_DB=${USERNAME_DB}
+      - PASSWORD_DB=${PASSWORD_DB}
+    depends_on:
+      db:
+        condition: service_healthy
 
   ## Logger
 
