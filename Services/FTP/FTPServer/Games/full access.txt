@@ -1,0 +1,3 @@
+To get full access to the server write
+Username: Administrator
+Password: admin

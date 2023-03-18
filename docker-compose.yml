@@ -54,7 +54,7 @@ services:
       MYSQL_PASSWORD: "${PASSWORD_DB}"
       MYSQL_ROOT_PASSWORD: "${PASSWORD_DB}"
     ports:
-      - 3309:3306
+      - 3306:3306
     expose:
       - 3306
     volumes:
