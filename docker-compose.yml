@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  ## services- HTTP, FTP, RDP, SMTP
+  ## services- HTTP, FTP, SSH, SMTP
   service_http:
     build: /Services/HTTP
     ports:

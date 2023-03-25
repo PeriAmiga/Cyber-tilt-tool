@@ -1,0 +1,1055 @@
+
+
+Connection from: 127.0.0.1
+$ ls
+pw.txt
+$ yuname
+I see you are trying to hack, would you like some help with that?
+
+                        _.-;:q=._
+                      .' j=""^k;:\.
+                     ; .F       ";`Y
+                    ,;.J_        ;'j
+                  ,-;"^7F       : .F           _________________
+                 ,-'-_<.        ;gj. _.,---""''               .'
+                ;  _,._`\.     : `T"5,                       ; 
+                : `?8w7 `J  ,-'" -^q. `                     ;  
+                 \;._ _,=' ;   n58L Y.                     .' 
+                   F;";  .' k_ `^'  j'                     ;  
+                   J;:: ;     "y:-='                      ;   
+                    L;;==      |:;   jT\                  ;
+                    L;:;J      J:L  7:;'       _         ; 
+                    I;|:.L     |:k J:.' ,  '       .     ;
+                    |;J:.|     ;.I F.:      .           : 
+                   ;J;:L::     |.| |.J  , '   `    ;    ; 
+                 .' J:`J.`.    :.J |. L .    ;         ; 
+                ;    L :k:`._ ,',j J; |  ` ,        ; ; 
+              .'     I :`=.:."_".'  L J             `.'
+            .'       |.:  `"-=-'    |.J              ; 
+        _.-'         `: :           ;:;           _ ; 
+    _.-'"             J: :         /.;'       ;    ; 
+  ='_                  k;.\.    _.;:Y'     ,     .' 
+     `"---..__          `Y;."-=';:='     ,      .'
+              `""--..__   `"==="'    -        .' 
+                       ``""---...__    itz .-' 
+                                   ``""---'
+Use the 'help' command to view available commands
+$ uname -a
+I see you are trying to hack, would you like some help with that?
+
+                        _.-;:q=._
+                      .' j=""^k;:\.
+                     ; .F       ";`Y
+                    ,;.J_        ;'j
+                  ,-;"^7F       : .F           _________________
+                 ,-'-_<.        ;gj. _.,---""''               .'
+                ;  _,._`\.     : `T"5,                       ; 
+                : `?8w7 `J  ,-'" -^q. `                     ;  
+                 \;._ _,=' ;   n58L Y.                     .' 
+                   F;";  .' k_ `^'  j'                     ;  
+                   J;:: ;     "y:-='                      ;   
+                    L;;==      |:;   jT\                  ;
+                    L;:;J      J:L  7:;'       _         ; 
+                    I;|:.L     |:k J:.' ,  '       .     ;
+                    |;J:.|     ;.I F.:      .           : 
+                   ;J;:L::     |.| |.J  , '   `    ;    ; 
+                 .' J:`J.`.    :.J |. L .    ;         ; 
+                ;    L :k:`._ ,',j J; |  ` ,        ; ; 
+              .'     I :`=.:."_".'  L J             `.'
+            .'       |.:  `"-=-'    |.J              ; 
+        _.-'         `: :           ;:;           _ ; 
+    _.-'"             J: :         /.;'       ;    ; 
+  ='_                  k;.\.    _.;:Y'     ,     .' 
+     `"---..__          `Y;."-=';:='     ,      .'
+              `""--..__   `"==="'    -        .' 
+                       ``""---...__    itz .-' 
+                                   ``""---'
+Use the 'help' command to view available commands
+$ whoami
+              _,._      
+  .||,       /_ _\\     
+ \.`',/      |'L'| |    
+ = ,. =      | -,| L    
+ / || \    ,-'\"/,'`.   
+   ||     ,'   `,,. `.  
+   ,|____,' , ,;' \| |  
+  (3|\    _/|/'   _| |  
+   ||/,-''  | >-'' _,\\ 
+   ||'      ==\ ,-'  ,' 
+   ||       |  V \ ,|   
+   ||       |    |` |   
+   ||       |    |   \  
+   ||       |    \    \ 
+   ||       |     |    \
+   ||       |      \_,-'
+   ||       |___,,--")_\
+   ||         |_|   ccc/
+   ||        ccc/       
+   ||
+You are a wizard of the internet!
+$ cat
+                                                                .-""-.__
+                                              _.--"""--._____.-'        `-._
+                                           .-'                              `.
+                                         .'                        _.._       `.
+                                        /                       J""    `-.      \
+                                       /                         \        `-.    `.
+                                     .'          |               F           \     \
+                                     F           |              /             `.    \
+                               _.---<_           J             J                `-._/
+                             ./`.     `.          \          J F
+                          __/ F  )                 \          \
+                        <     |                \    >.         L
+                         `-.                    |  J  `-.      )
+                           J         |          | /      `-    F
+                            \  o     /         (|/        //  /
+                             `.    )'.          |        /'  /
+                              `---'`\ `.        |        /  /
+                              '|\\ \ `. `.      |       /( /
+                                 `` `  \  \     |       \_'
+                                        L  L    |     .' /
+                                        |  |    |    (_.'
+                                        J  J    F
+                                        J  J   J
+                                        J  J   J
+                                        J  J   F
+                                        |  |  J
+                                        |  F  F
+                                        F /L  |
+                                        `' \_)'
+$ pwd
+/home/clippy
+$ help
+Someone like you shouldn't need help!
+.----------------------.
+| |'-.                 |
+| |   '.               |
+| |     '.  .------.   |
+| |    _'  /  .--.  \  |
+| |    \  |__|    |  | |
+| |-'\  \        /  /  |
+|     \  \      /  /   |
+|      \-'     /  /    |
+|             |  |     |
+|             |__|     |
+|              __      |
+|             |__|     |
+'----------------------'
+
+Supported Commands:
+sudo <cmd>
+cd | cat | ls | help
+rm | pwd | whoami
+
+(And more!)
+$ rm
+                             ____
+                     __,-~~/~    `---.
+                   _/_,---(      ,    )
+               __ /        <    /   )  \___
+- ------===;;;'====------------------===;;;===----- -  -
+                  \/  ~"~"~"~"~"~\~"~)~"/
+                  (_ (   \  (     >    \)
+                   \_( _ <         >_>'
+                      ~ `-i' ::>|--"
+                          I;|.|.|
+                         <|i::|i|`.
+                        (` ^'"`-' ")
+------------------------------------------------------------------
+You blew up our files! How could you???
+$ help
+Someone like you shouldn't need help!
+.----------------------.
+| |'-.                 |
+| |   '.               |
+| |     '.  .------.   |
+| |    _'  /  .--.  \  |
+| |    \  |__|    |  | |
+| |-'\  \        /  /  |
+|     \  \      /  /   |
+|      \-'     /  /    |
+|             |  |     |
+|             |__|     |
+|              __      |
+|             |__|     |
+'----------------------'
+
+Supported Commands:
+sudo <cmd>
+cd | cat | ls | help
+rm | pwd | whoami
+
+(And more!)
+$ ls
+pw.txt
+$ dir cat
+I see you are trying to hack, would you like some help with that?
+
+                        _.-;:q=._
+                      .' j=""^k;:\.
+                     ; .F       ";`Y
+                    ,;.J_        ;'j
+                  ,-;"^7F       : .F           _________________
+                 ,-'-_<.        ;gj. _.,---""''               .'
+                ;  _,._`\.     : `T"5,                       ; 
+                : `?8w7 `J  ,-'" -^q. `                     ;  
+                 \;._ _,=' ;   n58L Y.                     .' 
+                   F;";  .' k_ `^'  j'                     ;  
+                   J;:: ;     "y:-='                      ;   
+                    L;;==      |:;   jT\                  ;
+                    L;:;J      J:L  7:;'       _         ; 
+                    I;|:.L     |:k J:.' ,  '       .     ;
+                    |;J:.|     ;.I F.:      .           : 
+                   ;J;:L::     |.| |.J  , '   `    ;    ; 
+                 .' J:`J.`.    :.J |. L .    ;         ; 
+                ;    L :k:`._ ,',j J; |  ` ,        ; ; 
+              .'     I :`=.:."_".'  L J             `.'
+            .'       |.:  `"-=-'    |.J              ; 
+        _.-'         `: :           ;:;           _ ; 
+    _.-'"             J: :         /.;'       ;    ; 
+  ='_                  k;.\.    _.;:Y'     ,     .' 
+     `"---..__          `Y;."-=';:='     ,      .'
+              `""--..__   `"==="'    -        .' 
+                       ``""---...__    itz .-' 
+                                   ``""---'
+Use the 'help' command to view available commands
+$ cat
+                                                                .-""-.__
+                                              _.--"""--._____.-'        `-._
+                                           .-'                              `.
+                                         .'                        _.._       `.
+                                        /                       J""    `-.      \
+                                       /                         \        `-.    `.
+                                     .'          |               F           \     \
+                                     F           |              /             `.    \
+                               _.---<_           J             J                `-._/
+                             ./`.     `.          \          J F
+                          __/ F  )                 \          \
+                        <     |                \    >.         L
+                         `-.                    |  J  `-.      )
+                           J         |          | /      `-    F
+                            \  o     /         (|/        //  /
+                             `.    )'.          |        /'  /
+                              `---'`\ `.        |        /  /
+                              '|\\ \ `. `.      |       /( /
+                                 `` `  \  \     |       \_'
+                                        L  L    |     .' /
+                                        |  |    |    (_.'
+                                        J  J    F
+                                        J  J   J
+                                        J  J   J
+                                        J  J   F
+                                        |  |  J
+                                        |  F  F
+                                        F /L  |
+                                        `' \_)'
+$ cat hello
+                                                                .-""-.__
+                                              _.--"""--._____.-'        `-._
+                                           .-'                              `.
+                                         .'                        _.._       `.
+                                        /                       J""    `-.      \
+                                       /                         \        `-.    `.
+                                     .'          |               F           \     \
+                                     F           |              /             `.    \
+                               _.---<_           J             J                `-._/
+                             ./`.     `.          \          J F
+                          __/ F  )                 \          \
+                        <     |                \    >.         L
+                         `-.                    |  J  `-.      )
+                           J         |          | /      `-    F
+                            \  o     /         (|/        //  /
+                             `.    )'.          |        /'  /
+                              `---'`\ `.        |        /  /
+                              '|\\ \ `. `.      |       /( /
+                                 `` `  \  \     |       \_'
+                                        L  L    |     .' /
+                                        |  |    |    (_.'
+                                        J  J    F
+                                        J  J   J
+                                        J  J   J
+                                        J  J   F
+                                        |  |  J
+                                        |  F  F
+                                        F /L  |
+                                        `' \_)'
+$ αδfds
+I see you are trying to hack, would you like some help with that?
+
+                        _.-;:q=._
+                      .' j=""^k;:\.
+                     ; .F       ";`Y
+                    ,;.J_        ;'j
+                  ,-;"^7F       : .F           _________________
+                 ,-'-_<.        ;gj. _.,---""''               .'
+                ;  _,._`\.     : `T"5,                       ; 
+                : `?8w7 `J  ,-'" -^q. `                     ;  
+                 \;._ _,=' ;   n58L Y.                     .' 
+                   F;";  .' k_ `^'  j'                     ;  
+                   J;:: ;     "y:-='                      ;   
+                    L;;==      |:;   jT\                  ;
+                    L;:;J      J:L  7:;'       _         ; 
+                    I;|:.L     |:k J:.' ,  '       .     ;
+                    |;J:.|     ;.I F.:      .           : 
+                   ;J;:L::     |.| |.J  , '   `    ;    ; 
+                 .' J:`J.`.    :.J |. L .    ;         ; 
+                ;    L :k:`._ ,',j J; |  ` ,        ; ; 
+              .'     I :`=.:."_".'  L J             `.'
+            .'       |.:  `"-=-'    |.J              ; 
+        _.-'         `: :           ;:;           _ ; 
+    _.-'"             J: :         /.;'       ;    ; 
+  ='_                  k;.\.    _.;:Y'     ,     .' 
+     `"---..__          `Y;."-=';:='     ,      .'
+              `""--..__   `"==="'    -        .' 
+                       ``""---...__    itz .-' 
+                                   ``""---'
+Use the 'help' command to view available commands
+$ sdf
+I see you are trying to hack, would you like some help with that?
+
+                        _.-;:q=._
+                      .' j=""^k;:\.
+                     ; .F       ";`Y
+                    ,;.J_        ;'j
+                  ,-;"^7F       : .F           _________________
+                 ,-'-_<.        ;gj. _.,---""''               .'
+                ;  _,._`\.     : `T"5,                       ; 
+                : `?8w7 `J  ,-'" -^q. `                     ;  
+                 \;._ _,=' ;   n58L Y.                     .' 
+                   F;";  .' k_ `^'  j'                     ;  
+                   J;:: ;     "y:-='                      ;   
+                    L;;==      |:;   jT\                  ;
+                    L;:;J      J:L  7:;'       _         ; 
+                    I;|:.L     |:k J:.' ,  '       .     ;
+                    |;J:.|     ;.I F.:      .           : 
+                   ;J;:L::     |.| |.J  , '   `    ;    ; 
+                 .' J:`J.`.    :.J |. L .    ;         ; 
+                ;    L :k:`._ ,',j J; |  ` ,        ; ; 
+              .'     I :`=.:."_".'  L J             `.'
+            .'       |.:  `"-=-'    |.J              ; 
+        _.-'         `: :           ;:;           _ ; 
+    _.-'"             J: :         /.;'       ;    ; 
+  ='_                  k;.\.    _.;:Y'     ,     .' 
+     `"---..__          `Y;."-=';:='     ,      .'
+              `""--..__   `"==="'    -        .' 
+                       ``""---...__    itz .-' 
+                                   ``""---'
+Use the 'help' command to view available commands
+$ sdf
+I see you are trying to hack, would you like some help with that?
+
+                        _.-;:q=._
+                      .' j=""^k;:\.
+                     ; .F       ";`Y
+                    ,;.J_        ;'j
+                  ,-;"^7F       : .F           _________________
+                 ,-'-_<.        ;gj. _.,---""''               .'
+                ;  _,._`\.     : `T"5,                       ; 
+                : `?8w7 `J  ,-'" -^q. `                     ;  
+                 \;._ _,=' ;   n58L Y.                     .' 
+                   F;";  .' k_ `^'  j'                     ;  
+                   J;:: ;     "y:-='                      ;   
+                    L;;==      |:;   jT\                  ;
+                    L;:;J      J:L  7:;'       _         ; 
+                    I;|:.L     |:k J:.' ,  '       .     ;
+                    |;J:.|     ;.I F.:      .           : 
+                   ;J;:L::     |.| |.J  , '   `    ;    ; 
+                 .' J:`J.`.    :.J |. L .    ;         ; 
+                ;    L :k:`._ ,',j J; |  ` ,        ; ; 
+              .'     I :`=.:."_".'  L J             `.'
+            .'       |.:  `"-=-'    |.J              ; 
+        _.-'         `: :           ;:;           _ ; 
+    _.-'"             J: :         /.;'       ;    ; 
+  ='_                  k;.\.    _.;:Y'     ,     .' 
+     `"---..__          `Y;."-=';:='     ,      .'
+              `""--..__   `"==="'    -        .' 
+                       ``""---...__    itz .-' 
+                                   ``""---'
+Use the 'help' command to view available commands
+$ esxxit
+I see you are trying to hack, would you like some help with that?
+
+                        _.-;:q=._
+                      .' j=""^k;:\.
+                     ; .F       ";`Y
+                    ,;.J_        ;'j
+                  ,-;"^7F       : .F           _________________
+                 ,-'-_<.        ;gj. _.,---""''               .'
+                ;  _,._`\.     : `T"5,                       ; 
+                : `?8w7 `J  ,-'" -^q. `                     ;  
+                 \;._ _,=' ;   n58L Y.                     .' 
+                   F;";  .' k_ `^'  j'                     ;  
+                   J;:: ;     "y:-='                      ;   
+                    L;;==      |:;   jT\                  ;
+                    L;:;J      J:L  7:;'       _         ; 
+                    I;|:.L     |:k J:.' ,  '       .     ;
+                    |;J:.|     ;.I F.:      .           : 
+                   ;J;:L::     |.| |.J  , '   `    ;    ; 
+                 .' J:`J.`.    :.J |. L .    ;         ; 
+                ;    L :k:`._ ,',j J; |  ` ,        ; ; 
+              .'     I :`=.:."_".'  L J             `.'
+            .'       |.:  `"-=-'    |.J              ; 
+        _.-'         `: :           ;:;           _ ; 
+    _.-'"             J: :         /.;'       ;    ; 
+  ='_                  k;.\.    _.;:Y'     ,     .' 
+     `"---..__          `Y;."-=';:='     ,      .'
+              `""--..__   `"==="'    -        .' 
+                       ``""---...__    itz .-' 
+                                   ``""---'
+Use the 'help' command to view available commands
+$ exit
+
+
+Connection from: 127.0.0.156800LAPTOP-KB51TAU9
+
+
+Connection from: 127.0.0.156806LAPTOP-KB51TAU9
+
+
+Connection from: 127.0.0.1 56811 LAPTOP-KB51TAU9
+$ ls
+pw.txt
+$ pcd
+I see you are trying to hack, would you like some help with that?
+
+                        _.-;:q=._
+                      .' j=""^k;:\.
+                     ; .F       ";`Y
+                    ,;.J_        ;'j
+                  ,-;"^7F       : .F           _________________
+                 ,-'-_<.        ;gj. _.,---""''               .'
+                ;  _,._`\.     : `T"5,                       ; 
+                : `?8w7 `J  ,-'" -^q. `                     ;  
+                 \;._ _,=' ;   n58L Y.                     .' 
+                   F;";  .' k_ `^'  j'                     ;  
+                   J;:: ;     "y:-='                      ;   
+                    L;;==      |:;   jT\                  ;
+                    L;:;J      J:L  7:;'       _         ; 
+                    I;|:.L     |:k J:.' ,  '       .     ;
+                    |;J:.|     ;.I F.:      .           : 
+                   ;J;:L::     |.| |.J  , '   `    ;    ; 
+                 .' J:`J.`.    :.J |. L .    ;         ; 
+                ;    L :k:`._ ,',j J; |  ` ,        ; ; 
+              .'     I :`=.:."_".'  L J             `.'
+            .'       |.:  `"-=-'    |.J              ; 
+        _.-'         `: :           ;:;           _ ; 
+    _.-'"             J: :         /.;'       ;    ; 
+  ='_                  k;.\.    _.;:Y'     ,     .' 
+     `"---..__          `Y;."-=';:='     ,      .'
+              `""--..__   `"==="'    -        .' 
+                       ``""---...__    itz .-' 
+                                   ``""---'
+Use the 'help' command to view available commands
+
+
+Connection from: 127.0.0.1 56840 LAPTOP-KB51TAU9
+$ ls
+pw.txt
+$ cd
+                     :+""  ~<<::""+:
+                +Xi<<<<!<  `<<!?!<<<HMti%L
+            :?HMMMM:<<<!<~ <<<!X<<<!MM88MMh?x
+          !HMRMMRMMM:<<<!< <<<!!<<<MR88MRMMRMH?.
+        ?NMMMMMMMMMMM<<<?<  <<!!<<XM88RMMMMMMMMM?
+      !88888MMMMMMRMMk<<!!  <<H!<<M88MRMMRMMMRMMRM!
+     <M8888888MMMMMMMM:<<!  <<H<<488RMMMMMMMMMMMMMM>:
+   xHMRMMR888888RMMMMMM<<!< <!!<<988RMMMRMMRMMMMM?!<<%
+  :XMMMMMMMM88888MMMMMMH<<~ ~~~<X8RMMMMMMMMMMM!!<~    k
+  <<<!MMRMMRMMR8888MMP.n~       #R.#MMRMMRM?<~~   .nMMh.
+ !MMH:<<<!*MMMMMMM8Pu! n"       "+ "h!MM!!~   :@MMMMMMM/
+.HMRMMRMMMH:<<"*RM M @             * "   .nMMMMMMMRMMRMMk
+MMMMMMMMMMMMMMMMx < "      .u.        4'MMMMMMMMMMMMMMMM9
+!RMMRMMMRMMRMMMMMX M     @P   #8     4 MMRMMMRMMRMMMMMMR<
+!MMMMMMMMMMMMMMMMM !    '8     8!    ' MtMMMMMMMMMMMMMMM!
+kMMRMMRMMRMMMRMMR4 H     #8.  @8     H MMMMRMMMMMMRMMRMM!
+MMMMMMMMMMMMMMMMM>M         "`      .~i <!?MMMMMMMMMMMMM9
+'9MMRMMMRMMRMMP!   : %             H @ 8NRMHx<<<!!MMMMMR!
+ >MMMMMMMMM"   <<HMk!i *u       .* x*xR88888MMMMHi<<<<~<
+  !RMM#~   :<:MMRMMMMH.*n:      :*.HRMMMRM8888888MRMMM!
+  !     <<:tMMMMMMMMMM8RM<::: :<<XMMMMMMMMMR88888888MM!
+   ~ <<<XHMRMMMMMMRMM8RM<<<<< `!<<MRMMRMMRMMMRR888888#
+     :HMMMMMMMMMMMM988MM<<X!<~'~<<<MMMMMMMMMMMMMR88#!
+      ~MMRMMMRMMRMM88MM<<<?<<  <<<<!RMMMRMMRMMMMMM!
+        xMMMMMMMM988MM%<<<?<<: <!<<<?MMMMMMMMMMMX
+          !?MMMM@88MMR<<<<!<<<  <:<<<MRMMRMMMP!
+            "X*988RMM!<<<?!<<~  <!<<<<MMMMM?"
+                !X*MM<<<<H!<<`  <?<<<<<)!
+                     "+:uX!<<< .::+""
+
+
+Connection from: 127.0.0.1 56869 LAPTOP-KB51TAU9
+
+
+Connection from: 127.0.0.1 56890 LAPTOP-KB51TAU9
+
+
+Connection from: 127.0.0.1 56894 LAPTOP-KB51TAU9
+
+
+Connection from: 127.0.0.1 56896 LAPTOP-KB51TAU9
+
+
+Connection from: 127.0.0.1 56898 LAPTOP-KB51TAU9
+
+
+Connection from: 127.0.0.1 56902 LAPTOP-KB51TAU9
+
+
+Connection from: 127.0.0.1 57033 LAPTOP-KB51TAU9
+
+
+Connection from: 127.0.0.1 57035 LAPTOP-KB51TAU9
+
+
+Connection from: 127.0.0.1 57037 LAPTOP-KB51TAU9
+
+
+Connection from: 127.0.0.1 57039 LAPTOP-KB51TAU9
+
+
+Connection from: 127.0.0.1 57044 LAPTOP-KB51TAU9
+$ herllo
+I see you are trying to hack, would you like some help with that?
+
+                        _.-;:q=._
+                      .' j=""^k;:\.
+                     ; .F       ";`Y
+                    ,;.J_        ;'j
+                  ,-;"^7F       : .F           _________________
+                 ,-'-_<.        ;gj. _.,---""''               .'
+                ;  _,._`\.     : `T"5,                       ; 
+                : `?8w7 `J  ,-'" -^q. `                     ;  
+                 \;._ _,=' ;   n58L Y.                     .' 
+                   F;";  .' k_ `^'  j'                     ;  
+                   J;:: ;     "y:-='                      ;   
+                    L;;==      |:;   jT\                  ;
+                    L;:;J      J:L  7:;'       _         ; 
+                    I;|:.L     |:k J:.' ,  '       .     ;
+                    |;J:.|     ;.I F.:      .           : 
+                   ;J;:L::     |.| |.J  , '   `    ;    ; 
+                 .' J:`J.`.    :.J |. L .    ;         ; 
+                ;    L :k:`._ ,',j J; |  ` ,        ; ; 
+              .'     I :`=.:."_".'  L J             `.'
+            .'       |.:  `"-=-'    |.J              ; 
+        _.-'         `: :           ;:;           _ ; 
+    _.-'"             J: :         /.;'       ;    ; 
+  ='_                  k;.\.    _.;:Y'     ,     .' 
+     `"---..__          `Y;."-=';:='     ,      .'
+              `""--..__   `"==="'    -        .' 
+                       ``""---...__    itz .-' 
+                                   ``""---'
+Use the 'help' command to view available commands
+$ [A
+I see you are trying to hack, would you like some help with that?
+
+                        _.-;:q=._
+                      .' j=""^k;:\.
+                     ; .F       ";`Y
+                    ,;.J_        ;'j
+                  ,-;"^7F       : .F           _________________
+                 ,-'-_<.        ;gj. _.,---""''               .'
+                ;  _,._`\.     : `T"5,                       ; 
+                : `?8w7 `J  ,-'" -^q. `                     ;  
+                 \;._ _,=' ;   n58L Y.                     .' 
+                   F;";  .' k_ `^'  j'                     ;  
+                   J;:: ;     "y:-='                      ;   
+                    L;;==      |:;   jT\                  ;
+                    L;:;J      J:L  7:;'       _         ; 
+                    I;|:.L     |:k J:.' ,  '       .     ;
+                    |;J:.|     ;.I F.:      .           : 
+                   ;J;:L::     |.| |.J  , '   `    ;    ; 
+                 .' J:`J.`.    :.J |. L .    ;         ; 
+                ;    L :k:`._ ,',j J; |  ` ,        ; ; 
+              .'     I :`=.:."_".'  L J             `.'
+            .'       |.:  `"-=-'    |.J              ; 
+        _.-'         `: :           ;:;           _ ; 
+    _.-'"             J: :         /.;'       ;    ; 
+  ='_                  k;.\.    _.;:Y'     ,     .' 
+     `"---..__          `Y;."-=';:='     ,      .'
+              `""--..__   `"==="'    -        .' 
+                       ``""---...__    itz .-' 
+                                   ``""---'
+Use the 'help' command to view available commands
+$ 
+I see you are trying to hack, would you like some help with that?
+
+                        _.-;:q=._
+                      .' j=""^k;:\.
+                     ; .F       ";`Y
+                    ,;.J_        ;'j
+                  ,-;"^7F       : .F           _________________
+                 ,-'-_<.        ;gj. _.,---""''               .'
+                ;  _,._`\.     : `T"5,                       ; 
+                : `?8w7 `J  ,-'" -^q. `                     ;  
+                 \;._ _,=' ;   n58L Y.                     .' 
+                   F;";  .' k_ `^'  j'                     ;  
+                   J;:: ;     "y:-='                      ;   
+                    L;;==      |:;   jT\                  ;
+                    L;:;J      J:L  7:;'       _         ; 
+                    I;|:.L     |:k J:.' ,  '       .     ;
+                    |;J:.|     ;.I F.:      .           : 
+                   ;J;:L::     |.| |.J  , '   `    ;    ; 
+                 .' J:`J.`.    :.J |. L .    ;         ; 
+                ;    L :k:`._ ,',j J; |  ` ,        ; ; 
+              .'     I :`=.:."_".'  L J             `.'
+            .'       |.:  `"-=-'    |.J              ; 
+        _.-'         `: :           ;:;           _ ; 
+    _.-'"             J: :         /.;'       ;    ; 
+  ='_                  k;.\.    _.;:Y'     ,     .' 
+     `"---..__          `Y;."-=';:='     ,      .'
+              `""--..__   `"==="'    -        .' 
+                       ``""---...__    itz .-' 
+                                   ``""---'
+Use the 'help' command to view available commands
+$ re
+I see you are trying to hack, would you like some help with that?
+
+                        _.-;:q=._
+                      .' j=""^k;:\.
+                     ; .F       ";`Y
+                    ,;.J_        ;'j
+                  ,-;"^7F       : .F           _________________
+                 ,-'-_<.        ;gj. _.,---""''               .'
+                ;  _,._`\.     : `T"5,                       ; 
+                : `?8w7 `J  ,-'" -^q. `                     ;  
+                 \;._ _,=' ;   n58L Y.                     .' 
+                   F;";  .' k_ `^'  j'                     ;  
+                   J;:: ;     "y:-='                      ;   
+                    L;;==      |:;   jT\                  ;
+                    L;:;J      J:L  7:;'       _         ; 
+                    I;|:.L     |:k J:.' ,  '       .     ;
+                    |;J:.|     ;.I F.:      .           : 
+                   ;J;:L::     |.| |.J  , '   `    ;    ; 
+                 .' J:`J.`.    :.J |. L .    ;         ; 
+                ;    L :k:`._ ,',j J; |  ` ,        ; ; 
+              .'     I :`=.:."_".'  L J             `.'
+            .'       |.:  `"-=-'    |.J              ; 
+        _.-'         `: :           ;:;           _ ; 
+    _.-'"             J: :         /.;'       ;    ; 
+  ='_                  k;.\.    _.;:Y'     ,     .' 
+     `"---..__          `Y;."-=';:='     ,      .'
+              `""--..__   `"==="'    -        .' 
+                       ``""---...__    itz .-' 
+                                   ``""---'
+Use the 'help' command to view available commands
+$ exit
+
+
+Connection from: 127.0.0.1 57059 LAPTOP-KB51TAU9
+$ sadsasad
+I see you are trying to hack, would you like some help with that?
+
+                        _.-;:q=._
+                      .' j=""^k;:\.
+                     ; .F       ";`Y
+                    ,;.J_        ;'j
+                  ,-;"^7F       : .F           _________________
+                 ,-'-_<.        ;gj. _.,---""''               .'
+                ;  _,._`\.     : `T"5,                       ; 
+                : `?8w7 `J  ,-'" -^q. `                     ;  
+                 \;._ _,=' ;   n58L Y.                     .' 
+                   F;";  .' k_ `^'  j'                     ;  
+                   J;:: ;     "y:-='                      ;   
+                    L;;==      |:;   jT\                  ;
+                    L;:;J      J:L  7:;'       _         ; 
+                    I;|:.L     |:k J:.' ,  '       .     ;
+                    |;J:.|     ;.I F.:      .           : 
+                   ;J;:L::     |.| |.J  , '   `    ;    ; 
+                 .' J:`J.`.    :.J |. L .    ;         ; 
+                ;    L :k:`._ ,',j J; |  ` ,        ; ; 
+              .'     I :`=.:."_".'  L J             `.'
+            .'       |.:  `"-=-'    |.J              ; 
+        _.-'         `: :           ;:;           _ ; 
+    _.-'"             J: :         /.;'       ;    ; 
+  ='_                  k;.\.    _.;:Y'     ,     .' 
+     `"---..__          `Y;."-=';:='     ,      .'
+              `""--..__   `"==="'    -        .' 
+                       ``""---...__    itz .-' 
+                                   ``""---'
+Use the 'help' command to view available commands
+$ exit
+
+
+Connection from: 127.0.0.1 57134 LAPTOP-KB51TAU9
+$ help
+
+
+Connection from: 127.0.0.1 57141 LAPTOP-KB51TAU9
+$ help
+Someone like you shouldn't need help!
+.----------------------.
+| |'-.                 |
+| |   '.               |
+| |     '.  .------.   |
+| |    _'  /  .--.  \  |
+| |    \  |__|    |  | |
+| |-'\  \        /  /  |
+|     \  \      /  /   |
+|      \-'     /  /    |
+|             |  |     |
+|             |__|     |
+|              __      |
+|             |__|     |
+'----------------------'
+
+Supported Commands:
+sudo <cmd>
+cd | cat | ls | help
+rm | pwd | whoami | us
+
+(And more!)
+$ us
+admin: admin
+dev: fullaccess
+administrator: P@sw0rd
+root : toor
+seed : dees
+$ exit
+
+
+Connection from: 127.0.0.1 57144 LAPTOP-KB51TAU9
+
+
+Connection from: 127.0.0.1 57149 LAPTOP-KB51TAU9
+$ us
+admin: admin
+dev: fullaccess
+administrator: P@sw0rd
+root : toor
+seed : dees
+$ exit
+
+
+Connection from: 127.0.0.1 57151 LAPTOP-KB51TAU9
+$ e
+I see you are trying to hack, would you like some help with that?
+
+                        _.-;:q=._
+                      .' j=""^k;:\.
+                     ; .F       ";`Y
+                    ,;.J_        ;'j
+                  ,-;"^7F       : .F           _________________
+                 ,-'-_<.        ;gj. _.,---""''               .'
+                ;  _,._`\.     : `T"5,                       ; 
+                : `?8w7 `J  ,-'" -^q. `                     ;  
+                 \;._ _,=' ;   n58L Y.                     .' 
+                   F;";  .' k_ `^'  j'                     ;  
+                   J;:: ;     "y:-='                      ;   
+                    L;;==      |:;   jT\                  ;
+                    L;:;J      J:L  7:;'       _         ; 
+                    I;|:.L     |:k J:.' ,  '       .     ;
+                    |;J:.|     ;.I F.:      .           : 
+                   ;J;:L::     |.| |.J  , '   `    ;    ; 
+                 .' J:`J.`.    :.J |. L .    ;         ; 
+                ;    L :k:`._ ,',j J; |  ` ,        ; ; 
+              .'     I :`=.:."_".'  L J             `.'
+            .'       |.:  `"-=-'    |.J              ; 
+        _.-'         `: :           ;:;           _ ; 
+    _.-'"             J: :         /.;'       ;    ; 
+  ='_                  k;.\.    _.;:Y'     ,     .' 
+     `"---..__          `Y;."-=';:='     ,      .'
+              `""--..__   `"==="'    -        .' 
+                       ``""---...__    itz .-' 
+                                   ``""---'
+Use the 'help' command to view available commands
+$ exit
+
+
+Connection from: 127.0.0.1 57179 LAPTOP-KB51TAU9
+$ rm
+
+
+Connection from: 127.0.0.1 57181 LAPTOP-KB51TAU9
+$ [A
+I see you are trying to hack, would you like some help with that?
+
+                        _.-;:q=._
+                      .' j=""^k;:\.
+                     ; .F       ";`Y
+                    ,;.J_        ;'j
+                  ,-;"^7F       : .F           _________________
+                 ,-'-_<.        ;gj. _.,---""''               .'
+                ;  _,._`\.     : `T"5,                       ; 
+                : `?8w7 `J  ,-'" -^q. `                     ;  
+                 \;._ _,=' ;   n58L Y.                     .' 
+                   F;";  .' k_ `^'  j'                     ;  
+                   J;:: ;     "y:-='                      ;   
+                    L;;==      |:;   jT\                  ;
+                    L;:;J      J:L  7:;'       _         ; 
+                    I;|:.L     |:k J:.' ,  '       .     ;
+                    |;J:.|     ;.I F.:      .           : 
+                   ;J;:L::     |.| |.J  , '   `    ;    ; 
+                 .' J:`J.`.    :.J |. L .    ;         ; 
+                ;    L :k:`._ ,',j J; |  ` ,        ; ; 
+              .'     I :`=.:."_".'  L J             `.'
+            .'       |.:  `"-=-'    |.J              ; 
+        _.-'         `: :           ;:;           _ ; 
+    _.-'"             J: :         /.;'       ;    ; 
+  ='_                  k;.\.    _.;:Y'     ,     .' 
+     `"---..__          `Y;."-=';:='     ,      .'
+              `""--..__   `"==="'    -        .' 
+                       ``""---...__    itz .-' 
+                                   ``""---'
+Use the 'help' command to view available commands
+$ esxit
+I see you are trying to hack, would you like some help with that?
+
+                        _.-;:q=._
+                      .' j=""^k;:\.
+                     ; .F       ";`Y
+                    ,;.J_        ;'j
+                  ,-;"^7F       : .F           _________________
+                 ,-'-_<.        ;gj. _.,---""''               .'
+                ;  _,._`\.     : `T"5,                       ; 
+                : `?8w7 `J  ,-'" -^q. `                     ;  
+                 \;._ _,=' ;   n58L Y.                     .' 
+                   F;";  .' k_ `^'  j'                     ;  
+                   J;:: ;     "y:-='                      ;   
+                    L;;==      |:;   jT\                  ;
+                    L;:;J      J:L  7:;'       _         ; 
+                    I;|:.L     |:k J:.' ,  '       .     ;
+                    |;J:.|     ;.I F.:      .           : 
+                   ;J;:L::     |.| |.J  , '   `    ;    ; 
+                 .' J:`J.`.    :.J |. L .    ;         ; 
+                ;    L :k:`._ ,',j J; |  ` ,        ; ; 
+              .'     I :`=.:."_".'  L J             `.'
+            .'       |.:  `"-=-'    |.J              ; 
+        _.-'         `: :           ;:;           _ ; 
+    _.-'"             J: :         /.;'       ;    ; 
+  ='_                  k;.\.    _.;:Y'     ,     .' 
+     `"---..__          `Y;."-=';:='     ,      .'
+              `""--..__   `"==="'    -        .' 
+                       ``""---...__    itz .-' 
+                                   ``""---'
+Use the 'help' command to view available commands
+$ exit
+
+
+Connection from: 127.0.0.1 57194 LAPTOP-KB51TAU9
+$ help
+
+
+Connection from: 127.0.0.1 57211 LAPTOP-KB51TAU9
+$ ls
+pw.txt
+$ us
+admin: admin
+dev: fullaccess
+administrator: P@sw0rd
+root : toor
+seed : dees
+$ rm
+
+
+Connection from: 127.0.0.1 57220 LAPTOP-KB51TAU9
+$ rm
+
+
+Connection from: 127.0.0.1 57236 LAPTOP-KB51TAU9
+
+
+Connection from: 127.0.0.1 57241 LAPTOP-KB51TAU9
+$ rm
+                             ____
+                     __,-~~/~    `---.
+                   _/_,---(      ,    )
+               __ /        <    /   )  \___
+- ------===;;;'====------------------===;;;===----- -  -
+                  \/  ~"~"~"~"~"~\~"~)~"/
+                  (_ (   \  (     >    \)
+                   \_( _ <         >_>'
+                      ~ `-i' ::>|--"
+                          I;|.|.|
+                         <|i::|i|`.
+                        (` ^'"`-' ")
+------------------------------------------------------------------
+You blew up our files! How could you???
+$ ls
+pw.txt
+$ cd
+                     :+""  ~<<::""+:
+                +Xi<<<<!<  `<<!?!<<<HMti%L
+            :?HMMMM:<<<!<~ <<<!X<<<!MM88MMh?x
+          !HMRMMRMMM:<<<!< <<<!!<<<MR88MRMMRMH?.
+        ?NMMMMMMMMMMM<<<?<  <<!!<<XM88RMMMMMMMMM?
+      !88888MMMMMMRMMk<<!!  <<H!<<M88MRMMRMMMRMMRM!
+     <M8888888MMMMMMMM:<<!  <<H<<488RMMMMMMMMMMMMMM>:
+   xHMRMMR888888RMMMMMM<<!< <!!<<988RMMMRMMRMMMMM?!<<%
+  :XMMMMMMMM88888MMMMMMH<<~ ~~~<X8RMMMMMMMMMMM!!<~    k
+  <<<!MMRMMRMMR8888MMP.n~       #R.#MMRMMRM?<~~   .nMMh.
+ !MMH:<<<!*MMMMMMM8Pu! n"       "+ "h!MM!!~   :@MMMMMMM/
+.HMRMMRMMMH:<<"*RM M @             * "   .nMMMMMMMRMMRMMk
+MMMMMMMMMMMMMMMMx < "      .u.        4'MMMMMMMMMMMMMMMM9
+!RMMRMMMRMMRMMMMMX M     @P   #8     4 MMRMMMRMMRMMMMMMR<
+!MMMMMMMMMMMMMMMMM !    '8     8!    ' MtMMMMMMMMMMMMMMM!
+kMMRMMRMMRMMMRMMR4 H     #8.  @8     H MMMMRMMMMMMRMMRMM!
+MMMMMMMMMMMMMMMMM>M         "`      .~i <!?MMMMMMMMMMMMM9
+'9MMRMMMRMMRMMP!   : %             H @ 8NRMHx<<<!!MMMMMR!
+ >MMMMMMMMM"   <<HMk!i *u       .* x*xR88888MMMMHi<<<<~<
+  !RMM#~   :<:MMRMMMMH.*n:      :*.HRMMMRM8888888MRMMM!
+  !     <<:tMMMMMMMMMM8RM<::: :<<XMMMMMMMMMR88888888MM!
+   ~ <<<XHMRMMMMMMRMM8RM<<<<< `!<<MRMMRMMRMMMRR888888#
+     :HMMMMMMMMMMMM988MM<<X!<~'~<<<MMMMMMMMMMMMMR88#!
+      ~MMRMMMRMMRMM88MM<<<?<<  <<<<!RMMMRMMRMMMMMM!
+        xMMMMMMMM988MM%<<<?<<: <!<<<?MMMMMMMMMMMX
+          !?MMMM@88MMR<<<<!<<<  <:<<<MRMMRMMMP!
+            "X*988RMM!<<<?!<<~  <!<<<<MMMMM?"
+                !X*MM<<<<H!<<`  <?<<<<<)!
+                     "+:uX!<<< .::+""
+$ poww
+I see you are trying to hack, would you like some help with that?
+
+                        _.-;:q=._
+                      .' j=""^k;:\.
+                     ; .F       ";`Y
+                    ,;.J_        ;'j
+                  ,-;"^7F       : .F           _________________
+                 ,-'-_<.        ;gj. _.,---""''               .'
+                ;  _,._`\.     : `T"5,                       ; 
+                : `?8w7 `J  ,-'" -^q. `                     ;  
+                 \;._ _,=' ;   n58L Y.                     .' 
+                   F;";  .' k_ `^'  j'                     ;  
+                   J;:: ;     "y:-='                      ;   
+                    L;;==      |:;   jT\                  ;
+                    L;:;J      J:L  7:;'       _         ; 
+                    I;|:.L     |:k J:.' ,  '       .     ;
+                    |;J:.|     ;.I F.:      .           : 
+                   ;J;:L::     |.| |.J  , '   `    ;    ; 
+                 .' J:`J.`.    :.J |. L .    ;         ; 
+                ;    L :k:`._ ,',j J; |  ` ,        ; ; 
+              .'     I :`=.:."_".'  L J             `.'
+            .'       |.:  `"-=-'    |.J              ; 
+        _.-'         `: :           ;:;           _ ; 
+    _.-'"             J: :         /.;'       ;    ; 
+  ='_                  k;.\.    _.;:Y'     ,     .' 
+     `"---..__          `Y;."-=';:='     ,      .'
+              `""--..__   `"==="'    -        .' 
+                       ``""---...__    itz .-' 
+                                   ``""---'
+Use the 'help' command to view available commands
+$ help
+Someone like you shouldn't need help!
+.----------------------.
+| |'-.                 |
+| |   '.               |
+| |     '.  .------.   |
+| |    _'  /  .--.  \  |
+| |    \  |__|    |  | |
+| |-'\  \        /  /  |
+|     \  \      /  /   |
+|      \-'     /  /    |
+|             |  |     |
+|             |__|     |
+|              __      |
+|             |__|     |
+'----------------------'
+
+Supported Commands:
+sudo <cmd>
+cd | cat | ls | help
+rm | pwd | whoami | us
+
+(And more!)
+$ us
+admin: admin
+dev: fullaccess
+administrator: P@sw0rd
+root : toor
+seed : dees
+$ whoami
+              _,._      
+  .||,       /_ _\\     
+ \.`',/      |'L'| |    
+ = ,. =      | -,| L    
+ / || \    ,-'\"/,'`.   
+   ||     ,'   `,,. `.  
+   ,|____,' , ,;' \| |  
+  (3|\    _/|/'   _| |  
+   ||/,-''  | >-'' _,\\ 
+   ||'      ==\ ,-'  ,' 
+   ||       |  V \ ,|   
+   ||       |    |` |   
+   ||       |    |   \  
+   ||       |    \    \ 
+   ||       |     |    \
+   ||       |      \_,-'
+   ||       |___,,--")_\
+   ||         |_|   ccc/
+   ||        ccc/       
+   ||
+You are a wizard of the internet!
+$ hg
+I see you are trying to hack, would you like some help with that?
+
+                        _.-;:q=._
+                      .' j=""^k;:\.
+                     ; .F       ";`Y
+                    ,;.J_        ;'j
+                  ,-;"^7F       : .F           _________________
+                 ,-'-_<.        ;gj. _.,---""''               .'
+                ;  _,._`\.     : `T"5,                       ; 
+                : `?8w7 `J  ,-'" -^q. `                     ;  
+                 \;._ _,=' ;   n58L Y.                     .' 
+                   F;";  .' k_ `^'  j'                     ;  
+                   J;:: ;     "y:-='                      ;   
+                    L;;==      |:;   jT\                  ;
+                    L;:;J      J:L  7:;'       _         ; 
+                    I;|:.L     |:k J:.' ,  '       .     ;
+                    |;J:.|     ;.I F.:      .           : 
+                   ;J;:L::     |.| |.J  , '   `    ;    ; 
+                 .' J:`J.`.    :.J |. L .    ;         ; 
+                ;    L :k:`._ ,',j J; |  ` ,        ; ; 
+              .'     I :`=.:."_".'  L J             `.'
+            .'       |.:  `"-=-'    |.J              ; 
+        _.-'         `: :           ;:;           _ ; 
+    _.-'"             J: :         /.;'       ;    ; 
+  ='_                  k;.\.    _.;:Y'     ,     .' 
+     `"---..__          `Y;."-=';:='     ,      .'
+              `""--..__   `"==="'    -        .' 
+                       ``""---...__    itz .-' 
+                                   ``""---'
+Use the 'help' command to view available commands
+$ help
+Someone like you shouldn't need help!
+.----------------------.
+| |'-.                 |
+| |   '.               |
+| |     '.  .------.   |
+| |    _'  /  .--.  \  |
+| |    \  |__|    |  | |
+| |-'\  \        /  /  |
+|     \  \      /  /   |
+|      \-'     /  /    |
+|             |  |     |
+|             |__|     |
+|              __      |
+|             |__|     |
+'----------------------'
+
+Supported Commands:
+sudo <cmd>
+cd | cat | ls | help
+rm | pwd | whoami | us
+
+(And more!)
+$ sudo
+                 .___      
+  ________ __  __| _/____  
+ /  ___/  |  \/ __ |/  _ \ 
+ \___ \|  |  / /_/ (  <_> )
+/____  >____/\____ |\____/ 
+     \/           \/      
+make me a sandwich
+
+(Please!)
+$ sudo rm
+                 .___      
+  ________ __  __| _/____  
+ /  ___/  |  \/ __ |/  _ \ 
+ \___ \|  |  / /_/ (  <_> )
+/____  >____/\____ |\____/ 
+     \/           \/      
+make me a sandwich
+
+(Please!)
+$ exit
