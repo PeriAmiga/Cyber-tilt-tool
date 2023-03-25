@@ -17,8 +17,10 @@ SSH   ->  python main.py
 ```
 Run     -> docker compose up
 Stop    -> docker compose down
-Testing -> 
 ```
+
+#### Testing
+` ./tests/ python -m pytest `
 
 ## Routing
 ```
@@ -56,6 +58,7 @@ Services -
     - [x] Server
     - [ ] Traps
 - [ ] Logger
+- [ ] Testing
 
 ## Team
 > <a href="https://github.com/mfrankii"><kbd><img src="https://avatars.githubusercontent.com/u/88384146?s=30"/></kbd></a> &nbsp; Moshe Frankipour
