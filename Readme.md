@@ -13,6 +13,8 @@ SSH   ->  python main.py
 ```
 
 ```
+- Documentation API: `localhost:5000/docs`
+
 ## Docker Command
 ```
 Run     -> docker compose up
@@ -32,6 +34,8 @@ Services -
   SMTP:       :2525
   SSH:        :2222
 ```
+
+
 
 ## Roadmap
 - [ ] Backend (API)

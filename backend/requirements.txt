@@ -1,0 +1,8 @@
+fastapi
+fastapi_sessions
+uvicorn[standard]
+jinja2
+mysql
+mysql-connector
+mysql-connector-python
+orjson
