@@ -66,14 +66,10 @@ def is_access_fake_login():
     data = mycursor.fetchall()
     print("data", data)
     if len(data) == 0:
-        print("#1")
         mycursor = mydb.cursor()
-        print("#2")
         sql = "INSERT INTO Services_HTTP_IPFOLLOW (ip, counter, last_date_login) VALUES (%s, %s, %s)"
         now = datetime.now().strftime("%Y-%m-%d")
-        print("now", now)
         val = (client_ip, '1', now)
-        print("#3")
         mycursor.execute(sql, val)
     else:
         ip_data = data[0]

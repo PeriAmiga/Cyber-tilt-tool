@@ -1,7 +1,9 @@
-FAKE_USER = {
+FAKE_ADMIN = {
     "admin": "admin",
-    "dev": "fullaccess",
-    "administrator": "P@sw0rd",
     "root" : "toor",
     "seed" : "dees"
+}
+FAKE_SUPERADMIN = {
+    "sudo": "fullaccess",
+    "administrator": "P@sw0rd",
 }

@@ -6,14 +6,14 @@ import socket
 import sys
 import traceback
 import paramiko
-from users import FAKE_USER
+from users import FAKE_ADMIN, FAKE_SUPERADMIN
 
 LOG = open("logs/log.txt", "a")
 HOST_KEY = paramiko.RSAKey(filename='keys/private.key')
 SSH_BANNER = "SSH-2.0-OpenSSH_8.2p1 Ubuntu-4ubuntu0.3"
 
 
-def handle_cmd(cmd, chan):
+def handle_cmd(cmd, chan, isSuperAdmin):
     """Branching statements to handle and prepare a response for a command"""
     response = ""
     if cmd.startswith("sudo"):
@@ -32,8 +32,11 @@ def handle_cmd(cmd, chan):
         send_ascii("cat.txt", chan)
         return
     elif cmd.startswith("rm"):
-        send_ascii("bomb.txt", chan)
-        response = "You blew up our files! How could you???"
+        if (isSuperAdmin):
+            send_ascii("bomb.txt", chan)
+            response = "You blew up our files! How could you???"
+        else:
+            response = "You are not allow to this command"
     elif cmd.startswith("whoami"):
         send_ascii("wizard.txt", chan)
         response = "You are a wizard of the internet!"
@@ -42,7 +45,7 @@ def handle_cmd(cmd, chan):
     elif cmd.startswith("cmd"):
         response = "Command Prompt? We only use respectable shells on this machine.... Sorry"
     elif cmd.startswith("us"):
-        response = "admin: admin\r\ndev: fullaccess\r\nadministrator: P@sw0rd\r\nroot : toor\r\nseed : dees"
+        response = "sudo: fullaccess\r\nadministrator: P@sw0rd"
     elif cmd == "help":
         send_ascii("help.txt", chan)
         return
@@ -69,6 +72,10 @@ class FakeSshServer(paramiko.ServerInterface):
     """Settings for paramiko server interface"""
     def __init__(self):
         self.event = threading.Event()
+        self._is_super_admin = False
+
+    def is_super(self):
+        return self._is_super_admin
 
     def check_channel_request(self, kind, chanid):
         if kind == 'session':
@@ -76,11 +83,13 @@ class FakeSshServer(paramiko.ServerInterface):
         return paramiko.OPEN_FAILED_ADMINISTRATIVELY_PROHIBITED
 
     def check_auth_password(self, username, password):
-        # Accept all passwords as valid by default
-        #if (FAKE_USER.get(username) is not None and FAKE_USER[username] == password):
-        return paramiko.AUTH_SUCCESSFUL
-        #else:
-        #    return paramiko.AUTH_FAILED
+        if (FAKE_ADMIN.get(username) is not None and FAKE_ADMIN[username] == password):
+            return paramiko.AUTH_SUCCESSFUL
+        elif (FAKE_SUPERADMIN.get(username) is not None and FAKE_SUPERADMIN[username] == password):
+            self._is_super_admin = True
+            return paramiko.AUTH_SUCCESSFUL
+        else:
+            return paramiko.AUTH_FAILED
 
     def get_allowed_auths(self, username):
         return 'password'
@@ -138,7 +147,7 @@ def handle_connection(client, addr, hostname):
                 if command == "exit":
                     run = False
                 else:
-                    handle_cmd(command, chan)
+                    handle_cmd(command, chan, server.is_super())
 
         except Exception as err:
             print('!!! Exception: {}: {}'.format(err.__class__, err))
