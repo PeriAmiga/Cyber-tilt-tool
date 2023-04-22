@@ -1,13 +1,16 @@
 import LoginPage from "./LoginPage";
 import Lobby from "./Lobby";
 import Layout from "./Layout";
+import RegisterPage from "./RegisterPage";
+import EmailValidation from "./EmailValidation"
+import CodeValidation from "./CodeValidation";
+import ChangePassword from "./ChangePassword"
 import Template from "./Template";
 import React, {useState} from "react";
 import "./App.css"
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
-    const [isLoggedIn, setIsLoggedIn] = useState(true);
       return(
           <BrowserRouter>
               <Routes>
@@ -15,6 +18,11 @@ function App() {
                       <Route index element={<Lobby />} />
                       <Route path="/lobby" element={<Lobby />} />
                       <Route path="/login" element={<LoginPage />} />
+                      <Route path="/register" element={<RegisterPage />} />
+                      <Route path="/ev" element={<EmailValidation />} />
+                      <Route path="/cv" element={<CodeValidation />} />
+                      <Route path="/changepassword" element={<ChangePassword />} />
+                      <Route path="/template" element={<Template />} />
                   </Route>
               </Routes>
           </BrowserRouter>);

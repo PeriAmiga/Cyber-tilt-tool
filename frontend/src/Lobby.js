@@ -11,7 +11,7 @@ export default function Lobby() {
                     <Link to='/login'><button>Login</button></Link>
                 </p>
                 <p className="p-container">
-                    <input type="submit" id="register" value="Register" />
+                    <Link to='/register'><button>Register</button></Link>
                 </p>
             </form>
         </div>
