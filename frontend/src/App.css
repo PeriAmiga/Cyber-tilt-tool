@@ -105,7 +105,7 @@ body {
     border-radius: .4em;
     bottom: 0;
     box-shadow: 0 5px 10px 5px rgba(0,0,0,0.2);
-    height: 320px;
+    height: 440px;
     left: 0;
     margin: auto;
     overflow: hidden;
@@ -220,7 +220,7 @@ form h1:after {
 
 }
 
-input[type=text], input[type=password] {
+input[type=text], input[type=password], input[type=date] {
     background: linear-gradient(#1f2124,#27292c);
     border: 1px solid #222;
     border-radius: .3em;
@@ -232,8 +232,25 @@ input[type=text], input[type=password] {
     width: 100%;
 }
 
-input[type=text]:disabled, input[type=password]:disabled {
+input[type=text]:disabled, input[type=password]:disabled, input[type=date]:disabled {
     color: #999;
+}
+
+input[type=date] {
+    background: linear-gradient(#1f2124,#27292c);
+    border: 1px solid #222;
+    border-radius: .3em;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.1);
+    color: #FFF;
+    font-size: 13px;
+    text-align: left;
+    margin-bottom: 20px;
+    padding: 8px 5px;
+    width: 100%;
+}
+
+input[type="date"]:not(.has-value):before{
+    content: attr(placeholder);
 }
 
 label[for=remember] {
@@ -569,4 +586,11 @@ nav li button:hover {
     margin-top: -10px;
     margin-right: 75px;
     cursor: pointer;
+}
+
+#reports {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }

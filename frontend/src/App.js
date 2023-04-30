@@ -5,9 +5,10 @@ import RegisterPage from "./RegisterPage";
 import EmailValidation from "./EmailValidation"
 import CodeValidation from "./CodeValidation";
 import ChangePassword from "./ChangePassword"
+import Home from "./Home"
 import Template from "./Template";
-import React, {useState} from "react";
-import "./App.css"
+import React from "react";
+import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
                       <Route path="/ev" element={<EmailValidation />} />
                       <Route path="/cv" element={<CodeValidation />} />
                       <Route path="/changepassword" element={<ChangePassword />} />
+                      <Route path="/home" element={<Home />} />
                       <Route path="/template" element={<Template />} />
                   </Route>
               </Routes>

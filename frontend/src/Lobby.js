@@ -5,7 +5,7 @@ export default function Lobby() {
     return (
         <div>
             <form id="indexpanel">
-                <h1 id="litheader">Welcome to Communication LTD</h1>
+                <h1 id="litheader">Welcome to Cyber Tilt Tool</h1>
                 <br />
                 <p className="p-container">
                     <Link to='/login'><button>Login</button></Link>

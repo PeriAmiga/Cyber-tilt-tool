@@ -5,33 +5,69 @@ function RegisterPage() {
     const [error = "", setError] = useState("");
     const navigate = useNavigate();
     const emailRef = useRef(null);
-    const usernameRef = useRef(null);
+    const fullNameRef = useRef(null);
     const passwordRef = useRef(null);
+    const phoneRef = useRef(null);
+    const birthDateRef = useRef(null);
+    const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
+
+    // Set maximum date to today's date
+    const today = new Date();
+    const dd = String(today.getDate()).padStart(2, '0');
+    const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    const yyyy = today.getFullYear();
+    const maxDate = yyyy + '-' + mm + '-' + dd;
 
     function handleClick(e){
-        e.preventDefault();
-        let email = emailRef.current.value;
-        let username = usernameRef.current.value;
-        let password = passwordRef.current.value;
 
-        if (email === "" || username === "" || password === "")
-        {
-            if(email === "")
+        function validatePass(pass){
+            if(pass.length < 10)
             {
-                setError('Please Enter an Email');
+                return false;
             }
-            else if(username === "")
+            else if (!regex.test(pass))
             {
-                setError('Please Enter a Username');
+                return false
             }
             else
             {
-                setError('Please Enter a Password');
+                return true;
             }
         }
-        else if (password.length < 10)
+
+        e.preventDefault();
+        let email = emailRef.current.value;
+        let fullName = fullNameRef.current.value;
+        let password = passwordRef.current.value;
+        let phone = phoneRef.current.value;
+        let birthDate = birthDateRef.current.value;
+
+        if (email === "" || fullName === "" || password === "" || phone === "" || birthDate === "")
         {
-            setError('Please write a password with 10 letter or more');
+            if(fullName === "")
+            {
+                setError('Please Enter a Full Name');
+            }
+            else if(email === "")
+            {
+                setError('Please Enter an Email');
+            }
+            else if(password === "")
+            {
+                setError('Please Enter a Password');
+            }
+            else if(phone === "")
+            {
+                setError('Please Enter a Phone Number');
+            }
+            else
+            {
+                setError('Please Enter a Birth Date');
+            }
+        }
+        else if (!validatePass(password))
+        {
+            setError('Password must contain 10 characters and at least one number, one uppercase letter, and one lowercase letter.');
         }
         else
         {
@@ -47,13 +83,26 @@ function RegisterPage() {
                 <h1 id="litheader">Register</h1>
                 <div className="inset">
                     <p>
+                        <input type="text" name="fullName" id="fullName" placeholder="Full Name" ref={fullNameRef}/>
+                    </p>
+                    <p>
                         <input type="text" name="email" id="email" placeholder="Email" ref={emailRef}/>
                     </p>
                     <p>
-                        <input type="text" name="username" id="username" placeholder="User Name" ref={usernameRef}/>
+                        <input type="password" name="password" id="password" placeholder="Password" ref={passwordRef}/>
                     </p>
                     <p>
-                        <input type="password" name="password" id="password" placeholder="Password" ref={passwordRef}/>
+                        <input type="text" name="phone" id="phone" placeholder="Enter phone number" ref={phoneRef} onKeyPress={(event) => {
+                            const keyCode = event.keyCode || event.which;
+                            const keyValue = String.fromCharCode(keyCode);
+                            const regex = /[0-9]/;
+                            if (!regex.test(keyValue)) {
+                                event.preventDefault();
+                            }
+                        }} />
+                    </p>
+                    <p>
+                        <input type="date" name="birthdate" id="birthdate" max={maxDate} ref={birthDateRef} onKeyDown={(e) => e.preventDefault()}/>
                     </p>
                 </div>
                 <div className="p-container" id="registerError">{error}</div>

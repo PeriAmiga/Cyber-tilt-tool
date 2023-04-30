@@ -4,17 +4,17 @@ import {useNavigate} from "react-router-dom";
 export default function LoginPage() {
     const [error = "", setError] = useState("");
     const navigate = useNavigate();
-    const usernameRef = useRef(null);
+    const emailRef = useRef(null);
     const passwordRef = useRef(null);
 
     function handleClick(e){
         e.preventDefault();
-        let username = usernameRef.current.value;
+        let email = emailRef.current.value;
         let password = passwordRef.current.value;
 
-        if (username === "" || password === "")
+        if (email === "" || password === "")
         {
-            if(username === "")
+            if(email === "")
             {
                 setError('Please Enter a Username');
             }
@@ -23,15 +23,11 @@ export default function LoginPage() {
                 setError('Please Enter a Password');
             }
         }
-        else if (password.length < 10)
-        {
-            setError('Please write a password with 10 letter or more');
-        }
         else
         {
             // check the user in the db if exist do and write what if not
             setError('');
-            navigate('/reports');
+            navigate('/home');
         }
     }
 
@@ -42,7 +38,7 @@ export default function LoginPage() {
                 <h1 id="litheader">Login</h1>
                 <div className="inset">
                     <p>
-                        <input type="text" name="username" id="username" placeholder="User Name" ref={usernameRef}/>
+                        <input type="text" name="email" id="email" placeholder="Email" ref={emailRef}/>
                     </p>
                     <p>
                         <input type="password" name="password" id="password" placeholder="Password" ref={passwordRef}/>
