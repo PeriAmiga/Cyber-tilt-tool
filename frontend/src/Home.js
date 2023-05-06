@@ -1,13 +1,36 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Button from 'react-bootstrap/Button';
 
 function Home() {
+    //const [services, setServices] = useState([]);
+
+    // get services from API
+    /*
+    useEffect(() => {
+        setServices(["HTTP", "FTP", "SSH", "SMTP"])
+    }, [])
+    */
+
+    // Data
+    /*
+
+    */
+
+    // Style
+    const mystyle = {
+        'margin-top': '30px',
+        'display': 'flex',
+        'justify-content': 'center',
+        'align-item': 'center'
+    };
+
+
     return (
-        <div id="reports">
-            <Button variant="outline-primary">HTTP</Button>{' '}
-            <Button variant="outline-primary">FTP</Button>{' '}
-            <Button variant="outline-primary">SMTP</Button>{' '}
-            <Button variant="outline-primary">SSH</Button>{' '}
+        <div id="reports" style={mystyle} className="container">
+            <h2>Report</h2>
+
+
+
         </div>
     );
 }
