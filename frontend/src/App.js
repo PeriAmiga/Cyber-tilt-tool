@@ -5,7 +5,8 @@ import RegisterPage from "./RegisterPage";
 import EmailValidation from "./EmailValidation"
 import CodeValidation from "./CodeValidation";
 import ChangePassword from "./ChangePassword"
-import Home from "./Home"
+//import Home from "./Home"
+import Reports from "./Reports"
 import Template from "./Template";
 import React from "react";
 // import "./App.css";
@@ -23,7 +24,7 @@ function App() {
                     <Route path="/ev" element={<EmailValidation />} />
                     <Route path="/cv" element={<CodeValidation />} />
                     <Route path="/changepassword" element={<ChangePassword />} />
-                    <Route path="/home" element={<Home />} />
+                    <Route path="/reports" element={<Reports />} />
                     <Route path="/template" element={<Template />} />
                 </Route>
             </Routes>
