@@ -2,9 +2,12 @@ import React, { useState } from 'react';
 import "./table.css"
 import Papa from 'papaparse';
 
-function downloadCsv(data) {
+function downloadCsv() {
     try {
-        const csv = Papa.unparse(data);
+        const table = document.getElementById('reportTable');
+        //TODO: remove last col
+        const csv = toCsv(table)
+        // const csv = Papa.unparse(data);
         const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
         const url = URL.createObjectURL(blob);
         const link = document.createElement('a');
@@ -19,6 +22,25 @@ function downloadCsv(data) {
         console.error('Error generating CSV:', error);
     }
 }
+
+const toCsv = function (table) {
+    // Query all rows
+    const rows = table.querySelectorAll('tr');
+
+    return [].slice
+        .call(rows)
+        .map(function (row) {
+            // Query all cells
+            const cells = row.querySelectorAll('th,td');
+            return [].slice
+                .call(cells)
+                .map(function (cell) {
+                    return cell.textContent;
+                })
+                .join(',');
+        })
+        .join('\n');
+};
 
 
 const Table = ({ data }) => {
@@ -57,7 +79,7 @@ const Table = ({ data }) => {
 
     const filteredData = data.filter((item) =>
         item.attackerIP.includes(searchAttackerIP) &&
-    item.serviceName.toLowerCase().includes(searchService.toLowerCase()) && item.company.toLowerCase().includes(searchCompany.toLowerCase()) && item.trapName.toLowerCase().includes(searchTrapName.toLowerCase())
+        item.serviceName.toLowerCase().includes(searchService.toLowerCase()) && item.company.toLowerCase().includes(searchCompany.toLowerCase()) && item.trapName.toLowerCase().includes(searchTrapName.toLowerCase())
     );
 
     const totalPages = Math.ceil(filteredData.length / rowsPerPage);
@@ -92,32 +114,32 @@ const Table = ({ data }) => {
                     <input type="text" value={searchTrapName} id="trapName" onChange={handleSearchTrapName} placeholder="Search by Trap Name" />
                 </p>
             </p>
-            <br/>
-            <button id="save-button" onClick={() => downloadCsv(data)}>Save Data as CSV</button>
-            <table>
+            <br />
+            <button id="save-button" onClick={() => downloadCsv()}>Save Data as CSV</button>
+            <table id="reportTable">
                 <thead>
-                <tr>
-                    <th>Report ID</th>
-                    <th>Service Name</th>
-                    <th>Date</th>
-                    <th>Company</th>
-                    <th>Attacker IP</th>
-                    <th>Trap Name</th>
-                    <th>Session INFO</th>
-                </tr>
+                    <tr>
+                        <th>Report ID</th>
+                        <th>Service Name</th>
+                        <th>Date</th>
+                        <th>Company</th>
+                        <th>Attacker IP</th>
+                        <th>Trap Name</th>
+                        <th>Session INFO</th>
+                    </tr>
                 </thead>
                 <tbody>
-                {filteredData.slice(startIndex, endIndex).map((item) => (
-                    <tr key={item.reportID}>
-                        <td>{item.reportID}</td>
-                        <td>{item.serviceName}</td>
-                        <td>{item.date}</td>
-                        <td>{item.company}</td>
-                        <td>{item.attackerIP}</td>
-                        <td>{item.trapName}</td>
-                        <td>{item.sessionINFO}</td>
-                    </tr>
-                ))}
+                    {filteredData.slice(startIndex, endIndex).map((item) => (
+                        <tr key={item.reportID}>
+                            <td>{item.reportID}</td>
+                            <td>{item.serviceName}</td>
+                            <td>{item.date}</td>
+                            <td>{item.company}</td>
+                            <td>{item.attackerIP}</td>
+                            <td>{item.trapName}</td>
+                            <td>{item.sessionINFO}</td>
+                        </tr>
+                    ))}
                 </tbody>
             </table>
             <div className="pagination" id="tablePages">
