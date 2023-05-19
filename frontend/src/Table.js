@@ -1,13 +1,10 @@
 import React, { useState } from 'react';
 import "./table.css"
-import Papa from 'papaparse';
+import MyVerticallyCenteredModal from "./Card";
 
-function downloadCsv() {
+function downloadCsv(filteredData) {
     try {
-        const table = document.getElementById('reportTable');
-        //TODO: remove last col
-        const csv = toCsv(table)
-        // const csv = Papa.unparse(data);
+        const csv = toCsv(filteredData);
         const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
         const url = URL.createObjectURL(blob);
         const link = document.createElement('a');
@@ -23,39 +20,33 @@ function downloadCsv() {
     }
 }
 
-const toCsv = function (table) {
-    // Query all rows
-    const rows = table.querySelectorAll('tr');
+const toCsv = function (data) {
+    const headers = Object.keys(data[0]).filter(key => key !== 'sessionINFO');
+    const rows = data.map(function (row) {
+        return headers.map(function (header) {
+            return row[header];
+        });
+    });
 
-    return [].slice
-        .call(rows)
-        .map(function (row) {
-            // Query all cells
-            const cells = row.querySelectorAll('th,td');
-            return [].slice
-                .call(cells)
-                .map(function (cell) {
-                    return cell.textContent;
-                })
-                .join(',');
-        })
-        .join('\n');
+    const csvContent =
+        headers.join(',') +
+        '\n' +
+        rows.map(function (row) {
+            return row.join(',');
+        }).join('\n');
+
+    return csvContent;
 };
 
-
 const Table = ({ data }) => {
-    const [searchTerm, setSearchTerm] = useState('');
     const [searchService, setSearchService] = useState('');
     const [searchCompany, setSearchCompany] = useState('');
     const [searchAttackerIP, setSearchAttackerIP] = useState('');
     const [searchTrapName, setSearchTrapName] = useState('');
+    const [searchMinDate, setSearchMinDate] = useState('');
+    const [searchMaxDate, setSearchMaxDate] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
     const rowsPerPage = 10;
-
-    const handleSearch = (event) => {
-        setSearchTerm(event.target.value);
-        setCurrentPage(1);
-    };
 
     const handleSearchService = (event) => {
         setSearchService(event.target.value);
@@ -77,9 +68,19 @@ const Table = ({ data }) => {
         setCurrentPage(1);
     };
 
+    const handleSearchMinDate = (event) => {
+        setSearchMinDate(event.target.value);
+        setCurrentPage(1);
+    };
+
+    const handleSearchMaxDate = (event) => {
+        setSearchMaxDate(event.target.value);
+        setCurrentPage(1);
+    };
+
     const filteredData = data.filter((item) =>
         item.attackerIP.includes(searchAttackerIP) &&
-        item.serviceName.toLowerCase().includes(searchService.toLowerCase()) && item.company.toLowerCase().includes(searchCompany.toLowerCase()) && item.trapName.toLowerCase().includes(searchTrapName.toLowerCase())
+        item.serviceName.toLowerCase().includes(searchService.toLowerCase()) && item.company.toLowerCase().includes(searchCompany.toLowerCase()) && item.trapName.toLowerCase().includes(searchTrapName.toLowerCase()) && (searchMinDate === '' || item.date >= searchMinDate) && (searchMaxDate === '' || item.date <= searchMaxDate)
     );
 
     const totalPages = Math.ceil(filteredData.length / rowsPerPage);
@@ -87,6 +88,14 @@ const Table = ({ data }) => {
     const endIndex = startIndex + rowsPerPage;
     const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
 
+    const [modalShowMap, setModalShowMap] = useState({});
+    // Function to toggle the modal show state for a specific reportID
+    const toggleModalShow = (reportID) => {
+        setModalShowMap((prevModalShowMap) => ({
+            ...prevModalShowMap,
+            [reportID]: !prevModalShowMap[reportID] // Toggle the show state
+        }));
+    };
 
     return (
         <div>
@@ -97,9 +106,9 @@ const Table = ({ data }) => {
                 </p>
                 <p>
                     <label htmlFor="username-input">Filter By Date From:</label>
-                    <input type="Date" value={searchTerm} id="fromDate" onChange={handleSearch} placeholder="From Date" />
+                    <input type="Date" value={searchMinDate} id="fromDate" onChange={handleSearchMinDate} placeholder="From Date" />
                     <label htmlFor="username-input">To:</label>
-                    <input type="Date" value={searchTerm} id="toDate" onChange={handleSearch} placeholder="To Date" />
+                    <input type="Date" value={searchMaxDate} id="toDate" onChange={handleSearchMaxDate} placeholder="To Date" />
                 </p>
                 <p>
                     <label htmlFor="username-input">Filter By Company:</label>
@@ -115,7 +124,7 @@ const Table = ({ data }) => {
                 </p>
             </p>
             <br />
-            <button id="save-button" onClick={() => downloadCsv()}>Save Data as CSV</button>
+            <button id="save-button" onClick={() => downloadCsv(filteredData)}>Save Data as CSV</button>
             <table id="reportTable">
                 <thead>
                     <tr>
@@ -137,7 +146,12 @@ const Table = ({ data }) => {
                             <td>{item.company}</td>
                             <td>{item.attackerIP}</td>
                             <td>{item.trapName}</td>
-                            <td>{item.sessionINFO}</td>
+                            <td id={item.reportID} style={{ cursor: 'pointer' }} onClick={() => toggleModalShow(item.reportID)}><img
+                                src="https://upload.wikimedia.org/wikipedia/en/thumb/3/35/Information_icon.svg/2048px-Information_icon.svg.png" style={{ width: '40px', height: '40px' }}/></td>
+                            <MyVerticallyCenteredModal reportID={item.reportID}
+                               show={modalShowMap[item.reportID] || false} // Use modalShowMap to determine the show state
+                               onHide={() => toggleModalShow(item.reportID)}
+                            />
                         </tr>
                     ))}
                 </tbody>
