@@ -27,7 +27,7 @@ async def get_attacker_by_ip(ip: str):
     return AttackerEntity(att)
 
 
-@attacker.post()
+@attacker.post('')
 async def add_attacker(attackerDTO: AttackerDTO):
     conn.execute(attackers.insert(attackerDTO))
     return ORJSONResponse(content="Created", status=201)
