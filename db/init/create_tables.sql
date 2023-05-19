@@ -40,12 +40,37 @@ CREATE TABLE
     IF NOT EXISTS `db`.`Company` (
         `companyID` INT unsigned NOT NULL AUTO_INCREMENT,
         `name` VARCHAR(128) NOT NULL,
-        `serviceID` INT unsigned NOT NULL,
         `address` TEXT,
         `isActivate` TINYINT(1) NOT NULL DEFAULT 1,
         KEY `idx_Company_name` (`name`) USING BTREE,
-        CONSTRAINT `idx_Company_serviceID` FOREIGN KEY (`serviceID`) REFERENCES `Service` (`serviceID`),
         PRIMARY KEY (`companyID`)
+    );
+
+CREATE TABLE
+    IF NOT EXISTS `db`.`Log` (
+        `logID` INT unsigned NOT NULL AUTO_INCREMENT,
+        `sessionID` VARCHAR(32) NOT NULL,
+        `createAt` DATETIME NOT NULL,
+        `description` TEXT,
+        KEY `idx_sessionID` (`sessionID`) USING HASH,
+        PRIMARY KEY (`logID`)
+    );
+
+CREATE TABLE
+    IF NOT EXISTS `db`.`Report` (
+        `reportID` INT unsigned NOT NULL AUTO_INCREMENT,
+        `serviceID` INT unsigned NOT NULL,
+        `createAt` DATETIME NOT NULL,
+        `companyID` INT unsigned NOT NULL,
+        `attackerID` INT unsigned NOT NULL,
+        `trapID` INT unsigned NOT NULL,
+        `sessionLogID` VARCHAR(32) NOT NULL,
+        CONSTRAINT `idx_Report_log_sessionID` FOREIGN KEY (`sessionLogID`) REFERENCES `Log` (`sessionID`),
+        CONSTRAINT `idx_Report_companyID` FOREIGN KEY (`companyID`) REFERENCES `Company` (`companyID`),
+        CONSTRAINT `idx_Report_trapID` FOREIGN KEY (`trapID`) REFERENCES `Trap` (`trapID`),
+        CONSTRAINT `idx_Report_serviceID` FOREIGN KEY (`serviceID`) REFERENCES `Service` (`serviceID`),
+        CONSTRAINT `idx_Report_attackerID` FOREIGN KEY (`attackerID`) REFERENCES `Attacker` (`attackerID`),
+        PRIMARY KEY (`reportID`)
     );
 
 CREATE TABLE
@@ -59,7 +84,6 @@ CREATE TABLE
         `address` TEXT,
         `birthdate` DATE NOT NULL,
         `registerDate` DATETIME NOT NULL,
-        `serviceID` INT unsigned,
         `companyID` INT unsigned NOT NULL,
         `isSysAdmin` TINYINT(1) NOT NULL DEFAULT 0,
         `isCompanyAdmin` TINYINT(1) NOT NULL DEFAULT 0,
@@ -67,23 +91,15 @@ CREATE TABLE
         KEY `idx_User_username` (`username`) USING BTREE,
         KEY `idx_User_email` (`email`) USING BTREE,
         CONSTRAINT `idx_User_companyID` FOREIGN KEY (`companyID`) REFERENCES `Company` (`companyID`),
-        CONSTRAINT `idx_User_serviceID` FOREIGN KEY (`serviceID`) REFERENCES `Service` (`serviceID`),
         PRIMARY KEY (`userID`)
     );
 
 CREATE TABLE
-    IF NOT EXISTS `db`.`Report` (
-        `reportID` INT unsigned NOT NULL AUTO_INCREMENT,
-        `serviceID` INT unsigned NOT NULL,
-        `createDate` DATETIME NOT NULL,
-        `connectionDuration` TIME,
-        `companyID` INT unsigned NOT NULL,
-        `attackerID` INT unsigned NOT NULL,
-        `trapID` INT unsigned NOT NULL,
-        `description` TEXT,
-        CONSTRAINT `idx_Report_companyID` FOREIGN KEY (`companyID`) REFERENCES `Company` (`companyID`),
-        CONSTRAINT `idx_Report_trapID` FOREIGN KEY (`trapID`) REFERENCES `Trap` (`trapID`),
-        CONSTRAINT `idx_Report_serviceID` FOREIGN KEY (`serviceID`) REFERENCES `Service` (`serviceID`),
-        CONSTRAINT `idx_Report_attackerID` FOREIGN KEY (`attackerID`) REFERENCES `Attacker` (`attackerID`),
-        PRIMARY KEY (`reportID`)
+    IF NOT EXISTS `db`.`linking_company_service` (
+        `id` INT unsigned NOT NULL AUTO_INCREMENT,
+        `company_id` INT unsigned NOT NULL,
+        `service_id` INT unsigned NOT NULL,
+        CONSTRAINT `idx_linking_company_service_company_id` FOREIGN KEY (`company_id`) REFERENCES `Company` (`companyID`),
+        CONSTRAINT `idx_linking_company_service_service_id` FOREIGN KEY (`service_id`) REFERENCES `Service` (`serviceID`),
+        PRIMARY KEY (`id`)
     );
