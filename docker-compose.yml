@@ -67,8 +67,6 @@ services:
     build: /frontend
     ports:
       - 5001:3000
-    #volumes:
-    #  - ./frontend/code:/app
     environment:
       - BROWSER=none
     depends_on:
