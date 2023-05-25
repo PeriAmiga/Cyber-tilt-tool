@@ -9,6 +9,6 @@ RUN npm install
 RUN npm cache clean --force
 
 COPY ./code .
-EXPOSE 80/tcp
+EXPOSE 3000
 
 CMD ["npm", "run", "start"]
