@@ -7,6 +7,9 @@ import CodeValidation from "./CodeValidation";
 import ChangePassword from "./ChangePassword"
 import Home from "./Home"
 import Reports from "./Reports"
+import Profile from "./Profile";
+import CompanyUsers from "./CompanyUsers";
+import SystemUsers from "./SystemUsers";
 import Template from "./Template";
 import React from "react";
 // import "./App.css";
@@ -26,6 +29,9 @@ function App() {
                     <Route path="/changepassword" element={<ChangePassword />} />
                     <Route path="/reports" element={<Reports />} />
                     <Route path="/home" element={<Home />} />
+                    <Route path="/profile" element={<Profile />} />
+                    <Route path="/companyusers" element={<CompanyUsers />} />
+                    <Route path="/systemusers" element={<SystemUsers />} />
                     <Route path="/template" element={<Template />} />
                 </Route>
             </Routes>
