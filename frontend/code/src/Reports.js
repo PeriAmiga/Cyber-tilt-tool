@@ -1,5 +1,5 @@
 import React from 'react'
-import Table from "./Table";
+import ReportsTable from "./ReportsTable";
 import "./reports.css"
 
 const data = [
@@ -33,7 +33,7 @@ function Reports() {
         <div id="reports">
             <h1 id="titleReport">Reports</h1>
             <br/>
-            <Table data={data}></Table>
+            <ReportsTable data={data}></ReportsTable>
         </div>
     );
 }

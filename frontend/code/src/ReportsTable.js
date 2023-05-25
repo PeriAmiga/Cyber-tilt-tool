@@ -21,7 +21,7 @@ function downloadCsv(filteredData) {
 }
 
 const toCsv = function (data) {
-    const headers = Object.keys(data[0]).filter(key => key !== 'sessionINFO');
+    const headers = Object.keys(data[0]).filter(key => key !== 'Logs');
     const rows = data.map(function (row) {
         return headers.map(function (header) {
             return row[header];
@@ -38,7 +38,7 @@ const toCsv = function (data) {
     return csvContent;
 };
 
-const Table = ({ data }) => {
+const ReportsTable = ({ data }) => {
     const [searchService, setSearchService] = useState('');
     const [searchCompany, setSearchCompany] = useState('');
     const [searchAttackerIP, setSearchAttackerIP] = useState('');
@@ -134,7 +134,7 @@ const Table = ({ data }) => {
                         <th>Company</th>
                         <th>Attacker IP</th>
                         <th>Trap Name</th>
-                        <th>Session INFO</th>
+                        <th>Logs</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -167,4 +167,4 @@ const Table = ({ data }) => {
     );
 };
 
-export default Table;
+export default ReportsTable;
