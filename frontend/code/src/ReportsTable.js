@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import "./table.css"
+import "./ReportsTable.css"
 import MyVerticallyCenteredModal from "./Card";
 
 function downloadCsv(filteredData) {

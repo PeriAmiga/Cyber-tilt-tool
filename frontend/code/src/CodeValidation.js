@@ -19,7 +19,7 @@ export default function CodeValidation() {
             // check the code in the db if exist and equal
             //write what will happen if not equal
             setError('');
-            navigate('/changepassword');
+            navigate('/newpassword');
         }
     }
 

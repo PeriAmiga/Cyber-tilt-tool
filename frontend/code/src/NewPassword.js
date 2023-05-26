@@ -1,26 +1,20 @@
 import React, {useRef, useState} from 'react'
 import {useNavigate} from "react-router-dom";
 
-export default function ChangePassword() {
+export default function NewPassword() {
     const [error = "", setError] = useState("");
     const navigate = useNavigate();
-    const oldPasswordRef = useRef(null);
     const newPasswordRef = useRef(null);
     const confirmPasswordRef = useRef(null);
 
     function handleClick(e){
         e.preventDefault();
-        let oldPassword = oldPasswordRef.current.value;
         let newPassword = newPasswordRef.current.value;
         let confirmPassword = confirmPasswordRef.current.value;
 
-        if (oldPassword === "" || newPassword === "" || confirmPassword === "")
+        if (newPassword === "" || confirmPassword === "")
         {
-            if(oldPassword === "")
-            {
-                setError('Please Enter an old password');
-            }
-            else if (newPassword === "")
+            if (newPassword === "")
             {
                 setError('Please Enter an new password');
             }
@@ -49,12 +43,9 @@ export default function ChangePassword() {
 
     return (
         <div>
-            <form id="changepasswordpanel">
-                <h1 id="litheader">Change Password</h1>
+            <form id="newpasswordpanel">
+                <h1 id="litheader">New Password</h1>
                 <div className="inset">
-                    <p>
-                        <input type="password" name="oldPassword" id="oldPassword" placeholder="Old Password" ref={oldPasswordRef}/>
-                    </p>
                     <p>
                         <input type="password" name="newPassword" id="newPassword" placeholder="New Password" ref={newPasswordRef}/>
                     </p>
@@ -62,7 +53,7 @@ export default function ChangePassword() {
                         <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password" ref={confirmPasswordRef}/>
                     </p>
                 </div>
-                <div className="p-container" id="changePasswordError">{error}</div>
+                <div className="p-container" id="newPasswordError">{error}</div>
                 <p className="p-container">
                     <button onClick={handleClick}>Change Password</button>
                 </p>

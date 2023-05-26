@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import "./table.css"
+import "./ReportsTable.css"
 
 const ClientsTable = ({data, isCompany}) => {
     const [searchFullName, setSearchFullName] = useState('');

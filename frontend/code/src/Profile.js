@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {useNavigate} from "react-router-dom";
 
 export default function Profile() {
     const [fullName, setFullName] = useState('Nissim Gerame');
@@ -6,6 +7,7 @@ export default function Profile() {
     const [phone, setPhone] = useState('1234567890');
     const [birthdate, setBirthdate] = useState('1990-01-01');
     const [editMode, setEditMode] = useState(false);
+    const navigate = useNavigate();
 
     const handleSave = () => {
         // Save changes to the user's email and phone number
@@ -60,10 +62,11 @@ export default function Profile() {
                 <label htmlFor="birthdate">Birthdate:</label>
                 <span id="birthdate">{birthdate}</span>
             </div>
+            {editMode && <button onClick={handleSave}>Save</button>}
             <button onClick={() => setEditMode(!editMode)}>
                 {editMode ? 'Cancel' : 'Edit'}
             </button>
-            {editMode && <button onClick={handleSave}>Save</button>}
+            <button onClick={() => navigate('/changepassword')}>Change Password</button>
         </div>
     );
 }
