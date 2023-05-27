@@ -93,34 +93,22 @@ function CompanyAuthorization() {
                         <td>{user.phone}</td>
                         <td>{user.birthDate}</td>
                         <td>
-                            <select
-                                value={user.isAdmin}
+                            <input
+                                type="checkbox"
+                                checked={user.isAdmin}
                                 onChange={e =>
-                                    handleAuthorizationChange(
-                                        user.userID,
-                                        'isAdmin',
-                                        e.target.value === 'true'
-                                    )
+                                    handleAuthorizationChange(user.userID, 'isAdmin', e.target.checked)
                                 }
-                            >
-                                <option value="true">True</option>
-                                <option value="false">False</option>
-                            </select>
+                            />
                         </td>
                         <td>
-                            <select
-                                value={user.isActive}
+                            <input
+                                type="checkbox"
+                                checked={user.isActive}
                                 onChange={e =>
-                                    handleAuthorizationChange(
-                                        user.userID,
-                                        'isActive',
-                                        e.target.value === 'true'
-                                    )
+                                    handleAuthorizationChange(user.userID, 'isActive', e.target.checked)
                                 }
-                            >
-                                <option value="true">True</option>
-                                <option value="false">False</option>
-                            </select>
+                            />
                         </td>
                     </tr>
                 ))}
