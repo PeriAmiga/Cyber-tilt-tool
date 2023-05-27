@@ -1,27 +1,24 @@
 import axios from "axios";
 
-const _instanceAxios = axios.create({
+const _interfaceAxios = axios.create({
     baseURL: '/api',
     headers: {
-        Accept: 'application/json',
-        // TODO: add auth of user
+        Accept: 'application/json'
     },
 });
 
-export const apiGet = async (_url, params = {}) => {
+export const apiGet = async (path, params = {}) => {
     try {
-        let resp = await _instanceAxios.get(_url, {
-            params,
-        });
+        const resp = await _interfaceAxios.get(path, { params });
         return resp;
     } catch (err) {
         throw err;
     }
 };
 
-export const apiPost = async (_url, body) => {
+export const apiPost = async (path, body) => {
     try {
-        let resp = await _instanceAxios.post(_url, body);
+        const resp = await _interfaceAxios.post(path, body);
         console.log("apiPost", resp)
         return resp;
     } catch (err) {

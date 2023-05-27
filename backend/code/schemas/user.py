@@ -1,6 +1,6 @@
 
 from pydantic import BaseModel
-from datetime import datetime
+from datetime import datetime, date
 import bcrypt
 
 
@@ -15,7 +15,7 @@ class User(BaseModel):
     email: str
     fullName: str
     phone: str
-    birthdate: datetime
+    birthdate: date
     registerDate: datetime
     companyID: int
     isSysAdmin: bool
@@ -25,17 +25,17 @@ class User(BaseModel):
 
 def UserEntity(item) -> User:
     return User(
-        userID=int(item[0]),  # fix index
-        password=item[2],
-        fullName=item[3],
-        email=item[4],
-        phone=item[5],
-        birthdate=datetime(item[7]),
-        registerDate=datetime(item[8]),
-        companyID=int(item[9]),
-        isSysAdmin=bool(item[10]),
-        isCompanyAdmin=bool(item[11]),
-        isActive=bool(item[12])
+        userID=int(item[0]),
+        password=item[1],
+        fullName=item[2],
+        email=item[3],
+        phone=item[4],
+        birthdate=item[5],
+        registerDate=item[6],
+        companyID=int(item[7]),
+        isSysAdmin=bool(item[8]),
+        isCompanyAdmin=bool(item[9]),
+        isActive=bool(item[10])
     )
 
 

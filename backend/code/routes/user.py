@@ -19,6 +19,12 @@ user = APIRouter(
 config_ = config.common.load_config()
 
 
+@user.get('/')
+async def getAll():
+    data = conn.execute(users.select()).fetchall()
+    return ORJSONResponse(data, status_code=status.HTTP_200_OK)
+
+
 @user.get('/getReports', dependencies=[Depends(cookie)])
 async def getReports(session_data: SessionData = Depends(verifier)):
     data = conn.execute(reports.select().where(
@@ -40,11 +46,12 @@ async def register(user: UserDTO):
         phone=user.phone,
         fullName=user.fullName,
         birthdate=user.birthdate,
-        registerDate=datetime.now(),
+        registerDate=datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         companyID=user.companyID,
         isSysAdmin=user.isSysAdmin,
         isCompanyAdmin=user.isCompanyAdmin,
         isActive=user.isActive
     ))
+    conn.commit()
 
     return JSONResponse(status_code=status.HTTP_201_CREATED, content="")

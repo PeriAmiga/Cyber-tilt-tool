@@ -53,7 +53,6 @@ function RegisterPage() {
             setError('Password must contain 10 characters and at least one number, one uppercase letter, and one lowercase letter.');
         }
         else {
-            console.log('birthDate', birthDate)
             await apiPost('/user/register', {
                 "password": password,
                 "email": email,

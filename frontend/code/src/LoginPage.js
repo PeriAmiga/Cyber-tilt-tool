@@ -30,6 +30,7 @@ export default function LoginPage() {
 
             setError('');
             navigate('/home');
+            window.location.reload();
         }
     }
 

@@ -60,7 +60,7 @@ async def login(user: loginUser):
     if is_successfull:
         response = JSONResponse("Welcome :)", status_code=status.HTTP_200_OK)
         session = uuid4()
-        companyName = ''  # TODO: get name by ID `companyID`
+        companyName = 'Intel'  # TODO: get name by ID `companyID`
         sessionData = SessionData(
             email=user.email,
             companyName=companyName,

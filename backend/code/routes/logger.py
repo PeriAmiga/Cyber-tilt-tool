@@ -37,6 +37,7 @@ async def add_log(log: Log):
         createAt=now.strftime("%Y-%m-%d %H:%M:%S"),
         description=log.description
     ))
+    conn.commit()
     return ORJSONResponse('CREATED', status_code=status.HTTP_201_CREATED)
 
 """
@@ -56,6 +57,7 @@ async def init(report: Report):
         sessionLogID=session_id,
         createAt=now.strftime("%Y-%m-%d %H:%M:%S"),
     ))
+    conn.commit()
     return ORJSONResponse(session_id, status_code=status.HTTP_201_CREATED)
 
 """
