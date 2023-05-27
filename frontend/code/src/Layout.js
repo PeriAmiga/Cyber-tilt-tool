@@ -7,6 +7,8 @@ import Nav from "react-bootstrap/Nav";
 import { apiGet, apiPost } from "./services/apiService";
 import { Button } from 'react-bootstrap'
 
+import LoginPage from './LoginPage'
+
 const logout = async () => {
     await apiPost('/auth/logout', null)
 }
@@ -55,7 +57,9 @@ const Layout = () => {
                 }
             </Navbar>
 
-            <Outlet />
+            {
+                user == null ? (<LoginPage />) : (<Outlet />)
+            }
         </>
     )
 };
