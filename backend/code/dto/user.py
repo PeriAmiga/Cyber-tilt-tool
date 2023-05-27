@@ -1,17 +1,14 @@
-from datetime import datetime
+from datetime import date
 from pydantic import BaseModel
 
 
 class UserDTO(BaseModel):
-    username: str
     password: str
     email: str
     fullName: str
     phone: str
-    address: str
-    birthdate: datetime
-    registerDate: datetime
+    birthdate: date
     companyID: int
-    isSysAdmin: bool
-    isCompanyAdmin: bool
-    isActive: bool
+    isSysAdmin: bool = False
+    isCompanyAdmin: bool = False
+    isActive: bool = True

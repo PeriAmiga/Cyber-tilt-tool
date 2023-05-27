@@ -8,7 +8,7 @@ import os
 from fastapi.responses import JSONResponse
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-from models.user import loginUser
+from models.user import loginUser, users
 from schemas.user import validate_password
 from fastapi_sessions.backends.implementations import InMemoryBackend
 from fastapi_sessions.frontends.implementations import SessionCookie, CookieParameters
@@ -44,11 +44,9 @@ verifier = BasicVerifier(
 @auth.post("/login")
 async def login(user: loginUser):
     # Get User from DB
-    mycursor = conn.cursor()
-    sql = "SELECT * FROM User WHERE email = %s"
-    val = (user.email, )
-    mycursor.execute(sql, val)
-    data = mycursor.fetchall()
+    query = users.select().where(users.c.email == user.email)
+    data = conn.execute(query).fetchall()
+    print("auth", data)
     if len(data) == 0:
         return JSONResponse("Invalid User!", status_code=status.HTTP_401_UNAUTHORIZED)
     user_entity = UserEntity(data[0])
@@ -64,7 +62,6 @@ async def login(user: loginUser):
         session = uuid4()
         companyName = ''  # TODO: get name by ID `companyID`
         sessionData = SessionData(
-            username=user_entity.username,
             email=user.email,
             companyName=companyName,
             companyID=user_entity.companyID,

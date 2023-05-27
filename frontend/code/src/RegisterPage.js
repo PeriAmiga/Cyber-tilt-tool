@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { apiPost } from './services/apiService';
 
 function RegisterPage() {
     const [error = "", setError] = useState("");
@@ -9,7 +10,7 @@ function RegisterPage() {
     const passwordRef = useRef(null);
     const phoneRef = useRef(null);
     const birthDateRef = useRef(null);
-    const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
+    const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z](?=.*[@#$%^&+=!]).{10,}$/;
 
     // Set maximum date to today's date
     const today = new Date();
@@ -18,7 +19,7 @@ function RegisterPage() {
     const yyyy = today.getFullYear();
     const maxDate = yyyy + '-' + mm + '-' + dd;
 
-    function handleClick(e) {
+    async function handleClick(e) {
 
         function validatePass(pass) {
             return regex.test(pass)
@@ -52,7 +53,18 @@ function RegisterPage() {
             setError('Password must contain 10 characters and at least one number, one uppercase letter, and one lowercase letter.');
         }
         else {
-            // create the user and save it in the db
+            console.log('birthDate', birthDate)
+            await apiPost('/user/register', {
+                "password": password,
+                "email": email,
+                "fullName": fullName,
+                "phone": phone,
+                "birthdate": birthDate,
+                "companyID": 1, // TODO: Moshe&Peri - setting (Login)
+                "isSysAdmin": false, // TODO: peri - only SysAdmin
+                "isCompanyAdmin": false, // TODO: peri - only CompanyAdmin
+                "isActive": true // TODO: peri - admin and company
+            })
             setError('');
             alert("The user created successfully");
             navigate('/login');
@@ -64,28 +76,28 @@ function RegisterPage() {
             <h1 id="litheader">Register</h1>
             <div className="inset">
                 <p>
+                    <label htmlFor="register-input">Full Name:</label>
                     <input type="text" name="fullName" id="fullName" placeholder="Full Name" ref={fullNameRef} />
                 </p>
                 <p>
+                    <label htmlFor="register-input">Email:</label>
                     <input type="text" name="email" id="email" placeholder="Email" ref={emailRef} />
                 </p>
                 <p>
+                    <label htmlFor="register-input">Password:</label>
                     <input type="password" name="password" id="password" placeholder="Password" ref={passwordRef} />
                 </p>
                 <p>
+                    <label htmlFor="register-input">Phone Number:</label>
                     <input type="text" name="phone" id="phone" placeholder="Enter phone number" ref={phoneRef} onKeyPress={(event) => {
-                        const keyCode = event.keyCode || event.which;
-                        const keyValue = String.fromCharCode(keyCode);
-                        const regex = /[0-9]/;
-                        if (!regex.test(keyValue)) {
-                            event.preventDefault();
-                        }
+                        const keyCode = event.keyCode || event.which; const keyValue = String.fromCharCode(keyCode); const regex = /[0-9]/;
+                        if (!regex.test(keyValue)) { event.preventDefault(); }
                     }} />
                 </p>
                 <p>
-                    <input type="date" name="birthdate" id="birthdate" max={maxDate} ref={birthDateRef} onKeyDown={(e) => e.preventDefault()} />
-                </p>
-            </div>
+                    <label htmlFor="register-input">BirthDate:</label>
+                    <input type="date" name="birthdate" id="birthdate" max={maxDate} ref={birthDateRef} placeholder="Select birthdate" onKeyDown={(e) => e.preventDefault()} />
+                </p></div>
             <div className="p-container" id="registerError">{error}</div>
             <p className="p-container">
                 <button onClick={handleClick}>Register</button>

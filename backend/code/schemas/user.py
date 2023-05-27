@@ -5,18 +5,16 @@ import bcrypt
 
 
 class LogIn():
-    username: str
+    email: str
     password: str
 
 
 class User(BaseModel):
     userID: int
-    username: str
     password: str
     email: str
     fullName: str
     phone: str
-    address: str
     birthdate: datetime
     registerDate: datetime
     companyID: int
@@ -27,13 +25,11 @@ class User(BaseModel):
 
 def UserEntity(item) -> User:
     return User(
-        userID=int(item[0]),
-        username=item[1],
+        userID=int(item[0]),  # fix index
         password=item[2],
         fullName=item[3],
         email=item[4],
         phone=item[5],
-        address=item[6],
         birthdate=datetime(item[7]),
         registerDate=datetime(item[8]),
         companyID=int(item[9]),

@@ -1,7 +1,7 @@
 from fastapi import APIRouter, status, Depends
 from fastapi.responses import ORJSONResponse, JSONResponse
 from config.db import conn
-from models.index import reports
+from models.index import reports, users
 from schemas.index import ReportsEntity, hash
 from .auth import cookie
 from auth.SessionData import SessionData
@@ -9,6 +9,7 @@ from .auth import verifier
 import re
 import config.common
 from dto.user import UserDTO
+from datetime import datetime
 
 user = APIRouter(
     prefix="/api/user",
@@ -25,12 +26,25 @@ async def getReports(session_data: SessionData = Depends(verifier)):
     return ORJSONResponse(ReportsEntity(data), status_code=status.HTTP_200_OK)
 
 
-@user.post('/api/register')
+@user.post('/register')
 async def register(user: UserDTO):
     is_match = re.fullmatch(config_['regex_password'], user.password)
     if not is_match:
         return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST,
                             content="The password must include:\nAt least 10 characters \n any of the special characters: @#$%^&+=! \n numbers: 0-9 \n lowercase letters: a-z \n uppercase letters: A-Z")
-    # TODO
     user.password = hash(user.password)
+
+    conn.execute(users.insert().values(
+        email=user.email,
+        password=user.password,
+        phone=user.phone,
+        fullName=user.fullName,
+        birthdate=user.birthdate,
+        registerDate=datetime.now(),
+        companyID=user.companyID,
+        isSysAdmin=user.isSysAdmin,
+        isCompanyAdmin=user.isCompanyAdmin,
+        isActive=user.isActive
+    ))
+
     return JSONResponse(status_code=status.HTTP_201_CREATED, content="")

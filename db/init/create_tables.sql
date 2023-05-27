@@ -76,19 +76,16 @@ CREATE TABLE
 CREATE TABLE
     IF NOT EXISTS `db`.`User` (
         `userID` INT unsigned NOT NULL AUTO_INCREMENT,
-        `username` VARCHAR(32) NOT NULL,
         `password` VARCHAR(64) NOT NULL,
         `fullName` VARCHAR(256) NOT NULL,
         `email` VARCHAR(256) NOT NULL,
         `phone` CHAR(15),
-        `address` TEXT,
         `birthdate` DATE NOT NULL,
         `registerDate` DATETIME NOT NULL,
         `companyID` INT unsigned NOT NULL,
         `isSysAdmin` TINYINT(1) NOT NULL DEFAULT 0,
         `isCompanyAdmin` TINYINT(1) NOT NULL DEFAULT 0,
         `isActive` TINYINT(1) NOT NULL DEFAULT 1,
-        KEY `idx_User_username` (`username`) USING BTREE,
         KEY `idx_User_email` (`email`) USING BTREE,
         CONSTRAINT `idx_User_companyID` FOREIGN KEY (`companyID`) REFERENCES `Company` (`companyID`),
         PRIMARY KEY (`userID`)
