@@ -82,7 +82,7 @@ CREATE TABLE
         `phone` CHAR(15),
         `birthdate` DATE NOT NULL,
         `registerDate` DATETIME NOT NULL,
-        `companyID` INT unsigned NOT NULL,
+        `companyID` INT unsigned,
         `isSysAdmin` TINYINT(1) NOT NULL DEFAULT 0,
         `isCompanyAdmin` TINYINT(1) NOT NULL DEFAULT 0,
         `isActive` TINYINT(1) NOT NULL DEFAULT 1,

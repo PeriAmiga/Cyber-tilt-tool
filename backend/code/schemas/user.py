@@ -2,6 +2,7 @@
 from pydantic import BaseModel
 from datetime import datetime, date
 import bcrypt
+from typing import Optional
 
 
 class LogIn():
@@ -17,7 +18,7 @@ class User(BaseModel):
     phone: str
     birthdate: date
     registerDate: datetime
-    companyID: int
+    companyID: Optional[int] = None
     isSysAdmin: bool
     isCompanyAdmin: bool
     isActive: bool
@@ -32,7 +33,7 @@ def UserEntity(item) -> User:
         phone=item[4],
         birthdate=item[5],
         registerDate=item[6],
-        companyID=int(item[7]),
+        companyID=item[7],
         isSysAdmin=bool(item[8]),
         isCompanyAdmin=bool(item[9]),
         isActive=bool(item[10])
