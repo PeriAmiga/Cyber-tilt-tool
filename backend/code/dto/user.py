@@ -9,7 +9,7 @@ class UserDTO(BaseModel):
     fullName: str
     phone: str
     birthdate: date
-    companyID:  Optional[int] = None
+    companyID:  Optional[int] = 1
     isSysAdmin: bool = False
     isCompanyAdmin: bool = False
     isActive: bool = True
