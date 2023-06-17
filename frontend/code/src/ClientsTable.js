@@ -41,6 +41,15 @@ const ClientsTable = ({data, isCompany}) => {
         setCurrentPage(1);
     };
 
+    const handleClearSearch = () => {
+        setSearchFullName('');
+        setSearchCompany('');
+        setSearchEmail('');
+        setSearchPhone('');
+        setSearchMinDate('');
+        setSearchMaxDate('');
+    };
+
     const filteredData = data.filter((item) =>
             item.fullName.toLowerCase().includes(searchFullName.toLowerCase()) && item.email.toLowerCase().includes(searchEmail.toLowerCase()) && item.phone.toLowerCase().includes(searchPhone.toLowerCase()) && (isCompany ? item.company.toLowerCase().includes(searchCompany.toLowerCase()) : true) && (searchMinDate === '' || item.birthdate >= searchMinDate) && (searchMaxDate === '' || item.birthdate <= searchMaxDate)
     );
@@ -83,6 +92,7 @@ const ClientsTable = ({data, isCompany}) => {
                     <label htmlFor="username-input">Filter By Phone:</label>
                     <input type="text" value={searchPhone} id="phone" onChange={handleSearchPhone} placeholder="Search by Phone" />
                 </p>
+                <button onClick={handleClearSearch}>Clear</button>
             </p>
             <br />
             <table id="reportTable">

@@ -23,14 +23,19 @@ export default function LoginPage() {
             }
         }
         else {
-            await apiPost('/auth/login', {
-                "email": email,
-                "password": password
-            })
-
-            setError('');
-            navigate('/home');
-            window.location.reload();
+            try {
+                await apiPost('/auth/login', {
+                    "email": email,
+                    "password": password
+                });
+                // Code to execute if the request is successful
+                setError('');
+                navigate('/home');
+                window.location.reload();
+            } catch (error) {
+                // Code to handle the error
+                alert("the details you have entered are wrong, please try again")
+            }
         }
     }
 

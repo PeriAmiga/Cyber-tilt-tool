@@ -1,36 +1,47 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
+import {apiGet} from "./services/apiService";
 
 export default function Profile() {
-    const [fullName, setFullName] = useState('Nissim Gerame');
-    const [email, setEmail] = useState('nissim@example.com');
-    const [phone, setPhone] = useState('1234567890');
-    const [birthdate, setBirthdate] = useState('1990-01-01');
+
+    const [user, setUser] = useState("")
+
+    useEffect(() => {
+        async function getUser() {
+            try {
+                const user = await apiGet('/auth/whoami');
+                setUser(user.data);
+            } catch (error) {
+                setUser(null)
+            }
+            return
+        }
+        getUser();
+
+    }, []);
+
+    const [email, setEmail] = useState(user.email);
+    const [phone, setPhone] = useState(user.phone);
+    const [birthdate] = useState(user.birthdate);
     const [editMode, setEditMode] = useState(false);
     const navigate = useNavigate();
 
+
+
     const handleSave = () => {
-        // Save changes to the user's email and phone number
-        // Here you can make an API call to update the user's profile
+        // ToDo: Save changes to the user's email and phone number
 
         // Disable edit mode
         setEditMode(false);
     };
 
-    const handleSetFullName = (event) => {
-        setFullName(event.target.value);
-    };
-
-    const handleSetBirthdate = (event) => {
-        setBirthdate(event.target.value);
-    };
 
     return (
         <div>
             <h2>Profile</h2>
             <div>
                 <label htmlFor="fullName">Full Name:</label>
-                <span id="fullName">{fullName}</span>
+                <span id="fullName">{user.fullName}</span>
             </div>
             <div>
                 <label htmlFor="email">Email:</label>
@@ -60,7 +71,7 @@ export default function Profile() {
             </div>
             <div>
                 <label htmlFor="birthdate">Birthdate:</label>
-                <span id="birthdate">{birthdate}</span>
+                <span id="birthdate">{user.birthdate}</span>
             </div>
             {editMode && <button onClick={handleSave}>Save</button>}
             <button onClick={() => setEditMode(!editMode)}>

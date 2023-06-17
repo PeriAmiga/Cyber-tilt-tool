@@ -7,12 +7,17 @@ export default function ChangePassword() {
     const oldPasswordRef = useRef(null);
     const newPasswordRef = useRef(null);
     const confirmPasswordRef = useRef(null);
+    const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z](?=.*[@#$%^&+=!]).{10,}$/;
 
     function handleClick(e){
         e.preventDefault();
         let oldPassword = oldPasswordRef.current.value;
         let newPassword = newPasswordRef.current.value;
         let confirmPassword = confirmPasswordRef.current.value;
+
+        function validatePass(pass) {
+            return regex.test(pass)
+        }
 
         if (oldPassword === "" || newPassword === "" || confirmPassword === "")
         {
@@ -28,6 +33,9 @@ export default function ChangePassword() {
             {
                 setError('Please Enter a confirm password');
             }
+        }
+        else if (!validatePass(newPassword)) {
+            setError('Password must contain 10 characters and at least one number, one uppercase letter, and one lowercase letter.');
         }
         else
         {

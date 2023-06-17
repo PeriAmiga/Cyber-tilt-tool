@@ -48,6 +48,15 @@ const ReportsTable = ({ data }) => {
     const [currentPage, setCurrentPage] = useState(1);
     const rowsPerPage = 10;
 
+    const handleClearSearch = () => {
+        setSearchService('');
+        setSearchCompany('');
+        setSearchAttackerIP('');
+        setSearchTrapName('');
+        setSearchMinDate('');
+        setSearchMaxDate('');
+    };
+
     const handleSearchService = (event) => {
         setSearchService(event.target.value);
         setCurrentPage(1);
@@ -122,6 +131,7 @@ const ReportsTable = ({ data }) => {
                     <label htmlFor="username-input">Filter By Trap Name:</label>
                     <input type="text" value={searchTrapName} id="trapName" onChange={handleSearchTrapName} placeholder="Search by Trap Name" />
                 </p>
+                <button onClick={handleClearSearch}>Clear</button>
             </p>
             <br />
             <button id="save-button" onClick={() => downloadCsv(filteredData)}>Save Data as CSV</button>

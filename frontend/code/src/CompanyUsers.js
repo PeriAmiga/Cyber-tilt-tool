@@ -1,5 +1,6 @@
 import ClientsTable from "./ClientsTable";
-import React from "react";
+import React, {useEffect, useState} from "react";
+import {apiGet} from "./services/apiService";
 
 
 const data = [
@@ -72,9 +73,25 @@ const data = [
 
 function CompanyUsers() {
 
+    const [user, setUser] = useState("")
+
+    useEffect(() => {
+        async function getUser() {
+            try {
+                const user = await apiGet('/auth/whoami');
+                setUser(user.data);
+            } catch (error) {
+                setUser(null)
+            }
+            return
+        }
+        getUser();
+
+    }, []);
+
     return (
         <div id="reports">
-            <h1 id="companyClients">Company Users</h1>
+            <h1 id="companyClients">{user.companyName} - Users</h1>
             <br/>
             <ClientsTable data={data} isCompany={false}></ClientsTable>
         </div>

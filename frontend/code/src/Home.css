@@ -1,13 +1,15 @@
-#home {
-    background-image: url("https://img.freepik.com/free-photo/3d-internet-secuirty-badge_1048-18106.jpg?w=740&t=st=1684506289~exp=1684506889~hmac=19146e4554b854dc101cea6643ab676784e1de87d7804c8fdd0718b0533e9501");
-    background-repeat: no-repeat;
-    background-size: cover;
-    width: 100vw;
-    height: 100vh;
+body {
+    background-image: url("https://img.freepik.com/free-vector/cyber-security-concept_53876-93190.jpg?w=2000");
 }
 
 .button-92 {
-    --c: #fff;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    align-items: center;
+    : center;
+    --c: #000000;
     /* text color */
     background: linear-gradient(90deg, #0000 33%, #fff5, #0000 67%) var(--_p, 100%)/300% no-repeat,
         #004dff, rgba(255, 0, 0, 0.5);
