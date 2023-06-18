@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
@@ -51,9 +51,9 @@ const Layout = () => {
                                 <Nav.Link href="/reports">Reports</Nav.Link>
                                 <Nav.Link href="/companyusers">Company Users</Nav.Link>
                                 <Nav.Link href="/systemusers">System Users</Nav.Link>
-                                { user.isCompanyAdmin === true && <Nav.Link href="/companyauthorization">Company - Authorization </Nav.Link>}
-                                { user.isSysAdmin === true && <Nav.Link href="/systemauthorization">System - Authorization </Nav.Link>}
-                                { user.isSysAdmin === true && <Nav.Link href="/companymanagement">Company - Management </Nav.Link>}
+                                {user.isCompanyAdmin === true && <Nav.Link href="/companyauthorization">Company - Authorization </Nav.Link>}
+                                {user.isSysAdmin === true && <Nav.Link href="/systemauthorization">System - Authorization </Nav.Link>}
+                                {user.isSysAdmin === true && <Nav.Link href="/companymanagement">Company - Management </Nav.Link>}
 
                                 <Button variant="secondary" onClick={handleLogoutClick}>Logout</Button>
                             </Nav>
@@ -62,9 +62,7 @@ const Layout = () => {
                 }
             </Navbar>
 
-            {
-                user == null ? (<LoginPage />) : (<Outlet />)
-            }
+            <Outlet />
         </>
     )
 };

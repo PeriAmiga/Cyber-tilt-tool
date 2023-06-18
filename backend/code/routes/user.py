@@ -41,7 +41,7 @@ async def register(user: UserDTO):
 
     # Checking that the email does not exist
     db_select_user = conn.execute(users.select().where(
-        users.c.email == user.email)).fetchone()
+        users.c.email == user.email or users.c.phone == user.phone)).fetchone()
     if db_select_user is not None:
         return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content="BAD_REQUEST")
 

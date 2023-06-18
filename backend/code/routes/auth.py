@@ -67,7 +67,9 @@ async def login(user: loginUser):
             companyID=user_entity.companyID,
             fullName=user_entity.fullName,
             isSysAdmin=user_entity.isSysAdmin,
-            isCompanyAdmin=user_entity.isCompanyAdmin
+            isCompanyAdmin=user_entity.isCompanyAdmin,
+            phone=user_entity.phone,
+            birthdate=user_entity.birthdate
         )
         await backend.create(session, sessionData)
         cookie.attach_to_response(response, session)

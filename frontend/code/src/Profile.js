@@ -1,18 +1,29 @@
-import React, {useEffect, useState} from 'react';
-import {useNavigate} from "react-router-dom";
-import {apiGet} from "./services/apiService";
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from "react-router-dom";
+import { apiGet } from "./services/apiService";
 
 export default function Profile() {
 
     const [user, setUser] = useState("")
+    const [email, setEmail] = useState("");
+    const [phone, setPhone] = useState("");
+    const [birthdate] = useState("");
+    const [editMode, setEditMode] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         async function getUser() {
             try {
-                const user = await apiGet('/auth/whoami');
-                setUser(user.data);
+                const res = await apiGet('/auth/whoami');
+                setUser(res.data);
+
+                setPhone(user.phone)
+                setEmail(user.email)
+
+
             } catch (error) {
                 setUser(null)
+                navigate('/error')
             }
             return
         }
@@ -20,16 +31,10 @@ export default function Profile() {
 
     }, []);
 
-    const [email, setEmail] = useState(user.email);
-    const [phone, setPhone] = useState(user.phone);
-    const [birthdate] = useState(user.birthdate);
-    const [editMode, setEditMode] = useState(false);
-    const navigate = useNavigate();
-
 
 
     const handleSave = () => {
-        // ToDo: Save changes to the user's email and phone number
+        // TODO: Save changes to the user's email and phone number
 
         // Disable edit mode
         setEditMode(false);
