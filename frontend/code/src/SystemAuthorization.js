@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
+import {apiGet} from "./services/apiService";
 
 function SystemAuthorization() {
+    const navigate = useNavigate();
     const [users, setUsers] = useState([
         {
             userID: 1,
@@ -49,7 +51,7 @@ function SystemAuthorization() {
         },
     ]);
 
-    const navigate = useNavigate();
+
     const [filteredUsers, setFilteredUsers] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
 
@@ -82,8 +84,26 @@ function SystemAuthorization() {
     const endIndex = startIndex + rowsPerPage;
     const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
 
+    const [user, setUser] = useState("")
+
+    useEffect(() => {
+        async function getUser() {
+            try {
+                const user = await apiGet('/auth/whoami');
+                setUser(user.data);
+            } catch (error) {
+                setUser(null)
+                navigate('/error');
+            }
+            return
+        }
+        getUser();
+
+    }, []);
+
+
     return (
-        <div>
+        user !== null && (<div>
             <h1>System - Authorization</h1>
             <br />
             <div>
@@ -202,7 +222,7 @@ function SystemAuthorization() {
             <button id="register" onClick={() => navigate('/register')}>
                 Register a new user
             </button>
-        </div>
+        </div>)
     );
 }
 

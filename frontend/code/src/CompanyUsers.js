@@ -1,5 +1,6 @@
 import ClientsTable from "./ClientsTable";
 import React, {useEffect, useState} from "react";
+import {useNavigate} from "react-router-dom";
 import {apiGet} from "./services/apiService";
 
 
@@ -74,6 +75,7 @@ const data = [
 function CompanyUsers() {
 
     const [user, setUser] = useState("")
+    const navigate = useNavigate();
 
     useEffect(() => {
         async function getUser() {
@@ -81,7 +83,8 @@ function CompanyUsers() {
                 const user = await apiGet('/auth/whoami');
                 setUser(user.data);
             } catch (error) {
-                setUser(null)
+                setUser(null);
+                navigate('/error');
             }
             return
         }
@@ -90,11 +93,11 @@ function CompanyUsers() {
     }, []);
 
     return (
-        <div id="reports">
+        user !== null && (<div id="reports">
             <h1 id="companyClients">{user.companyName} - Users</h1>
             <br/>
             <ClientsTable data={data} isCompany={false}></ClientsTable>
-        </div>
+        </div>)
     );
 }
 

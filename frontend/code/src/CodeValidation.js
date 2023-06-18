@@ -1,10 +1,28 @@
-import React, {useRef, useState} from 'react'
+import React, {useRef, useState, useEffect} from 'react'
 import {useNavigate} from "react-router-dom";
+import { apiGet } from "./services/apiService";
 
 export default function CodeValidation() {
     const [error = "", setError] = useState("");
     const navigate = useNavigate();
     const codeRef = useRef(null);
+
+    const [user, setUser] = useState("");
+    useEffect(() => {
+        async function getUser() {
+            try {
+                const user = await apiGet('/auth/whoami');
+                setUser(user.data);
+            } catch (error) {
+                setUser(null)
+                navigate('/error');
+            }
+            return
+        }
+        getUser();
+
+    }, []);
+
 
     function handleClick(e){
         e.preventDefault();
@@ -25,7 +43,7 @@ export default function CodeValidation() {
 
 
     return (
-        <div>
+        user !== null && (<div>
             <form id="codeValidationpanel">
                 <h1 id="litheader">Code Validation</h1>
                 <div className="inset">
@@ -46,6 +64,6 @@ export default function CodeValidation() {
                     >Validate Code</button>
                 </p>
             </form>
-        </div>
+        </div>)
     )
 }

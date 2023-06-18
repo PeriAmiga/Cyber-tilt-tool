@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import "./ReportsTable.css"
+import {useEffect} from 'react'
+import {useNavigate} from "react-router-dom";
+import { apiGet } from "./services/apiService";
 
 const ClientsTable = ({data, isCompany}) => {
     const [searchFullName, setSearchFullName] = useState('');
@@ -59,8 +62,25 @@ const ClientsTable = ({data, isCompany}) => {
     const endIndex = startIndex + rowsPerPage;
     const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
 
+    const [user, setUser] = useState("");
+    const navigate = useNavigate();
+    useEffect(() => {
+        async function getUser() {
+            try {
+                const user = await apiGet('/auth/whoami');
+                setUser(user.data);
+            } catch (error) {
+                setUser(null)
+                navigate('/error');
+            }
+            return
+        }
+        getUser();
+
+    }, []);
+
     return (
-        <div>
+        user !== null && (<div>
             <p>
                 <p>
                     <label htmlFor="username-input">Filter By Full Name:</label>
@@ -126,7 +146,7 @@ const ClientsTable = ({data, isCompany}) => {
                     </button>
                 ))}
             </div>
-        </div>
+        </div>)
     );
 }
 export default ClientsTable;

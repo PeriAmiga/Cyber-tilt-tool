@@ -13,7 +13,8 @@ export default function Home() {
                 const user = await apiGet('/auth/whoami');
                 setUser(user.data);
             } catch (error) {
-                setUser(null)
+                setUser(null);
+                navigate('/error');
             }
             return
         }
@@ -23,7 +24,7 @@ export default function Home() {
     console.log(user);
 
     return (
-        <div id="home">
+        user !== null && (<div id="home">
             <h1 style={{color: 'black'}}>Welcome To Cyber Tilt Tool Project</h1>
             <br />
             <div className='button-container'>
@@ -35,6 +36,6 @@ export default function Home() {
                 { user.isSysAdmin === true && <button className='button-92' onClick={() => navigate('/systemauthorization')}>System - Authorization</button>}
                 { user.isSysAdmin === true && <button className='button-92' onClick={() => navigate('/companymanagement')}>Company - Management</button>}
             </div>
-        </div>
+        </div>)
     )
 }

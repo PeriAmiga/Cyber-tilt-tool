@@ -4,7 +4,8 @@ import {apiGet} from "./services/apiService";
 
 function CompanyAuthorization() {
 
-    const [user, setUser] = useState("")
+    const [user, setUser] = useState("");
+    const navigate = useNavigate();
 
     useEffect(() => {
         async function getUser() {
@@ -13,6 +14,7 @@ function CompanyAuthorization() {
                 setUser(user.data);
             } catch (error) {
                 setUser(null)
+                navigate('/error');
             }
             return
         }
@@ -49,7 +51,7 @@ function CompanyAuthorization() {
             isActive: true,
         },
     ]);
-    const navigate = useNavigate();
+
     const [filteredUsers, setFilteredUsers] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
 
@@ -82,7 +84,7 @@ function CompanyAuthorization() {
     const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
 
     return (
-        <div>
+        user !== null && (<div>
             <h1>{user.companyName} - Authorization</h1>
             <div>
                 <label htmlFor="searchInput">Search by Phone or Email:</label>
@@ -178,7 +180,7 @@ function CompanyAuthorization() {
             <button id="register" onClick={() => navigate('/register')}>
                 Register a new user
             </button>
-        </div>
+        </div>)
     );
 }
 

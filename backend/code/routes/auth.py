@@ -69,7 +69,7 @@ async def login(user: loginUser):
             isSysAdmin=user_entity.isSysAdmin,
             isCompanyAdmin=user_entity.isCompanyAdmin,
             phone=user_entity.phone,
-            birthdate=user_entity.birthdate
+            birthdate=user_entity.birthdate.strftime("%d/%h/%Y")
         )
         await backend.create(session, sessionData)
         cookie.attach_to_response(response, session)

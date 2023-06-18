@@ -1,4 +1,6 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
+import {useNavigate} from "react-router-dom";
+import { apiGet } from "./services/apiService";
 import ReportsTable from "./ReportsTable";
 import "./reports.css"
 
@@ -29,12 +31,29 @@ const data = [
 
 function Reports() {
 
+    const [user, setUser] = useState("");
+    const navigate = useNavigate();
+    useEffect(() => {
+        async function getUser() {
+            try {
+                const user = await apiGet('/auth/whoami');
+                setUser(user.data);
+            } catch (error) {
+                setUser(null)
+                navigate('/error');
+            }
+            return
+        }
+        getUser();
+
+    }, []);
+
     return (
-        <div id="reports">
+        user !== null && (<div id="reports">
             <h1 id="titleReport">Reports</h1>
             <br/>
             <ReportsTable data={data}></ReportsTable>
-        </div>
+        </div>)
     );
 }
 

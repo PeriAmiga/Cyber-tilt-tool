@@ -9,10 +9,11 @@ function CompanyManagement() {
     useEffect(() => {
         async function getUser() {
             try {
-                const user = await apiGet('/auth/whoami');
-                setUser(user.data);
+                const user2 = await apiGet('/auth/whoami');
+                setUser(user2.data);
             } catch (error) {
                 setUser(null)
+                navigate('/error');
             }
             return
         }
@@ -133,6 +134,7 @@ function CompanyManagement() {
     const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
 
     return (
+        user !== null && (
         <div>
             <h1>Company - Management</h1>
             <div>
@@ -272,7 +274,7 @@ function CompanyManagement() {
             <button id="register" onClick={() => navigate('/registercompany')}>
                 Register a new company
             </button>
-        </div>
+        </div>)
     );
 }
 

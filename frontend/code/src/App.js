@@ -13,6 +13,8 @@ import SystemUsers from "./SystemUsers";
 import CompanyAuthorization from "./CompanyAuthorization";
 import SystemAuthorization from "./SystemAuthorization"
 import CompanyManagement from "./CompanyManagement"
+import RegisterCompany from "./RegisterCompany"
+import Error from "./Error"
 import React, {createContext, useState} from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -46,6 +48,8 @@ function App() {
                         <Route path="/companyauthorization" element={<CompanyAuthorization />} />
                         <Route path="/systemauthorization" element={<SystemAuthorization />} />
                         <Route path="/companymanagement" element={<CompanyManagement />} />
+                        <Route path="/registercompany" element={<RegisterCompany />} />
+                        <Route path="/error" element={<Error />} />
                     </Route>
                 </Routes>
             </BrowserRouter>

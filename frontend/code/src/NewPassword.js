@@ -1,5 +1,6 @@
-import React, {useRef, useState} from 'react'
+import React, {useRef, useState, useEffect} from 'react'
 import {useNavigate} from "react-router-dom";
+import { apiGet } from "./services/apiService";
 
 export default function NewPassword() {
     const [error = "", setError] = useState("");
@@ -7,6 +8,23 @@ export default function NewPassword() {
     const newPasswordRef = useRef(null);
     const confirmPasswordRef = useRef(null);
     const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z](?=.*[@#$%^&+=!]).{10,}$/;
+
+    const [user, setUser] = useState("");
+    useEffect(() => {
+        async function getUser() {
+            try {
+                const user = await apiGet('/auth/whoami');
+                setUser(user.data);
+            } catch (error) {
+                setUser(null)
+                navigate('/error');
+            }
+            return
+        }
+        getUser();
+
+    }, []);
+
 
     function handleClick(e){
         e.preventDefault();
@@ -50,7 +68,7 @@ export default function NewPassword() {
 
 
     return (
-        <div>
+        user !== null && (<div>
             <form id="newpasswordpanel">
                 <h1 id="litheader">New Password</h1>
                 <div className="inset">
@@ -66,6 +84,6 @@ export default function NewPassword() {
                     <button onClick={handleClick}>Change Password</button>
                 </p>
             </form>
-        </div>
+        </div>)
     )
 }

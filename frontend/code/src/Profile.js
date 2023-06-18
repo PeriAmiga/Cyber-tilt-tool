@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { apiGet } from "./services/apiService";
+import "./Profile.css";
 
 export default function Profile() {
 
     const [user, setUser] = useState("")
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
-    const [birthdate] = useState("");
     const [editMode, setEditMode] = useState(false);
     const navigate = useNavigate();
 
@@ -28,7 +28,6 @@ export default function Profile() {
             return
         }
         getUser();
-
     }, []);
 
 
@@ -40,15 +39,17 @@ export default function Profile() {
         setEditMode(false);
     };
 
-
     return (
-        <div>
-            <h2>Profile</h2>
-            <div>
+        user !== null && (
+            <div class="profilePage">
+            <h1>Profile</h1>
+            <br/>
+                <ul class="list-group">
+            <li class="list-group-item">
                 <label htmlFor="fullName">Full Name:</label>
                 <span id="fullName">{user.fullName}</span>
-            </div>
-            <div>
+            </li>
+            <li class="list-group-item">
                 <label htmlFor="email">Email:</label>
                 {editMode ? (
                     <input
@@ -58,10 +59,10 @@ export default function Profile() {
                         onChange={(e) => setEmail(e.target.value)}
                     />
                 ) : (
-                    <span id="email">{email}</span>
+                    <span id="email">{user.email}</span>
                 )}
-            </div>
-            <div>
+            </li>
+            <li class="list-group-item">
                 <label htmlFor="phone">Phone:</label>
                 {editMode ? (
                     <input
@@ -71,18 +72,20 @@ export default function Profile() {
                         onChange={(e) => setPhone(e.target.value)}
                     />
                 ) : (
-                    <span id="phone">{phone}</span>
+                    <span id="phone">{user.phone}</span>
                 )}
-            </div>
-            <div>
+            </li>
+            <li class="list-group-item">
                 <label htmlFor="birthdate">Birthdate:</label>
                 <span id="birthdate">{user.birthdate}</span>
-            </div>
-            {editMode && <button onClick={handleSave}>Save</button>}
+            </li>
+                </ul>
+                {editMode && <button onClick={handleSave}>Save</button>}
+                <br/>
             <button onClick={() => setEditMode(!editMode)}>
                 {editMode ? 'Cancel' : 'Edit'}
             </button>
             <button onClick={() => navigate('/changepassword')}>Change Password</button>
-        </div>
+        </div>)
     );
 }
