@@ -27,7 +27,7 @@ cookie_params = CookieParameters()
 cookie = SessionCookie(
     cookie_name="cookie",
     identifier="general_verifier",
-    auto_error=False,
+    auto_error=True,
     secret_key="MosheTomerPeri",
     cookie_params=cookie_params,
 )
@@ -49,7 +49,7 @@ async def login(user: loginUser):
     print("auth", data)
     if len(data) == 0:
         return JSONResponse("Invalid User!", status_code=status.HTTP_401_UNAUTHORIZED)
-    user_entity = UserEntity(data[0])
+    user_entity = UserEntity(data[0], False)
     #password_attempts = int(user_db[5])
     #config_ = config.common.load_config()
     # if not user_entity.isActive or password_attempts >= int(config_['password_try']):

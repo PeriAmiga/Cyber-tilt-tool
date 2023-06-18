@@ -9,13 +9,17 @@ class Attacker(BaseModel):
     location: str
 
 
-def AttackerEntity(item) -> Attacker:
-    return Attacker(
+def AttackerEntity(item, isDict=True) -> Attacker:
+    attacker = Attacker(
         AttackerID=int(item[0]),
         ip=item[1],
         location=item[2]
     )
 
+    if isDict:
+        return attacker.dict()
+    return attacker
 
-def AttackersEntity(entity) -> list:
-    return [AttackerEntity(item) for item in entity]
+
+def AttackersEntity(entity, isDict=True) -> list:
+    return [AttackerEntity(item, isDict) for item in entity]

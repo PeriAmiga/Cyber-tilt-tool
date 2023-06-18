@@ -24,8 +24,8 @@ class User(BaseModel):
     isActive: bool
 
 
-def UserEntity(item) -> User:
-    return User(
+def UserEntity(item, isDict=False) -> User:
+    user = User(
         userID=int(item[0]),
         password=item[1],
         fullName=item[2],
@@ -38,10 +38,13 @@ def UserEntity(item) -> User:
         isCompanyAdmin=bool(item[9]),
         isActive=bool(item[10])
     )
+    if isDict:
+        return user.dict()
+    return user
 
 
-def UsersEntity(entity) -> list:
-    return [UserEntity(item) for item in entity]
+def UsersEntity(entity, isDict=False) -> list:
+    return [UserEntity(item, isDict) for item in entity]
 
 
 def hash(password: str) -> str:

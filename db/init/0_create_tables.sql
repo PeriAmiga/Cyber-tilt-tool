@@ -100,3 +100,12 @@ CREATE TABLE
         CONSTRAINT `idx_linking_company_service_service_id` FOREIGN KEY (`service_id`) REFERENCES `Service` (`serviceID`),
         PRIMARY KEY (`id`)
     );
+
+CREATE TABLE
+    IF NOT EXISTS `db`.`Token` (
+        `id` INT NOT NULL AUTO_INCREMENT,
+        `token` VARCHAR(125) NOT NULL,
+        `email` VARCHAR(45) NOT NULL,
+        `expired` VARCHAR(100) NOT NULL,
+        PRIMARY KEY (`id`)
+    );
