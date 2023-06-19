@@ -2,6 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { apiGet } from "./services/apiService";
 import "./Profile.css";
+import Form from 'react-bootstrap/Form';
+import InputGroup from 'react-bootstrap/InputGroup';
+import Container from 'react-bootstrap/Container';
+import Button from 'react-bootstrap/Button';
 
 export default function Profile() {
 
@@ -11,25 +15,20 @@ export default function Profile() {
     const [editMode, setEditMode] = useState(false);
     const navigate = useNavigate();
 
-    useEffect(() => {
+
+    useEffect( () => {
         async function getUser() {
             try {
                 const res = await apiGet('/auth/whoami');
                 setUser(res.data);
 
-                setPhone(user.phone)
-                setEmail(user.email)
-
-
             } catch (error) {
                 setUser(null)
                 navigate('/error')
             }
-            return
         }
         getUser();
     }, []);
-
 
 
     const handleSave = () => {
@@ -41,51 +40,67 @@ export default function Profile() {
 
     return (
         user !== null && (
-            <div class="profilePage">
+            <Container className="profilePage">
             <h1>Profile</h1>
             <br/>
-                <ul class="list-group">
-            <li class="list-group-item">
-                <label htmlFor="fullName">Full Name:</label>
-                <span id="fullName">{user.fullName}</span>
-            </li>
-            <li class="list-group-item">
-                <label htmlFor="email">Email:</label>
-                {editMode ? (
-                    <input
-                        type="email"
-                        id="email"
+                <InputGroup className="mb-3 profileInputs">
+                    <InputGroup.Text id="basic-addon1">Full Name</InputGroup.Text>
+                    <Form.Control
+                        placeholder="Full Name"
+                        aria-label="Full Name"
+                        aria-describedby="basic-addon1"
+                        value={user.fullName}
+                        disabled
+                    />
+                </InputGroup>
+                <InputGroup className="mb-3 profileInputs">
+                    <InputGroup.Text id="basic-addon1">Email</InputGroup.Text>
+                    {editMode? <Form.Control
+                        placeholder="Email"
+                        aria-label="Email"
+                        aria-describedby="basic-addon1"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                    />
-                ) : (
-                    <span id="email">{user.email}</span>
-                )}
-            </li>
-            <li class="list-group-item">
-                <label htmlFor="phone">Phone:</label>
-                {editMode ? (
-                    <input
-                        type="tel"
-                        id="phone"
+                    /> : <Form.Control
+                        placeholder="Email"
+                        aria-label="Email"
+                        aria-describedby="basic-addon1"
+                        value={user.email}
+                        disabled
+                    />}
+                </InputGroup>
+                <InputGroup className="mb-3 profileInputs">
+                    <InputGroup.Text id="basic-addon1">Phone</InputGroup.Text>
+                    {editMode? <Form.Control
+                        placeholder="Phone"
+                        aria-label="Phone"
+                        aria-describedby="basic-addon1"
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
+                    /> : <Form.Control
+                        placeholder="Phone"
+                        aria-label="Phone"
+                        aria-describedby="basic-addon1"
+                        value={user.phone}
+                        disabled
+                    />}
+                </InputGroup>
+                <InputGroup className="mb-3 profileInputs">
+                    <InputGroup.Text id="basic-addon1">Birth Date</InputGroup.Text>
+                    <Form.Control
+                        placeholder="Birth Date"
+                        aria-label="Birth Date"
+                        aria-describedby="basic-addon1"
+                        value={user.birthdate}
+                        disabled
                     />
-                ) : (
-                    <span id="phone">{user.phone}</span>
-                )}
-            </li>
-            <li class="list-group-item">
-                <label htmlFor="birthdate">Birthdate:</label>
-                <span id="birthdate">{user.birthdate}</span>
-            </li>
-                </ul>
-                {editMode && <button onClick={handleSave}>Save</button>}
-                <br/>
-            <button onClick={() => setEditMode(!editMode)}>
+                </InputGroup>
+                {editMode && <Button onClick={handleSave} variant="success">Save</Button>}
+            <Button style={{"margin-left": "10px"}} variant="secondary" onClick={() => setEditMode(!editMode)}>
                 {editMode ? 'Cancel' : 'Edit'}
-            </button>
-            <button onClick={() => navigate('/changepassword')}>Change Password</button>
-        </div>)
+            </Button>
+            <br/><br/>
+            <Button variant="primary" onClick={() => navigate('/changepassword')}>Change Password</Button>
+        </Container>)
     );
 }

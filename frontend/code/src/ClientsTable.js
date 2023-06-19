@@ -3,6 +3,10 @@ import "./ReportsTable.css"
 import {useEffect} from 'react'
 import {useNavigate} from "react-router-dom";
 import { apiGet } from "./services/apiService";
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import InputGroup from 'react-bootstrap/InputGroup';
+import Container from 'react-bootstrap/Container';
 
 const ClientsTable = ({data, isCompany}) => {
     const [searchFullName, setSearchFullName] = useState('');
@@ -81,39 +85,71 @@ const ClientsTable = ({data, isCompany}) => {
 
     return (
         user !== null && (<div>
-            <p>
-                <p>
-                    <label htmlFor="username-input">Filter By Full Name:</label>
-                    <input type="text" value={searchFullName} id="fullName" onChange={handleSearchFullName} placeholder="Search by Full Name" />
-                </p>
-                <p>
-                    <label htmlFor="username-input">Filter By Birth Date From:</label>
-                    <input type="Date" value={searchMinDate} id="fromDate" onChange={handleSearchMinDate} placeholder="From Date" />
-                    <label htmlFor="username-input">To:</label>
-                    <input type="Date" value={searchMaxDate} id="toDate" onChange={handleSearchMaxDate} placeholder="To Date" />
-                </p>
+            <Container className="usersPages">
+                <InputGroup className="mb-3 reportInputs">
+                    <InputGroup.Text id="basic-addon1">Filter By Full Name</InputGroup.Text>
+                    <Form.Control
+                        id="fullName"
+                        placeholder="Search by Full Name"
+                        aria-describedby="basic-addon1"
+                        value={searchFullName}
+                        onChange={handleSearchFullName}
+                    />
+                </InputGroup>
+                <InputGroup className="mb-3 reportInputs">
+                    <InputGroup.Text id="basic-addon1">Filter By Date From</InputGroup.Text>
+                    <Form.Control
+                        id="fromDate"
+                        type="Date"
+                        aria-describedby="basic-addon1"
+                        value={searchMinDate}
+                        onChange={handleSearchMinDate}
+                    />
+                    <InputGroup.Text id="basic-addon1">To</InputGroup.Text>
+                    <Form.Control
+                        id="toDate"
+                        type="Date"
+                        aria-describedby="basic-addon1"
+                        value={searchMaxDate}
+                        onChange={handleSearchMaxDate}
+                    />
+                </InputGroup>
+
                 {isCompany && (
-                    <p>
-                        <label htmlFor="username-input">Filter By Company:</label>
-                        <input
-                            type="text"
+                    <InputGroup className="mb-3 reportInputs">
+                        <InputGroup.Text id="basic-addon1">Filter By Company</InputGroup.Text>
+                        <Form.Control
                             id="company"
+                            placeholder="Search by Company"
+                            aria-describedby="basic-addon1"
                             value={searchCompany}
                             onChange={handleSearchCompany}
-                            placeholder="Search by Company"
                         />
-                    </p>
+                    </InputGroup>
                 )}
-                <p>
-                    <label htmlFor="username-input">Filter By Email:</label>
-                    <input type="text" value={searchEmail} id="email" onChange={handleSearchEmail} placeholder="Search by Email" />
-                </p>
-                <p>
-                    <label htmlFor="username-input">Filter By Phone:</label>
-                    <input type="text" value={searchPhone} id="phone" onChange={handleSearchPhone} placeholder="Search by Phone" />
-                </p>
-                <button onClick={handleClearSearch}>Clear</button>
-            </p>
+                <InputGroup className="mb-3 reportInputs">
+                    <InputGroup.Text id="basic-addon1">Filter By Email</InputGroup.Text>
+                    <Form.Control
+                        id="email"
+                        placeholder="Search by Email"
+                        aria-describedby="basic-addon1"
+                        value={searchEmail}
+                        onChange={handleSearchEmail}
+                    />
+                </InputGroup>
+                <InputGroup className="mb-3 reportInputs">
+                    <InputGroup.Text id="basic-addon1">Filter By Phone</InputGroup.Text>
+                    <Form.Control
+                        id="phone"
+                        placeholder="Search by Phone"
+                        aria-describedby="basic-addon1"
+                        value={searchPhone}
+                        onChange={handleSearchPhone}
+                    />
+                </InputGroup>
+
+                <Button variant="secondary" onClick={handleClearSearch}>Clear</Button>
+            </Container>
             <br />
             <table id="reportTable">
                 <thead>

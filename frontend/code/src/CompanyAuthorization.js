@@ -1,6 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import {apiGet} from "./services/apiService";
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import InputGroup from 'react-bootstrap/InputGroup';
+import Container from 'react-bootstrap/Container';
 
 function CompanyAuthorization() {
 
@@ -83,18 +87,31 @@ function CompanyAuthorization() {
     const endIndex = startIndex + rowsPerPage;
     const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
 
+    const toggleSave = (userID, isAdmin, isActive) => {
+        // TODO: api to update the user data
+
+        alert("The data has been successfully saved");
+    }
+
     return (
         user !== null && (<div>
             <h1>{user.companyName} - Authorization</h1>
-            <div>
-                <label htmlFor="searchInput">Search by Phone or Email:</label>
-                <input
-                    type="text"
-                    id="searchInput"
-                    value={searchTerm}
-                    onChange={handleSearch}
-                />
-            </div>
+            <br/>
+            <Button variant="primary" id="register" onClick={() => navigate('/register')}>
+                Register a new user
+            </Button>
+            <br/><br/>
+            <Container className="companyAuthPage">
+                <InputGroup className="mb-3 reportInputs">
+                    <InputGroup.Text id="basic-addon1">Search by Phone or Email</InputGroup.Text>
+                    <Form.Control
+                        id="searchInput"
+                        aria-describedby="basic-addon1"
+                        value={searchTerm}
+                        onChange={handleSearch}
+                    />
+                </InputGroup>
+            </Container>
             <table>
                 <thead>
                 <tr>
@@ -105,6 +122,7 @@ function CompanyAuthorization() {
                     <th>BirthDate</th>
                     <th>Admin</th>
                     <th>Activate</th>
+                    <th>Save</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -118,6 +136,7 @@ function CompanyAuthorization() {
                             <td>{user.birthDate}</td>
                             <td>
                                 <input
+                                    id="isAdmin"
                                     type="checkbox"
                                     checked={user.isAdmin}
                                     onChange={(e) =>
@@ -127,6 +146,7 @@ function CompanyAuthorization() {
                             </td>
                             <td>
                                 <input
+                                    id="isActive"
                                     type="checkbox"
                                     checked={user.isActive}
                                     onChange={(e) =>
@@ -134,6 +154,9 @@ function CompanyAuthorization() {
                                     }
                                 />
                             </td>
+                            <td id={user.userID} style={{ cursor: 'pointer' }} onClick={() => toggleSave(user.userID, document.getElementById("isAdmin").value, document.getElementById("isActive").value)}>
+                                <img
+                                    src="/images/save.png" alt="save" style={{ width: '40px', height: '40px' }}/></td>
                         </tr>
                     ))
                 ) : filteredUsers.length > 0 ? (
@@ -146,6 +169,7 @@ function CompanyAuthorization() {
                             <td>{user.birthDate}</td>
                             <td>
                                 <input
+                                    id="isAdmin"
                                     type="checkbox"
                                     checked={user.isAdmin}
                                     onChange={(e) =>
@@ -155,6 +179,7 @@ function CompanyAuthorization() {
                             </td>
                             <td>
                                 <input
+                                    id="isActive"
                                     type="checkbox"
                                     checked={user.isActive}
                                     onChange={(e) =>
@@ -162,6 +187,9 @@ function CompanyAuthorization() {
                                     }
                                 />
                             </td>
+                            <td id={user.userID} style={{ cursor: 'pointer' }} onClick={() => toggleSave(user.userID, document.getElementById("isAdmin").value, document.getElementById("isActive").value)}>
+                                <img
+                                    src="/images/save.png" alt="save" style={{ width: '40px', height: '40px' }}/></td>
                         </tr>
                     ))
                 ) : (
@@ -177,9 +205,6 @@ function CompanyAuthorization() {
                     </button>
                 ))}
             </div>
-            <button id="register" onClick={() => navigate('/register')}>
-                Register a new user
-            </button>
         </div>)
     );
 }

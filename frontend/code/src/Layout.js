@@ -20,7 +20,7 @@ const Layout = () => {
 
     const resetSessionTimeout = () => {
         clearTimeout(sessionTimeout);
-        const timeout = setTimeout(logout, 600000);
+        const timeout = setTimeout(logout, 600000000000000);
         setSessionTimeout(timeout);
     };
 
@@ -37,7 +37,7 @@ const Layout = () => {
 
         getUser();
 
-        const timeout = setTimeout(logout, 300000);
+        const timeout = setTimeout(logout, 600000000000000);
         setSessionTimeout(timeout);
 
         return () => {

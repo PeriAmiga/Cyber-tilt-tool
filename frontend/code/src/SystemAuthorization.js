@@ -1,6 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import {apiGet} from "./services/apiService";
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import InputGroup from 'react-bootstrap/InputGroup';
+import Container from 'react-bootstrap/Container';
 
 function SystemAuthorization() {
     const navigate = useNavigate();
@@ -101,20 +105,31 @@ function SystemAuthorization() {
 
     }, []);
 
+    const toggleSave = (userID, isCompanyAdmin, isSysAdmin, isActive) => {
+        // TODO: api to update the user data
+
+        alert("The data has been successfully saved");
+    }
 
     return (
         user !== null && (<div>
             <h1>System - Authorization</h1>
-            <br />
-            <div>
-                <label htmlFor="searchInput">Search by Phone or Email or Company:</label>
-                <input
-                    type="text"
-                    id="searchInput"
-                    value={searchTerm}
-                    onChange={handleSearch}
-                />
-            </div>
+            <br/>
+            <Button variant="primary" id="register" onClick={() => navigate('/register')}>
+                Register a new user
+            </Button>
+            <br/><br/>
+            <Container className="companyAuthPage">
+                <InputGroup className="mb-3 reportInputs">
+                    <InputGroup.Text id="basic-addon1">Search by Phone or Email or Company</InputGroup.Text>
+                    <Form.Control
+                        id="searchInput"
+                        aria-describedby="basic-addon1"
+                        value={searchTerm}
+                        onChange={handleSearch}
+                    />
+                </InputGroup>
+            </Container>
             <table>
                 <thead>
                 <tr>
@@ -127,6 +142,7 @@ function SystemAuthorization() {
                     <th>Company Admin</th>
                     <th>System Admin</th>
                     <th>Activate</th>
+                    <th>Save</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -141,6 +157,7 @@ function SystemAuthorization() {
                             <td>{user.birthDate}</td>
                             <td>
                                 <input
+                                    id="isCompanyAdmin"
                                     type="checkbox"
                                     checked={user.isAdmin}
                                     onChange={(e) =>
@@ -150,6 +167,7 @@ function SystemAuthorization() {
                             </td>
                             <td>
                                 <input
+                                    id="isSysAdmin"
                                     type="checkbox"
                                     checked={user.isSysAdmin}
                                     onChange={(e) =>
@@ -159,6 +177,7 @@ function SystemAuthorization() {
                             </td>
                             <td>
                                 <input
+                                    id="isActive"
                                     type="checkbox"
                                     checked={user.isActive}
                                     onChange={(e) =>
@@ -166,6 +185,9 @@ function SystemAuthorization() {
                                     }
                                 />
                             </td>
+                            <td id={user.userID} style={{ cursor: 'pointer' }} onClick={() => toggleSave(user.userID, document.getElementById("isCompanyAdmin").value, document.getElementById("isSysAdmin").value, document.getElementById("isActive").value)}>
+                                <img
+                                    src="/images/save.png" alt="save" style={{ width: '40px', height: '40px' }}/></td>
                         </tr>
                     ))
                 ) : filteredUsers.length > 0 ? (
@@ -179,6 +201,7 @@ function SystemAuthorization() {
                             <td>{user.birthDate}</td>
                             <td>
                                 <input
+                                    id="isCompanyAdmin"
                                     type="checkbox"
                                     checked={user.isAdmin}
                                     onChange={(e) =>
@@ -188,6 +211,7 @@ function SystemAuthorization() {
                             </td>
                             <td>
                                 <input
+                                    id="isSysAdmin"
                                     type="checkbox"
                                     checked={user.isSysAdmin}
                                     onChange={(e) =>
@@ -197,6 +221,7 @@ function SystemAuthorization() {
                             </td>
                             <td>
                                 <input
+                                    id="isActive"
                                     type="checkbox"
                                     checked={user.isActive}
                                     onChange={(e) =>
@@ -204,6 +229,9 @@ function SystemAuthorization() {
                                     }
                                 />
                             </td>
+                            <td id={user.userID} style={{ cursor: 'pointer' }} onClick={() => toggleSave(user.userID, document.getElementById("isCompanyAdmin").value, document.getElementById("isSysAdmin").value, document.getElementById("isActive").value)}>
+                                <img
+                                    src="/images/save.png" alt="save" style={{ width: '40px', height: '40px' }}/></td>
                         </tr>
                     ))
                 ) : (
@@ -219,9 +247,6 @@ function SystemAuthorization() {
                     </button>
                 ))}
             </div>
-            <button id="register" onClick={() => navigate('/register')}>
-                Register a new user
-            </button>
         </div>)
     );
 }
