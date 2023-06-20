@@ -1,0 +1,27 @@
+.profileInputs, .changePassPage, .newPassPage, .cvPage, .evPage, .companyRegisterPage, .registerPage  {
+    align-content: center;
+    margin-right: auto;
+    margin-left: auto;
+    width: 40% !important;
+}
+
+.usersPages, .reportPage, .companiesPage {
+    align-content: center;
+    margin-right: auto;
+    margin-left: auto;
+    width: 50% !important;
+}
+
+.companyAuthPage {
+    align-content: center;
+    margin-right: auto;
+    margin-left: auto;
+    width: 50% !important;
+}
+
+.sysAuthPage {
+    align-content: center;
+    margin-right: auto;
+    margin-left: auto;
+    width: 60% !important;
+}

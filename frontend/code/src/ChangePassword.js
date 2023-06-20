@@ -1,6 +1,11 @@
 import React, {useRef, useState, useEffect} from 'react'
 import {useNavigate} from "react-router-dom";
 import { apiGet } from "./services/apiService";
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import InputGroup from 'react-bootstrap/InputGroup';
+import Container from 'react-bootstrap/Container';
+import Alert from 'react-bootstrap/Alert'
 
 export default function ChangePassword() {
     const [error = "", setError] = useState("");
@@ -45,7 +50,7 @@ export default function ChangePassword() {
             }
             else if (newPassword === "")
             {
-                setError('Please Enter an new password');
+                setError('Please Enter a new password');
             }
             else
             {
@@ -77,21 +82,29 @@ export default function ChangePassword() {
         user !== null && (<div>
             <form id="changepasswordpanel">
                 <h1 id="litheader">Change Password</h1>
-                <div className="inset">
-                    <p>
-                        <input type="password" name="oldPassword" id="oldPassword" placeholder="Old Password" ref={oldPasswordRef}/>
-                    </p>
-                    <p>
-                        <input type="password" name="newPassword" id="newPassword" placeholder="New Password" ref={newPasswordRef}/>
-                    </p>
-                    <p>
-                        <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password" ref={confirmPasswordRef}/>
-                    </p>
-                </div>
-                <div className="p-container" id="changePasswordError">{error}</div>
-                <p className="p-container">
-                    <button onClick={handleClick}>Change Password</button>
-                </p>
+                <br/>
+                <Container className="changePassPage">
+                    <InputGroup className="mb-3">
+                        <InputGroup.Text id="basic-addon1">Enter Old Password</InputGroup.Text>
+                        <Form.Control
+                            type="password" name="oldPassword" id="oldPassword" placeholder="Old Password" ref={oldPasswordRef}
+                        />
+                    </InputGroup>
+                    <InputGroup className="mb-3">
+                        <InputGroup.Text id="basic-addon1">Enter New Password</InputGroup.Text>
+                        <Form.Control
+                            type="password" name="newPassword" id="newPassword" placeholder="New Password" ref={newPasswordRef}
+                        />
+                    </InputGroup>
+                    <InputGroup className="mb-3">
+                        <InputGroup.Text id="basic-addon1">Confirm New Password</InputGroup.Text>
+                        <Form.Control
+                            type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password" ref={confirmPasswordRef}
+                        />
+                    </InputGroup>
+                    {error !== "" && <Alert id="changePasswordError" key='warning' variant='warning'>{error}</Alert>}
+                </Container>
+                <Button onClick={handleClick}>Change Password</Button>
             </form>
         </div>)
     )

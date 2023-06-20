@@ -119,7 +119,7 @@ function SystemAuthorization() {
                 Register a new user
             </Button>
             <br/><br/>
-            <Container className="companyAuthPage">
+            <Container className="sysAuthPage">
                 <InputGroup className="mb-3 reportInputs">
                     <InputGroup.Text id="basic-addon1">Search by Phone or Email or Company</InputGroup.Text>
                     <Form.Control

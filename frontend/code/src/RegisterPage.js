@@ -1,6 +1,11 @@
 import React, {useState, useRef, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import {apiGet, apiPost} from './services/apiService';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import InputGroup from 'react-bootstrap/InputGroup';
+import Container from 'react-bootstrap/Container';
+import Alert from 'react-bootstrap/Alert';
 
 function RegisterPage() {
     const [error = "", setError] = useState("");
@@ -53,15 +58,15 @@ function RegisterPage() {
         let phone = phoneRef.current.value;
         let birthDate = birthDateRef.current.value;
 
-        if (email === "" || fullName === "" || company === "" || password === "" || confirmPassword === "" || phone === "" || birthDate === "") {
+        if (fullName === "" || company === "" || email === "" || password === "" || confirmPassword === "" || phone === "" || birthDate === "") {
             if (fullName === "") {
                 setError('Please Enter a Full Name');
             }
-            else if (email === "") {
-                setError('Please Enter an Email');
-            }
             else if (company === "") {
                 setError('Please Enter a Company');
+            }
+            else if (email === "") {
+                setError('Please Enter an Email');
             }
             else if (password === "") {
                 setError('Please Enter a Password');
@@ -105,46 +110,64 @@ function RegisterPage() {
     return (
         <form id="registerpanel">
             <h1 id="litheader">Register</h1>
-            <div className="inset">
-                <p>
-                    <label htmlFor="register-input">Full Name:</label>
-                    <input type="text" name="fullName" id="fullName" placeholder="Full Name" ref={fullNameRef} />
-                </p>
-                { user.isSysAdmin === true && <p>
-                    <label htmlFor="register-input">Company:</label>
-                    <input type="text" name="company" id="company" placeholder="Company" ref={companyRef} />
-                </p>}
-                { user.isSysAdmin === false && user.isCompanyAdmin === true && <p>
-                    <label htmlFor="register-input">Company:</label>
-                    <input type="text" name="company" id="company" placeholder="Company" ref={companyRef} value={user.companyName} disabled/>
-                </p>}
-                <p>
-                    <label htmlFor="register-input">Email:</label>
-                    <input type="text" name="email" id="email" placeholder="Email" ref={emailRef} />
-                </p>
-                <p>
-                    <label htmlFor="register-input">Password:</label>
-                    <input type="password" name="password" id="password" placeholder="Password" ref={passwordRef} />
-                </p>
-                <p>
-                    <label htmlFor="register-input">Confirm Password:</label>
-                    <input type="password" name="password" id="confirmPassword" placeholder="Confirm Password" ref={confirmPasswordRef} />
-                </p>
-                <p>
-                    <label htmlFor="register-input">Phone Number:</label>
-                    <input type="text" name="phone" id="phone" placeholder="Enter phone number" ref={phoneRef} onKeyPress={(event) => {
+            <br/>
+            <Container className="registerPage">
+                <InputGroup className="mb-3">
+                    <InputGroup.Text id="basic-addon1">Full Name</InputGroup.Text>
+                    <Form.Control
+                        type="text" name="fullName" id="fullName" placeholder="Full Name" ref={fullNameRef}
+                    />
+                </InputGroup>
+
+
+                { user.isSysAdmin === true && <InputGroup className="mb-3">
+                    <InputGroup.Text id="basic-addon1">Company</InputGroup.Text>
+                    <Form.Control
+                        type="text" name="company" id="company" placeholder="Company" ref={companyRef}
+                    />
+                </InputGroup>}
+                { user.isSysAdmin === false && user.isCompanyAdmin === true && <InputGroup className="mb-3">
+                    <InputGroup.Text id="basic-addon1">Company</InputGroup.Text>
+                    <Form.Control
+                        type="text" name="company" id="company" placeholder="Company" ref={companyRef} value={user.companyName} disabled
+                    />
+                </InputGroup>}
+                <InputGroup className="mb-3">
+                    <InputGroup.Text id="basic-addon1">Email</InputGroup.Text>
+                    <Form.Control
+                        type="text" name="email" id="email" placeholder="Email" ref={emailRef}
+                    />
+                </InputGroup>
+                <InputGroup className="mb-3">
+                    <InputGroup.Text id="basic-addon1">Password</InputGroup.Text>
+                    <Form.Control
+                        type="password" name="password" id="password" placeholder="Password" ref={passwordRef}
+                    />
+                </InputGroup>
+                <InputGroup className="mb-3">
+                    <InputGroup.Text id="basic-addon1">Confirm Password</InputGroup.Text>
+                    <Form.Control
+                        type="password" name="password" id="confirmPassword" placeholder="Confirm Password" ref={confirmPasswordRef}
+                    />
+                </InputGroup>
+                <InputGroup className="mb-3">
+                    <InputGroup.Text id="basic-addon1">Phone Number</InputGroup.Text>
+                    <Form.Control
+                        type="text" name="phone" id="phone" placeholder="Enter phone number" ref={phoneRef} onKeyPress={(event) => {
                         const keyCode = event.keyCode || event.which; const keyValue = String.fromCharCode(keyCode); const regex = /[0-9]/;
                         if (!regex.test(keyValue)) { event.preventDefault(); }
-                    }} />
-                </p>
-                <p>
-                    <label htmlFor="register-input">BirthDate:</label>
-                    <input type="date" name="birthdate" id="birthdate" max={maxDate} ref={birthDateRef} placeholder="Select birthdate" onKeyDown={(e) => e.preventDefault()} />
-                </p></div>
-            <div className="p-container" id="registerError">{error}</div>
-            <p className="p-container">
-                <button onClick={handleClick}>Register</button>
-            </p>
+                    }}
+                    />
+                </InputGroup>
+                <InputGroup className="mb-3">
+                    <InputGroup.Text id="basic-addon1">Birth Date</InputGroup.Text>
+                    <Form.Control
+                        type="date" name="birthdate" id="birthdate" max={maxDate} ref={birthDateRef} placeholder="Select birthdate" onKeyDown={(e) => e.preventDefault()}
+                    />
+                </InputGroup>
+                {error !== "" && <Alert id="registerError" key='warning' variant='warning'>{error}</Alert>}
+            </Container>
+            <Button onClick={handleClick}>Register</Button>
         </form>
     );
 } export default RegisterPage;

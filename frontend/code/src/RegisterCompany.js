@@ -1,6 +1,11 @@
 import React, {useState, useRef, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import {apiGet} from './services/apiService';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import InputGroup from 'react-bootstrap/InputGroup';
+import Container from 'react-bootstrap/Container';
+import Alert from 'react-bootstrap/Alert';
 
 function RegisterCompany() {
     const [error = "", setError] = useState("");
@@ -56,19 +61,23 @@ function RegisterCompany() {
         user.isSysAdmin === true && (
         <form id="registerpanel">
             <h1 id="litheader">Company - Registration</h1>
-            <div className="inset">
-                <p>
-                    <label htmlFor="register-input">Company Name:</label>
-                    <input type="text" name="company" id="company" placeholder="Company" ref={companyRef} />
-                </p>
-                <p>
-                    <label htmlFor="register-input">Address:</label>
-                    <input type="text" name="address" id="address" placeholder="Address" ref={addressRef} />
-                </p></div>
-            <div className="p-container" id="registerError">{error}</div>
-            <p className="p-container">
-                <button onClick={handleClick}>Register Company</button>
-            </p>
+            <br/>
+            <Container className="companyRegisterPage">
+                <InputGroup className="mb-3">
+                    <InputGroup.Text id="basic-addon1">Company Name</InputGroup.Text>
+                    <Form.Control
+                        type="text" name="company" id="company" placeholder="Company" ref={companyRef}
+                    />
+                </InputGroup>
+                <InputGroup className="mb-3">
+                    <InputGroup.Text id="basic-addon1">Address</InputGroup.Text>
+                    <Form.Control
+                        type="text" name="address" id="address" placeholder="Address" ref={addressRef}
+                    />
+                </InputGroup>
+                {error !== "" && <Alert id="registerError" key='warning' variant='warning'>{error}</Alert>}
+            </Container>
+            <Button onClick={handleClick}>Register Company</Button>
         </form>)
     );
 } export default RegisterCompany;

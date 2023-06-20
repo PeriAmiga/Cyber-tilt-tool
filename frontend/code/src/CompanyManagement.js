@@ -1,6 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import {apiGet} from "./services/apiService";
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import InputGroup from 'react-bootstrap/InputGroup';
+import Container from 'react-bootstrap/Container';
 
 function CompanyManagement() {
 
@@ -133,19 +137,32 @@ function CompanyManagement() {
     const endIndex = startIndex + rowsPerPage;
     const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
 
+    const toggleSave = (companyID, isActive, isHTTP, isFTP, isSSH, isSMTP) => {
+        // TODO: api to update the user data
+
+        alert("The data has been successfully saved");
+    }
+
     return (
         user !== null && (
         <div>
             <h1>Company - Management</h1>
-            <div>
-                <label htmlFor="searchInput">Search by Name:</label>
-                <input
-                    type="text"
-                    id="searchInput"
-                    value={searchTerm}
-                    onChange={handleSearch}
-                />
-            </div>
+            <br/>
+            <Button variant="primary" id="register" onClick={() => navigate('/registercompany')}>
+                Register a new company
+            </Button>
+            <br/><br/>
+            <Container className="companiesPage">
+                <InputGroup className="mb-3 reportInputs">
+                    <InputGroup.Text id="basic-addon1">Search by Name</InputGroup.Text>
+                    <Form.Control
+                        id="searchInput"
+                        aria-describedby="basic-addon1"
+                        value={searchTerm}
+                        onChange={handleSearch}
+                    />
+                </InputGroup>
+            </Container>
             <table>
                 <thead>
                 <tr>
@@ -157,6 +174,7 @@ function CompanyManagement() {
                     <th>FTP</th>
                     <th>SSH</th>
                     <th>SMTP</th>
+                    <th>Save</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -168,6 +186,7 @@ function CompanyManagement() {
                             <td>{company.address}</td>
                             <td>
                                 <input
+                                    id="isActive"
                                     type="checkbox"
                                     checked={company.isActivate}
                                     onChange={(e) =>
@@ -177,6 +196,7 @@ function CompanyManagement() {
                             </td>
                             <td>
                                 <input
+                                    id="isHTTP"
                                     type="checkbox"
                                     checked={company.HTTP}
                                     onChange={(e) =>
@@ -186,6 +206,7 @@ function CompanyManagement() {
                             </td>
                             <td>
                                 <input
+                                    id="isFTP"
                                     type="checkbox"
                                     checked={company.FTP}
                                     onChange={(e) => handleAuthorizationChange(company.companyID, 'FTP', e.target.checked)}
@@ -193,6 +214,7 @@ function CompanyManagement() {
                             </td>
                             <td>
                                 <input
+                                    id="isSSH"
                                     type="checkbox"
                                     checked={company.SSH}
                                     onChange={(e) => handleAuthorizationChange(company.companyID, 'SSH', e.target.checked)}
@@ -200,6 +222,7 @@ function CompanyManagement() {
                             </td>
                             <td>
                                 <input
+                                    id="isSMTP"
                                     type="checkbox"
                                     checked={company.SMTP}
                                     onChange={(e) =>
@@ -207,6 +230,9 @@ function CompanyManagement() {
                                     }
                                 />
                             </td>
+                            <td id={user.userID} style={{ cursor: 'pointer' }} onClick={() => toggleSave(company.companyID, document.getElementById("isActive").value, document.getElementById("isHTTP").value, document.getElementById("isFTP").value, document.getElementById("isSSH").value, document.getElementById("isSMTP").value)}>
+                                <img
+                                    src="/images/save.png" alt="save" style={{ width: '40px', height: '40px' }}/></td>
                         </tr>
                     ))
                 ) : filteredCompanies.length > 0 ? (
@@ -217,6 +243,7 @@ function CompanyManagement() {
                             <td>{company.address}</td>
                             <td>
                                 <input
+                                    id="isActive"
                                     type="checkbox"
                                     checked={company.isActivate}
                                     onChange={(e) =>
@@ -226,6 +253,7 @@ function CompanyManagement() {
                             </td>
                             <td>
                                 <input
+                                    id="isHTTP"
                                     type="checkbox"
                                     checked={company.HTTP}
                                     onChange={(e) =>
@@ -235,6 +263,7 @@ function CompanyManagement() {
                             </td>
                             <td>
                                 <input
+                                    id="isFTP"
                                     type="checkbox"
                                     checked={company.FTP}
                                     onChange={(e) => handleAuthorizationChange(company.companyID, 'FTP', e.target.checked)}
@@ -242,6 +271,7 @@ function CompanyManagement() {
                             </td>
                             <td>
                                 <input
+                                    id="isSSH"
                                     type="checkbox"
                                     checked={company.SSH}
                                     onChange={(e) => handleAuthorizationChange(company.companyID, 'SSH', e.target.checked)}
@@ -249,6 +279,7 @@ function CompanyManagement() {
                             </td>
                             <td>
                                 <input
+                                    id="isSMTP"
                                     type="checkbox"
                                     checked={company.SMTP}
                                     onChange={(e) =>
@@ -256,6 +287,9 @@ function CompanyManagement() {
                                     }
                                 />
                             </td>
+                            <td id={user.userID} style={{ cursor: 'pointer' }} onClick={() => toggleSave(company.companyID, document.getElementById("isActive").value, document.getElementById("isHTTP").value, document.getElementById("isFTP").value, document.getElementById("isSSH").value, document.getElementById("isSMTP").value)}>
+                                <img
+                                    src="/images/save.png" alt="save" style={{ width: '40px', height: '40px' }}/></td>
                         </tr>
                     ))
                 ) : (
@@ -271,9 +305,6 @@ function CompanyManagement() {
                     </button>
                 ))}
             </div>
-            <button id="register" onClick={() => navigate('/registercompany')}>
-                Register a new company
-            </button>
         </div>)
     );
 }

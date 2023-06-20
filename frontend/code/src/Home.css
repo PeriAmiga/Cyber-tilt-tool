@@ -1,5 +1,8 @@
 body {
     background-image: url("/public/images/home_background.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 }
 
 .button-92 {

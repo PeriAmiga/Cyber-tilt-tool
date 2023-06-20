@@ -1,6 +1,11 @@
 import React, {useRef, useState, useEffect} from 'react'
 import {useNavigate} from "react-router-dom";
 import { apiGet } from "./services/apiService";
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import InputGroup from 'react-bootstrap/InputGroup';
+import Container from 'react-bootstrap/Container';
+import Alert from 'react-bootstrap/Alert';
 
 export default function CodeValidation() {
     const [error = "", setError] = useState("");
@@ -46,23 +51,21 @@ export default function CodeValidation() {
         user !== null && (<div>
             <form id="codeValidationpanel">
                 <h1 id="litheader">Code Validation</h1>
-                <div className="inset">
-                    <p>
-                        <input
+                <br/>
+                <Container className="cvPage">
+                    <InputGroup className="mb-3">
+                        <InputGroup.Text id="basic-addon1">Enter Code</InputGroup.Text>
+                        <Form.Control
                             type="text"
                             name="code"
                             id="code"
                             placeholder="Code"
                             ref={codeRef}
                         />
-                    </p>
-                </div>
-                <div className="p-container" id="codeValidationError">{error}</div>
-                <p className="p-container" id="button">
-                    <button
-                        onClick={handleClick}
-                    >Validate Code</button>
-                </p>
+                    </InputGroup>
+                    {error !== "" && <Alert id="codeValidationError" key='warning' variant='warning'>{error}</Alert>}
+                </Container>
+                <Button onClick={handleClick}>Validate Code</Button>
             </form>
         </div>)
     )
