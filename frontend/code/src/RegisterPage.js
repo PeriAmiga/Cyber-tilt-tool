@@ -135,7 +135,7 @@ function RegisterPage() {
                 <InputGroup className="mb-3">
                     <InputGroup.Text id="basic-addon1">Email</InputGroup.Text>
                     <Form.Control
-                        type="text" name="email" id="email" placeholder="Email" ref={emailRef}
+                        type="email" name="email" id="email" placeholder="Email" ref={emailRef}
                     />
                 </InputGroup>
                 <InputGroup className="mb-3">
@@ -153,7 +153,7 @@ function RegisterPage() {
                 <InputGroup className="mb-3">
                     <InputGroup.Text id="basic-addon1">Phone Number</InputGroup.Text>
                     <Form.Control
-                        type="text" name="phone" id="phone" placeholder="Enter phone number" ref={phoneRef} onKeyPress={(event) => {
+                        type="tel" name="phone" id="phone" placeholder="Enter phone number" ref={phoneRef} onKeyPress={(event) => {
                         const keyCode = event.keyCode || event.which; const keyValue = String.fromCharCode(keyCode); const regex = /[0-9]/;
                         if (!regex.test(keyValue)) { event.preventDefault(); }
                     }}

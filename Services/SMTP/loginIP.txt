@@ -11,3 +11,6 @@
 11/03/2023 21:43:38: Client IP: 127.0.0.1:57920, The command is: VRFY INFO@WHITEHU, The details are: The mail that checked is: info@whitehu
 11/03/2023 21:43:43: Client IP: 127.0.0.1:57920, The command is: VRFY INFO!, The details are: The mail that checked is: info!
 11/03/2023 21:43:51: Client IP: 127.0.0.1:57920, The command is: VRFY INFO@WHITEHOUSE.GOV, The details are: The mail that checked is: info@whitehouse.gov
+21/06/2023 18:11:50: Client IP: 172.18.0.1:37526, The command is: AUTH LOGIN, The details are: Username is: admin, Password is: admin
+21/06/2023 18:13:05: Client IP: 172.18.0.1:37526, The command is: AUTH GET USERS
+21/06/2023 18:40:26: Client IP: 172.18.0.1:50740, The command is: AUTH LOGIN, The details are: Username is: admin, Password is: admin

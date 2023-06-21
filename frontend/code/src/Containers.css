@@ -1,15 +1,15 @@
-.profileInputs, .changePassPage, .newPassPage, .cvPage, .evPage, .companyRegisterPage, .registerPage  {
+.profileInputs, .changePassPage, .newPassPage, .cvPage, .evPage, .companyRegisterPage, .registerPage, .loginPage  {
     align-content: center;
     margin-right: auto;
     margin-left: auto;
     width: 40% !important;
 }
 
-.usersPages, .reportPage, .companiesPage {
+.usersPages, .reportPage, .companiesPage, .sysAuthPage {
     align-content: center;
     margin-right: auto;
     margin-left: auto;
-    width: 50% !important;
+    width: 60% !important;
 }
 
 .companyAuthPage {
@@ -17,11 +17,4 @@
     margin-right: auto;
     margin-left: auto;
     width: 50% !important;
-}
-
-.sysAuthPage {
-    align-content: center;
-    margin-right: auto;
-    margin-left: auto;
-    width: 60% !important;
 }

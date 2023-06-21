@@ -1,7 +1,11 @@
 import React, { useRef, useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import { apiPost } from "./services/apiService"
-
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import InputGroup from 'react-bootstrap/InputGroup';
+import Container from 'react-bootstrap/Container';
+import Alert from 'react-bootstrap/Alert';
 
 export default function LoginPage() {
     const [error = "", setError] = useState("");
@@ -16,7 +20,7 @@ export default function LoginPage() {
 
         if (email === "" || password === "") {
             if (email === "") {
-                setError('Please Enter a Username');
+                setError('Please Enter an Email');
             }
             else {
                 setError('Please Enter a Password');
@@ -44,18 +48,24 @@ export default function LoginPage() {
         <div>
             <form id="loginpanel">
                 <h1 id="litheader">Login</h1>
-                <div className="inset">
-                    <p>
-                        <input type="text" name="email" id="email" placeholder="Email" ref={emailRef} />
-                    </p>
-                    <p>
-                        <input type="password" name="password" id="password" placeholder="Password" ref={passwordRef} />
-                    </p>
-                </div>
-                <div className="p-container" id="loginError">{error}</div>
-                <p className="p-container">
-                    <button onClick={handleClick}>Login</button>
-                </p>
+                <br/>
+                <Container className="loginPage">
+                    <InputGroup className="mb-3">
+                        <InputGroup.Text id="basic-addon1">Email</InputGroup.Text>
+                        <Form.Control
+                            type="email" name="email" id="email" placeholder="Email" ref={emailRef}
+                        />
+                    </InputGroup>
+                    <InputGroup className="mb-3">
+                        <InputGroup.Text id="basic-addon1">Password</InputGroup.Text>
+                        <Form.Control
+                            type="password" name="password" id="password" placeholder="Password" ref={passwordRef}
+                        />
+                    </InputGroup>
+                    {error !== "" && <Alert id="loginError" key='warning' variant='warning'>{error}</Alert>}
+                </Container>
+                <Button onClick={handleClick}>Login</Button>
+                <br/>
                 <a href="/ev" className="rstpassword">Forget your password?</a>
             </form>
         </div>
