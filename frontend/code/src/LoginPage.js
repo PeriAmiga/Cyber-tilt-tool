@@ -1,6 +1,6 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useNavigate } from "react-router-dom";
-import { apiPost } from "./services/apiService"
+import { apiGet, apiPost } from "./services/apiService"
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
@@ -12,6 +12,18 @@ export default function LoginPage() {
     const navigate = useNavigate();
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
+
+    useEffect(() => {
+        async function getUser() {
+            try {
+                await apiGet('/auth/whoami');
+                navigate('/home');
+            } catch (error) {
+                // ignore
+            }
+        }
+        getUser();
+    }, []);
 
     async function handleClick(e) {
         e.preventDefault();
@@ -48,7 +60,7 @@ export default function LoginPage() {
         <div>
             <form id="loginpanel">
                 <h1 id="litheader">Login</h1>
-                <br/>
+                <br />
                 <Container className="loginPage">
                     <InputGroup className="mb-3">
                         <InputGroup.Text id="basic-addon1">Email</InputGroup.Text>
@@ -65,7 +77,7 @@ export default function LoginPage() {
                     {error !== "" && <Alert id="loginError" key='warning' variant='warning'>{error}</Alert>}
                 </Container>
                 <Button onClick={handleClick}>Login</Button>
-                <br/>
+                <br />
                 <a href="/ev" className="rstpassword">Forget your password?</a>
             </form>
         </div>

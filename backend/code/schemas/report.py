@@ -4,21 +4,27 @@ from datetime import datetime
 
 
 class Report(BaseModel):
-    serviceID: int
-    companyID: int
-    attackerIP: str
+    reportID: int
+    createAt: datetime
+    companies_services_id: int
+    attackerID: int
     trapID: int
+    sessionLogID: str
 
 
 def ReportEntity(item) -> dict:
     return {
         "reportID": item[0],
-        "serviceID": item[1],
-        "createAt": item[2],
-        "companyID": item[4],
-        "attackerID": item[5],
-        "trapID": item[6],
-        "sessionLogID": item[7]
+        "createAt": str(item[1]),
+        # "companies_services_id": item[2],
+        "attackerID": item[3],
+        "trapID": item[4],
+        "sessionLogID": item[5],
+        "companies_services_id": item[6],
+        "companies_services_name": item[7],
+        "companies_services_port": int(item[8]),
+        "companyID": int(item[9]),
+        "serviceID": int(item[10])
     }
 
 

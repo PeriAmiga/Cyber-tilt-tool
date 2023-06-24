@@ -63,7 +63,7 @@ INSERT INTO
     )
 SELECT
     1,
-    '$2b$12$bnaCG6/wApivYZpfTrLm4O5YyRqKZSjla1WxJH2mknKHaWfXuESqi',
+    '$2b$12$EEmr3aYzuYBFK7n8OVrwae7MoxE/UbtCSB5B0/VhXePflS4sXFMPG',
     'Administrator',
     'admin@admin.com',
     '050000000',
@@ -98,7 +98,7 @@ INSERT INTO
     )
 SELECT
     2,
-    '$2b$12$bnaCG6/wApivYZpfTrLm4O5YyRqKZSjla1WxJH2mknKHaWfXuESqi',
+    '$2b$12$EEmr3aYzuYBFK7n8OVrwae7MoxE/UbtCSB5B0/VhXePflS4sXFMPG',
     'User1, Intel',
     'user1@intel.com',
     '050099000',
@@ -133,7 +133,7 @@ INSERT INTO
     )
 SELECT
     3,
-    '$2b$12$bnaCG6/wApivYZpfTrLm4O5YyRqKZSjla1WxJH2mknKHaWfXuESqi',
+    '$2b$12$EEmr3aYzuYBFK7n8OVrwae7MoxE/UbtCSB5B0/VhXePflS4sXFMPG',
     'Admin1, Intel',
     'admin1@intel.com',
     '050699000',
@@ -168,7 +168,7 @@ INSERT INTO
     )
 SELECT
     4,
-    '$2b$12$bnaCG6/wApivYZpfTrLm4O5YyRqKZSjla1WxJH2mknKHaWfXuESqi',
+    '$2b$12$EEmr3aYzuYBFK7n8OVrwae7MoxE/UbtCSB5B0/VhXePflS4sXFMPG',
     'User1, Apple',
     'user1@apple.com',
     '050099000',
@@ -203,7 +203,7 @@ INSERT INTO
     )
 SELECT
     5,
-    '$2b$12$bnaCG6/wApivYZpfTrLm4O5YyRqKZSjla1WxJH2mknKHaWfXuESqi',
+    '$2b$12$EEmr3aYzuYBFK7n8OVrwae7MoxE/UbtCSB5B0/VhXePflS4sXFMPG',
     'Admin1, Apple',
     'admin1@apple.com',
     '059099001',

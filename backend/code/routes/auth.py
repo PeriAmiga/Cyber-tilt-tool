@@ -42,6 +42,7 @@ verifier = BasicVerifier(
         status_code=403, detail="invalid session"),
 )
 
+
 @auth.post("/login")
 async def login(user: loginUser):
     # Get User from DB
@@ -114,10 +115,10 @@ def send_mail(email: str):
 
     # save in DB
     conn.execute(tokens.insert().values(
-            token = token,
-            email = email,
-            expired = expired
-        ))
+        token=token,
+        email=email,
+        expired=expired
+    ))
     conn.commit()
 
     # send mail
@@ -137,20 +138,24 @@ def send_mail(email: str):
         server.sendmail(EMAIL_USER, [email], message.as_string())
     return JSONResponse("Sent", status_code=status.HTTP_202_ACCEPTED)
 
+
 @auth.get('/checkToken')
 def check_token(email: str, token: str):
     # check if the email and token is exist in the db
     query = tokens.select().where((tokens.c.email == email) & (tokens.c.token == token))
     db_select_token = conn.execute(query).fetchone()
-    expired_token = datetime.strptime(TokenEntity(db_select_token)['expired'], '%Y-%m-%d %H:%M:%S')
+    expired_token = datetime.strptime(TokenEntity(db_select_token)[
+                                      'expired'], '%Y-%m-%d %H:%M:%S')
     is_expired = datetime.now() > expired_token
     if db_select_token is None or is_expired:
         return JSONResponse("Forbidden", status_code=status.HTTP_403_FORBIDDEN)
     else:
-        response = JSONResponse("Token Accepted", status_code=status.HTTP_202_ACCEPTED)
+        response = JSONResponse(
+            "Token Accepted", status_code=status.HTTP_202_ACCEPTED)
         # Set 'newpassword' value to true
         response.set_cookie("newpassword", "true")
         return response
+
 
 @auth.get('/resetPassword')
 def reset_password(email: str, password: str):
@@ -161,12 +166,15 @@ def reset_password(email: str, password: str):
         response.delete_cookie("newpassword")
         return JSONResponse("Forbidden", status_code=status.HTTP_403_FORBIDDEN)
     else:
-        update_query = users.update().where(users.c.email == email).values(password=hash(password))
+        update_query = users.update().where(
+            users.c.email == email).values(password=hash(password))
         conn.execute(update_query)
         conn.commit()
-        response = JSONResponse("Token Accepted", status_code=status.HTTP_202_ACCEPTED)
+        response = JSONResponse(
+            "Token Accepted", status_code=status.HTTP_202_ACCEPTED)
         response.delete_cookie("newpassword")
         return response
+
 
 def reset_password_attempts(email: str, token: str):
     mycursor = conn.cursor()
