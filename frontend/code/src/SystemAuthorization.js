@@ -94,6 +94,8 @@ function SystemAuthorization() {
         async function getUser() {
             try {
                 const user = await apiGet('/auth/whoami');
+                if (!user.data.isSysAdmin)
+                    throw Error();
                 setUser(user.data);
             } catch (error) {
                 setUser(null)
@@ -112,7 +114,7 @@ function SystemAuthorization() {
     }
 
     return (
-        user !== null && (<div>
+        user && (<div>
             <h1>System - Authorization</h1>
             <br/>
             <Button variant="primary" id="register" onClick={() => navigate('/register')}>

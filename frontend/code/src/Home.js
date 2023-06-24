@@ -21,7 +21,6 @@ export default function Home() {
         getUser();
 
     }, []);
-    console.log(user);
 
     return (
         user !== null && (<div id="home">
@@ -30,8 +29,8 @@ export default function Home() {
             <div className='button-container'>
                 <button className='button-92' onClick={() => navigate('/profile')}>Profile</button>
                 <button className='button-92' onClick={() => navigate('/reports')}>Reports</button>
-                <button className='button-92' onClick={() => navigate('/companyusers')}>Company Users</button>
-                <button className='button-92' onClick={() => navigate('/systemusers')}>System Users</button>
+                { user.isCompanyAdmin === true && <button className='button-92' onClick={() => navigate('/companyusers')}>Company Users</button>}
+                { user.isSysAdmin === true && <button className='button-92' onClick={() => navigate('/systemusers')}>System Users</button>}
                 { user.isCompanyAdmin === true && <button className='button-92' onClick={() => navigate('/companyauthorization')}>Company - Authorization</button>}
                 { user.isSysAdmin === true && <button className='button-92' onClick={() => navigate('/systemauthorization')}>System - Authorization</button>}
                 { user.isSysAdmin === true && <button className='button-92' onClick={() => navigate('/companymanagement')}>Company - Management</button>}

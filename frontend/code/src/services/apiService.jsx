@@ -9,7 +9,7 @@ const _interfaceAxios = axios.create({
 
 export const apiGet = async (path, params = {}) => {
     try {
-        const resp = await _interfaceAxios.get(path, { params });
+        const resp = await _interfaceAxios.get(path, {params});
         return resp;
     } catch (err) {
         throw err;

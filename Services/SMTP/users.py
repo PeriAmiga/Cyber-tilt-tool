@@ -5,9 +5,9 @@ FAKE_ADMIN = {
 }
 
 FAKE_EMAILS = [
-    "john.doe@example.com",
-     "jane_smith@company.net",
-     "johndoe123@yahoo.com",
-     "support@amazon.com",
-     "info@whitehouse.gov"
+    "john.doe@intel.com",
+     "jane_smith@intel.com",
+     "johndoe123@intel.com",
+     "support@intel.com",
+     "info@intel.com"
 ]

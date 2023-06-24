@@ -81,6 +81,8 @@ function CompanyUsers() {
         async function getUser() {
             try {
                 const user = await apiGet('/auth/whoami');
+                if (!user.data.isCompanyAdmin)
+                    throw Error();
                 setUser(user.data);
             } catch (error) {
                 setUser(null);
@@ -93,7 +95,7 @@ function CompanyUsers() {
     }, []);
 
     return (
-        user !== null && (<div id="reports">
+        user && (<div id="reports">
             <h1 id="companyClients">{user.companyName} - Users</h1>
             <br/>
             <ClientsTable data={data} isCompany={false}></ClientsTable>

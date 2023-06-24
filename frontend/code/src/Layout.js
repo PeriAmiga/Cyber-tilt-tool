@@ -57,8 +57,8 @@ const Layout = () => {
                                 <Nav.Link href="/home">Home</Nav.Link>
                                 <Nav.Link href="/profile">Profile</Nav.Link>
                                 <Nav.Link href="/reports">Reports</Nav.Link>
-                                <Nav.Link href="/companyusers">Company Users</Nav.Link>
-                                <Nav.Link href="/systemusers">System Users</Nav.Link>
+                                {user.isCompanyAdmin === true && (<Nav.Link href="/companyusers">Company Users</Nav.Link>)}
+                                {user.isSysAdmin === true && (<Nav.Link href="/systemusers">System Users</Nav.Link>)}
                                 {user.isCompanyAdmin === true && (
                                     <Nav.Link href="/companyauthorization">
                                         Company - Authorization
@@ -69,7 +69,7 @@ const Layout = () => {
                                         System - Authorization
                                     </Nav.Link>
                                 )}
-                                {user.isSysAdmin === true && (
+                                {user.isSysAdmin == true && (
                                     <Nav.Link href="/companymanagement">
                                         Company - Management
                                     </Nav.Link>

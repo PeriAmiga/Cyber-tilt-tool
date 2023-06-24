@@ -14,3 +14,6 @@
 21/06/2023 18:11:50: Client IP: 172.18.0.1:37526, The command is: AUTH LOGIN, The details are: Username is: admin, Password is: admin
 21/06/2023 18:13:05: Client IP: 172.18.0.1:37526, The command is: AUTH GET USERS
 21/06/2023 18:40:26: Client IP: 172.18.0.1:50740, The command is: AUTH LOGIN, The details are: Username is: admin, Password is: admin
+23/06/2023 14:22:31: Client IP: 172.18.0.1:50280, The command is: AUTH GET USERS
+23/06/2023 14:29:40: Client IP: 172.18.0.1:48066, The command is: VRFY JOHN.DOE@INTEL.COM, The details are: The mail that checked is: john.doe@intel.com
+23/06/2023 14:30:48: Client IP: 172.18.0.1:50960, The command is: VRFY JOHN.DOE@INTEL.COM, The details are: The mail that checked is: john.doe@intel.com

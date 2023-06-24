@@ -9,7 +9,9 @@ from fastapi.responses import JSONResponse
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from models.user import loginUser, users
-from schemas.user import validate_password
+from models.token import tokens
+from schemas.token import TokenEntity
+from schemas.user import validate_password, hash
 from fastapi_sessions.backends.implementations import InMemoryBackend
 from fastapi_sessions.frontends.implementations import SessionCookie, CookieParameters
 from auth.BasicVerifier import BasicVerifier
@@ -39,7 +41,6 @@ verifier = BasicVerifier(
     auth_http_exception=HTTPException(
         status_code=403, detail="invalid session"),
 )
-
 
 @auth.post("/login")
 async def login(user: loginUser):
@@ -97,7 +98,13 @@ async def del_session(session_id: UUID = Depends(cookie)):
 @auth.get('/sendMail')
 def send_mail(email: str):
 
-    # crate token
+    # check if the email is exist in the db
+    db_select_user = conn.execute(users.select().where(
+        users.c.email == email)).fetchone()
+    if db_select_user is None:
+        return JSONResponse("Forbidden", status_code=status.HTTP_403_FORBIDDEN)
+
+    # create token
     random_value = secrets.token_hex(16)
     token = sha1(random_value.encode()).hexdigest()
 
@@ -106,10 +113,11 @@ def send_mail(email: str):
     expired = expired.strftime('%Y-%m-%d %H:%M:%S')
 
     # save in DB
-    mycursor = conn.cursor()
-    sql = "INSERT INTO Token (email, token, expired) VALUES (%s, %s, %s)"
-    val = (email, token, expired)
-    mycursor.execute(sql, val)
+    conn.execute(tokens.insert().values(
+            token = token,
+            email = email,
+            expired = expired
+        ))
     conn.commit()
 
     # send mail
@@ -129,8 +137,38 @@ def send_mail(email: str):
         server.sendmail(EMAIL_USER, [email], message.as_string())
     return JSONResponse("Sent", status_code=status.HTTP_202_ACCEPTED)
 
+@auth.get('/checkToken')
+def check_token(email: str, token: str):
+    # check if the email and token is exist in the db
+    query = tokens.select().where((tokens.c.email == email) & (tokens.c.token == token))
+    db_select_token = conn.execute(query).fetchone()
+    expired_token = datetime.strptime(TokenEntity(db_select_token)['expired'], '%Y-%m-%d %H:%M:%S')
+    is_expired = datetime.now() > expired_token
+    if db_select_token is None or is_expired:
+        return JSONResponse("Forbidden", status_code=status.HTTP_403_FORBIDDEN)
+    else:
+        response = JSONResponse("Token Accepted", status_code=status.HTTP_202_ACCEPTED)
+        # Set 'newpassword' value to true
+        response.set_cookie("newpassword", "true")
+        return response
 
-def reset_password_attempts(email: str):
+@auth.get('/resetPassword')
+def reset_password(email: str, password: str):
+    # check if the email
+    query = users.select().where(users.c.email == email)
+    db_select_user = conn.execute(query).fetchone()
+    if db_select_user is None:
+        response.delete_cookie("newpassword")
+        return JSONResponse("Forbidden", status_code=status.HTTP_403_FORBIDDEN)
+    else:
+        update_query = users.update().where(users.c.email == email).values(password=hash(password))
+        conn.execute(update_query)
+        conn.commit()
+        response = JSONResponse("Token Accepted", status_code=status.HTTP_202_ACCEPTED)
+        response.delete_cookie("newpassword")
+        return response
+
+def reset_password_attempts(email: str, token: str):
     mycursor = conn.cursor()
     sql = "UPDATE User SET password_attempts = 0 WHERE email = %s"
     val = (email,)

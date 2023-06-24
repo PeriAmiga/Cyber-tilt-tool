@@ -81,6 +81,8 @@ function SystemUsers() {
         async function getUser() {
             try {
                 const user = await apiGet('/auth/whoami');
+                if (!user.data.isSysAdmin)
+                    throw Error();
                 setUser(user.data);
             } catch (error) {
                 setUser(null)
@@ -89,11 +91,10 @@ function SystemUsers() {
             return
         }
         getUser();
-
     }, []);
 
     return (
-        user !== null && (<div id="reports">
+        user && (<div id="reports">
             <h1 id="systemUsersClients">System Users</h1>
             <br/>
             <ClientsTable data={data} isCompany={true}></ClientsTable>

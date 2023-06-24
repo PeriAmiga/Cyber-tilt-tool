@@ -1,5 +1,5 @@
 import React, {useRef, useState, useEffect} from 'react'
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useLocation as useRouterLocation} from "react-router-dom";
 import { apiGet } from "./services/apiService";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -13,25 +13,29 @@ export default function NewPassword() {
     const newPasswordRef = useRef(null);
     const confirmPasswordRef = useRef(null);
     const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z](?=.*[@#$%^&+=!]).{10,}$/;
+    const routerLocation = useRouterLocation();
+    const email = routerLocation?.state?.email;
 
-    const [user, setUser] = useState("");
-    useEffect(() => {
-        async function getUser() {
-            try {
-                const user = await apiGet('/auth/whoami');
-                setUser(user.data);
-            } catch (error) {
-                setUser(null)
-                navigate('/error');
-            }
-            return
+    if(document.cookie) {
+        const flagPage = document.cookie
+            .split('; ')
+            .find(row => row.startsWith('newpassword='))
+            .split('=')[1];
+        console.log(flagPage);
+        if (!flagPage) {
+            navigate('/error');
         }
-        getUser();
+    }
+    else{
+        navigate('/error');
+    }
 
-    }, []);
+    useEffect(()=>{
+        if(!email)
+            navigate('/error');
+    },[email]);
 
-
-    function handleClick(e){
+    async function handleClick(e){
         e.preventDefault();
         let newPassword = newPasswordRef.current.value;
         let confirmPassword = confirmPasswordRef.current.value;
@@ -62,18 +66,28 @@ export default function NewPassword() {
             }
             else
             {
-                // check that the new password not equal to the old
-                // save the new password in the db
-                setError('');
-                alert("The password changed successfully");
-                navigate('/login');
+                const res = await resetPassword(email, newPassword);
+                if(res) {
+                    setError('');
+                    alert("The password changed successfully");
+                    navigate('/login');
+                }
             }
         }
     }
 
+    async function resetPassword(email, password) {
+        try {
+            return await apiGet('/auth/resetPassword', {email: email, password: password});
+        } catch (error) {
+            setError("The password did not change, please try again")
+        }
+    }
+
+
 
     return (
-        user !== null && (<div>
+        email && (<div>
             <form id="newpasswordpanel">
                 <h1 id="litheader">New Password</h1>
                 <br/>

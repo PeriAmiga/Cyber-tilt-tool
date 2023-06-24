@@ -19,9 +19,12 @@ function RegisterCompany() {
         async function getUser() {
             try {
                 const user = await apiGet('/auth/whoami');
+                if (!user.data.isSysAdmin)
+                    throw Error();
                 setUser(user.data);
             } catch (error) {
-                setUser(null)
+                setUser(null);
+                navigate('/error');
             }
             return
         }
@@ -58,7 +61,7 @@ function RegisterCompany() {
     }
 
     return (
-        user.isSysAdmin === true && (
+        user && (
         <form id="registerpanel">
             <h1 id="litheader">Company - Registration</h1>
             <br/>

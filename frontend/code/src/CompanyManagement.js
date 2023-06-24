@@ -14,6 +14,8 @@ function CompanyManagement() {
         async function getUser() {
             try {
                 const user2 = await apiGet('/auth/whoami');
+                if (!user.data.isCompanyAdmin)
+                    throw Error();
                 setUser(user2.data);
             } catch (error) {
                 setUser(null)
@@ -144,7 +146,7 @@ function CompanyManagement() {
     }
 
     return (
-        user !== null && (
+        user && (
         <div>
             <h1>Company - Management</h1>
             <br/>

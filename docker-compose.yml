@@ -81,6 +81,8 @@ services:
     environment:
       - USERNAME_DB=${USERNAME_DB}
       - PASSWORD_DB=${PASSWORD_DB}
+      - EMAIL_USER=${EMAIL_USER}
+      - EMAIL_PASS=${EMAIL_PASS}
     depends_on:
       db:
         condition: service_healthy

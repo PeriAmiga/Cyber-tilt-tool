@@ -1,35 +1,25 @@
 import React, {useRef, useState, useEffect} from 'react'
-import {useNavigate} from "react-router-dom";
-import { apiGet } from "./services/apiService";
+import { useNavigate, useLocation as useRouterLocation } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Container from 'react-bootstrap/Container';
 import Alert from 'react-bootstrap/Alert';
+import {apiGet} from "./services/apiService";
 
 export default function CodeValidation() {
     const [error = "", setError] = useState("");
     const navigate = useNavigate();
     const codeRef = useRef(null);
+    const routerLocation = useRouterLocation();
+    const email = routerLocation?.state?.email;
 
-    const [user, setUser] = useState("");
-    useEffect(() => {
-        async function getUser() {
-            try {
-                const user = await apiGet('/auth/whoami');
-                setUser(user.data);
-            } catch (error) {
-                setUser(null)
-                navigate('/error');
-            }
-            return
-        }
-        getUser();
+    useEffect(()=>{
+        if(!email)
+            navigate('/error');
+    },[email]);
 
-    }, []);
-
-
-    function handleClick(e){
+    async function handleClick(e){
         e.preventDefault();
         let code = codeRef.current.value;
 
@@ -39,16 +29,26 @@ export default function CodeValidation() {
         }
         else
         {
-            // check the code in the db if exist and equal
-            //write what will happen if not equal
-            setError('');
-            navigate('/newpassword');
+            const res = await sendTokenEmail(email, code);
+            console.log(res);
+            if(res) {
+                setError('');
+                navigate('/newpassword', {state: {email}});
+            }
+        }
+    }
+
+    async function sendTokenEmail(email, token) {
+        try {
+            return await apiGet('/auth/checkToken', {email: email, token: token});
+        } catch (error) {
+            setError("The code did not send, please try again");
         }
     }
 
 
     return (
-        user !== null && (<div>
+        email && <div>
             <form id="codeValidationpanel">
                 <h1 id="litheader">Code Validation</h1>
                 <br/>
@@ -67,6 +67,6 @@ export default function CodeValidation() {
                 </Container>
                 <Button onClick={handleClick}>Validate Code</Button>
             </form>
-        </div>)
+        </div>
     )
 }

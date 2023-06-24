@@ -25,11 +25,13 @@ function RegisterPage() {
         async function getUser() {
             try {
                 const user = await apiGet('/auth/whoami');
+                if (!user.data.isSysAdmin && !user.data.isCompanyAdmin)
+                    throw Error();
                 setUser(user.data);
             } catch (error) {
-                setUser(null)
+                setUser(null);
+                navigate('/error');
             }
-            return
         }
         getUser();
 
@@ -107,8 +109,7 @@ function RegisterPage() {
         }
     }
 
-    return (
-        <form id="registerpanel">
+    return ( user && (<form id="registerpanel">
             <h1 id="litheader">Register</h1>
             <br/>
             <Container className="registerPage">
@@ -168,6 +169,6 @@ function RegisterPage() {
                 {error !== "" && <Alert id="registerError" key='warning' variant='warning'>{error}</Alert>}
             </Container>
             <Button onClick={handleClick}>Register</Button>
-        </form>
+        </form>)
     );
 } export default RegisterPage;
