@@ -8,21 +8,42 @@ CREATE TABLE
     );
 
 CREATE TABLE
-    IF NOT EXISTS `db`.`Service` (
-        `serviceID` INT unsigned NOT NULL AUTO_INCREMENT,
-        `name` VARCHAR(5) NOT NULL,
-        `port` INT NOT NULL,
-        `description` TEXT,
-        PRIMARY KEY (`serviceID`)
-    );
-
-CREATE TABLE
     IF NOT EXISTS `db`.`Attacker` (
         `attackerID` INT unsigned NOT NULL AUTO_INCREMENT,
         `ip` VARCHAR(15) NOT NULL,
         `location` TEXT,
         KEY `idx_Attacker_ip` (`ip`) USING BTREE,
         PRIMARY KEY (`attackerID`)
+    );
+
+CREATE TABLE
+    IF NOT EXISTS `db`.`Company` (
+        `companyID` INT unsigned NOT NULL AUTO_INCREMENT,
+        `name` VARCHAR(128) NOT NULL,
+        `address` TEXT,
+        `isActivate` TINYINT(1) NOT NULL DEFAULT 1,
+        KEY `idx_Company_name` (`name`) USING BTREE,
+        PRIMARY KEY (`companyID`)
+    );
+
+CREATE TABLE
+    IF NOT EXISTS `db`.`Service` (
+        `serviceID` INT unsigned NOT NULL AUTO_INCREMENT,
+        `name` VARCHAR(25) NOT NULL,
+        `description` TEXT,
+        PRIMARY KEY (`serviceID`)
+    );
+
+CREATE TABLE
+    IF NOT EXISTS `db`.`Companies_Services` (
+        `ID` INT unsigned NOT NULL AUTO_INCREMENT,
+        `name` VARCHAR(25) NOT NULL,
+        `port` INT NOT NULL,
+        `companyID` INT unsigned NOT NULL,
+        `serviceID` INT unsigned NOT NULL,
+        PRIMARY KEY (`ID`),
+        CONSTRAINT `idx_Companies_Services_companyID` FOREIGN KEY (`companyID`) REFERENCES `Company` (`companyID`),
+        CONSTRAINT `idx_Companies_Services_serviceID` FOREIGN KEY (`serviceID`) REFERENCES `Service` (`serviceID`)
     );
 
 CREATE TABLE
@@ -37,19 +58,9 @@ CREATE TABLE
     );
 
 CREATE TABLE
-    IF NOT EXISTS `db`.`Company` (
-        `companyID` INT unsigned NOT NULL AUTO_INCREMENT,
-        `name` VARCHAR(128) NOT NULL,
-        `address` TEXT,
-        `isActivate` TINYINT(1) NOT NULL DEFAULT 1,
-        KEY `idx_Company_name` (`name`) USING BTREE,
-        PRIMARY KEY (`companyID`)
-    );
-
-CREATE TABLE
     IF NOT EXISTS `db`.`Log` (
         `logID` INT unsigned NOT NULL AUTO_INCREMENT,
-        `sessionID` VARCHAR(32) NOT NULL,
+        `sessionID` VARCHAR(40) NOT NULL,
         `createAt` DATETIME NOT NULL,
         `description` TEXT,
         KEY `idx_sessionID` (`sessionID`) USING HASH,
@@ -59,16 +70,14 @@ CREATE TABLE
 CREATE TABLE
     IF NOT EXISTS `db`.`Report` (
         `reportID` INT unsigned NOT NULL AUTO_INCREMENT,
-        `serviceID` INT unsigned NOT NULL,
         `createAt` DATETIME NOT NULL,
-        `companyID` INT unsigned NOT NULL,
+        `companies_services_id` INT unsigned NOT NULL,
         `attackerID` INT unsigned NOT NULL,
         `trapID` INT unsigned NOT NULL,
-        `sessionLogID` VARCHAR(32) NOT NULL,
+        `sessionLogID` VARCHAR(36) NOT NULL,
         CONSTRAINT `idx_Report_log_sessionID` FOREIGN KEY (`sessionLogID`) REFERENCES `Log` (`sessionID`),
-        CONSTRAINT `idx_Report_companyID` FOREIGN KEY (`companyID`) REFERENCES `Company` (`companyID`),
+        CONSTRAINT `idx_Report_companies_services_id` FOREIGN KEY (`companies_services_id`) REFERENCES `Companies_Services` (`ID`),
         CONSTRAINT `idx_Report_trapID` FOREIGN KEY (`trapID`) REFERENCES `Trap` (`trapID`),
-        CONSTRAINT `idx_Report_serviceID` FOREIGN KEY (`serviceID`) REFERENCES `Service` (`serviceID`),
         CONSTRAINT `idx_Report_attackerID` FOREIGN KEY (`attackerID`) REFERENCES `Attacker` (`attackerID`),
         PRIMARY KEY (`reportID`)
     );
@@ -89,16 +98,6 @@ CREATE TABLE
         KEY `idx_User_email` (`email`) USING BTREE,
         CONSTRAINT `idx_User_companyID` FOREIGN KEY (`companyID`) REFERENCES `Company` (`companyID`),
         PRIMARY KEY (`userID`)
-    );
-
-CREATE TABLE
-    IF NOT EXISTS `db`.`linking_company_service` (
-        `id` INT unsigned NOT NULL AUTO_INCREMENT,
-        `company_id` INT unsigned NOT NULL,
-        `service_id` INT unsigned NOT NULL,
-        CONSTRAINT `idx_linking_company_service_company_id` FOREIGN KEY (`company_id`) REFERENCES `Company` (`companyID`),
-        CONSTRAINT `idx_linking_company_service_service_id` FOREIGN KEY (`service_id`) REFERENCES `Service` (`serviceID`),
-        PRIMARY KEY (`id`)
     );
 
 CREATE TABLE
