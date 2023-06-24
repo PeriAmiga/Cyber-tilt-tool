@@ -1,4 +1,7 @@
-<h1 align="center"> Cyber HIT project - traps for attackers on services </h1>
+<div align="center">
+  <h1> Cyber HIT project - traps for attackers on services</h1>
+  <img src="./assets/banner.png"/>
+</div>
 
 
 ## Commands (without docker)
@@ -28,7 +31,7 @@ API:          :5000
 GUI:          :5001
 Services -
   HTTP:       :8080
-  FTP:        :2121
+  FTP:        :2121 & 2122
   SMTP:       :2525
   SSH:        :2222
 ```
@@ -37,37 +40,37 @@ Services -
 <img src="./assets/sqlmodel.png"/>
 
 ## Roadmap
-- [ ] Backend (API)
-  - [ ] config
-  - [ ] models
-  - [ ] routes
-    - [ ] user
-    - [ ] auth
-    - [ ] report
-    - [ ] logger
-  - [ ] schemas
-- [ ] Frontend (Client)
-  - [ ] Login page
-  - [ ] Report page
-  - [ ] profile page
-  - [ ] Admin page
-- [ ] DB (MySQL)
+- [x] Backend (API)
+  - [x] config
+  - [x] models
+  - [x] routes
+    - [x] user
+    - [x] auth
+    - [x] report
+    - [x] logger
+  - [x] schemas
+- [x] Frontend (Client)
+  - [x] Login page
+  - [x] Report page
+  - [x] profile page
+  - [x] Admin page
+- [x] DB (MySQL)
   - [x] Design
   - [x] Init table
-- [ ] Services
-  - [ ] HTTP
+- [x] Services
+  - [x] HTTP
     - [x] Client
     - [x] API
     - [x] Traps
-  - [ ] FTP
+  - [x] FTP
     - [x] Server
-    - [ ] Traps
-  - [ ] SMTP
+    - [x] Traps
+  - [x] SMTP
     - [x] Server
-    - [ ] Traps
-  - [ ] SSH
+    - [x] Traps
+  - [x] SSH
     - [x] Server
-    - [ ] Traps
+    - [x] Traps
 - [ ] Testing
 
 ## Team
