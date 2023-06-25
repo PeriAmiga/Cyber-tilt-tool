@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from 'react'
-import {useNavigate} from "react-router-dom";
+import React, { useState, useEffect } from 'react'
+import { useNavigate } from "react-router-dom";
 import { apiGet } from "./services/apiService";
 import ReportsTable from "./ReportsTable";
 import "./reports.css"
@@ -32,6 +32,7 @@ const data = [
 function Reports() {
 
     const [user, setUser] = useState("");
+    const [data, setdata] = useState([]);
     const navigate = useNavigate();
     useEffect(() => {
         async function getUser() {
@@ -42,16 +43,25 @@ function Reports() {
                 setUser(null)
                 navigate('/error');
             }
-            return
         }
         getUser();
 
+        async function getReports() {
+            try {
+                const res = await apiGet('/report');
+                console.log(res.data.sort(x => x.reportID))
+                setdata(res.data.sort(x => x.reportID));
+            } catch (error) {
+                setdata([])
+            }
+        }
+        getReports();
     }, []);
 
     return (
         user !== null && (<div id="reports">
             <h1 id="titleReport">Reports</h1>
-            <br/>
+            <br />
             <ReportsTable data={data}></ReportsTable>
         </div>)
     );

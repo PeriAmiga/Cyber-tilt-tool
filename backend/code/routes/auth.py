@@ -1,4 +1,4 @@
-from fastapi import APIRouter, status, HTTPException, Depends, Request
+from fastapi import APIRouter, status, HTTPException, Depends
 from config.db import conn
 from hashlib import sha1
 from datetime import datetime, timedelta
@@ -10,6 +10,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from models.user import loginUser, users
 from models.token import tokens
+from models.company import companies
 from schemas.token import TokenEntity
 from schemas.user import validate_password, hash
 from fastapi_sessions.backends.implementations import InMemoryBackend
@@ -17,7 +18,6 @@ from fastapi_sessions.frontends.implementations import SessionCookie, CookiePara
 from auth.BasicVerifier import BasicVerifier
 from auth.SessionData import SessionData
 from uuid import UUID, uuid4
-import config.common
 from schemas.user import UserEntity
 
 auth = APIRouter(
@@ -52,20 +52,18 @@ async def login(user: loginUser):
     if len(data) == 0:
         return JSONResponse("Invalid User!", status_code=status.HTTP_401_UNAUTHORIZED)
     user_entity = UserEntity(data[0], False)
-    #password_attempts = int(user_db[5])
-    #config_ = config.common.load_config()
-    # if not user_entity.isActive or password_attempts >= int(config_['password_try']):
-    #    return JSONResponse("Too many attempts, the user is blocked", status_code=status.HTTP_403_FORBIDDEN)
 
     is_successfull = validate_password(user.password, user_entity.password)
 
     if is_successfull:
         response = JSONResponse("Welcome :)", status_code=status.HTTP_200_OK)
         session = uuid4()
-        companyName = 'Intel'  # TODO: get name by ID `companyID`
+        query_company = companies.select().where(
+            companies.c.companyID == user_entity.companyID)
+        data_company = conn.execute(query_company).fetchone()
         sessionData = SessionData(
             email=user.email,
-            companyName=companyName,
+            companyName=data_company[1],
             companyID=user_entity.companyID,
             fullName=user_entity.fullName,
             isSysAdmin=user_entity.isSysAdmin,
@@ -75,12 +73,10 @@ async def login(user: loginUser):
         )
         await backend.create(session, sessionData)
         cookie.attach_to_response(response, session)
-        # reset_password_attempts(user.email)
         return response
     else:
         response = JSONResponse(
             "Invalid User!", status_code=status.HTTP_401_UNAUTHORIZED)
-        #plus_password_attempts(user.email, password_attempts)
         return response
 
 

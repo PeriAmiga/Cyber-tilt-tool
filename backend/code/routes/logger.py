@@ -89,4 +89,10 @@ async def get_logs_by_session(session: str):
     query = logs.select().where(
         logs.c.sessionID == session)
     data = conn.execute(query).fetchall()
-    return ORJSONResponse(LogsEntity(data), status_code=status.HTTP_200_OK)
+    res = LogsEntity(data)
+    res.sort(key=sortedLog)
+    return ORJSONResponse(res, status_code=status.HTTP_200_OK)
+
+
+def sortedLog(e):
+    return e['logID']

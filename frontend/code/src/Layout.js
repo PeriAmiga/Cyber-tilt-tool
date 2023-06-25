@@ -59,7 +59,7 @@ const Layout = () => {
                         </Navbar.Brand>
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Navbar.Collapse>
-                            <Nav className="me-auto" fill variant="tabs" defaultActiveKey="tab-home">
+                            <Nav className="me-auto" fill variant="tabs">
                                 <Nav.Item>
                                     <LinkContainer to="/home">
                                         <Nav.Link eventKey="tab-home">Home</Nav.Link>

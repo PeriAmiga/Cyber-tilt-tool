@@ -2,7 +2,7 @@ from fastapi import APIRouter, status, Depends
 from fastapi.responses import ORJSONResponse, JSONResponse
 from config.db import conn
 from models.index import reports, users
-from schemas.index import ReportsEntity, hash
+from schemas.index import hash
 from .auth import cookie
 from auth.SessionData import SessionData
 from .auth import verifier
@@ -23,13 +23,6 @@ config_ = config.common.load_config()
 async def getAll():
     data = conn.execute(users.select()).fetchall()
     return ORJSONResponse(data, status_code=status.HTTP_200_OK)
-
-
-@user.get('/getReports', dependencies=[Depends(cookie)])
-async def getReports(session_data: SessionData = Depends(verifier)):
-    data = conn.execute(reports.select().where(
-        reports.c.companyID == session_data.companyID))
-    return ORJSONResponse(ReportsEntity(data), status_code=status.HTTP_200_OK)
 
 
 @user.post('/register')

@@ -1,10 +1,8 @@
 from sqlalchemy import Table, Column, ForeignKey
-from sqlalchemy.sql.sqltypes import Integer, String, DateTime, Boolean, Date
+from sqlalchemy.sql.sqltypes import Integer, String, Boolean
 from config.db import meta
-from pydantic import BaseModel
-from sqlalchemy.orm import relationship
 
-companys = Table(
+companies = Table(
     'Company', meta,
     Column('companyID', Integer, primary_key=True),
     Column('name', String(128)),

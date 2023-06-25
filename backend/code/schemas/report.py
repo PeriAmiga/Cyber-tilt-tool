@@ -16,15 +16,15 @@ def ReportEntity(item) -> dict:
     return {
         "reportID": item[0],
         "createAt": str(item[1]),
-        # "companies_services_id": item[2],
-        "attackerID": item[3],
-        "trapID": item[4],
-        "sessionLogID": item[5],
+        "sessionLogID": item[4],
         "companies_services_id": item[6],
         "companies_services_name": item[7],
         "companies_services_port": int(item[8]),
-        "companyID": int(item[9]),
-        "serviceID": int(item[10])
+        "attackerIP": item[12],
+        "attackerLocation": item[13],
+        "trapName": item[15],
+        "trapDescription": item[17],
+        "companyName": item[20]
     }
 
 

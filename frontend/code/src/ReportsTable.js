@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Container from 'react-bootstrap/Container';
+import Table from 'react-bootstrap/Table';
 
 function downloadCsv(filteredData) {
     try {
@@ -93,7 +94,7 @@ const ReportsTable = ({ data }) => {
 
     const filteredData = data.filter((item) =>
         item.attackerIP.includes(searchAttackerIP) &&
-        item.serviceName.toLowerCase().includes(searchService.toLowerCase()) && item.company.toLowerCase().includes(searchCompany.toLowerCase()) && item.trapName.toLowerCase().includes(searchTrapName.toLowerCase()) && (searchMinDate === '' || item.date >= searchMinDate) && (searchMaxDate === '' || item.date <= searchMaxDate)
+        item.companies_services_name.toLowerCase().includes(searchService.toLowerCase()) && item.companyName.toLowerCase().includes(searchCompany.toLowerCase()) && item.trapName.toLowerCase().includes(searchTrapName.toLowerCase()) && (searchMinDate === '' || item.createAt >= searchMinDate) && (searchMaxDate === '' || item.createAt <= searchMaxDate)
     );
 
     const totalPages = Math.ceil(filteredData.length / rowsPerPage);
@@ -173,47 +174,51 @@ const ReportsTable = ({ data }) => {
                 </InputGroup>
 
                 <Button variant="secondary" onClick={handleClearSearch}>Clear</Button>
-            </Container>
-            <br />
-            <Button id="save-button" variant="success" onClick={() => downloadCsv(filteredData)}>Save Data as CSV</Button>
-            <table id="reportTable">
-                <thead>
-                    <tr>
-                        <th>Report ID</th>
-                        <th>Service Name</th>
-                        <th>Date</th>
-                        <th>Company</th>
-                        <th>Attacker IP</th>
-                        <th>Trap Name</th>
-                        <th>Logs</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {filteredData.slice(startIndex, endIndex).map((item) => (
-                        <tr key={item.reportID}>
-                            <td>{item.reportID}</td>
-                            <td>{item.serviceName}</td>
-                            <td>{item.date}</td>
-                            <td>{item.company}</td>
-                            <td>{item.attackerIP}</td>
-                            <td>{item.trapName}</td>
-                            <td id={item.reportID} style={{ cursor: 'pointer' }} onClick={() => toggleModalShow(item.reportID)}><img
-                                src="/images/Information_icon.png" style={{ width: '40px', height: '40px' }}/></td>
-                            <MyVerticallyCenteredModal reportID={item.reportID}
-                               show={modalShowMap[item.reportID] || false} // Use modalShowMap to determine the show state
-                               onHide={() => toggleModalShow(item.reportID)}
-                            />
+
+                <br />
+                <Button id="save-button" variant="success" onClick={() => downloadCsv(filteredData)}>Save Data as CSV</Button>
+                <Table id="reportTable" striped>
+                    <thead>
+                        <tr>
+                            <th>Report ID</th>
+                            <th>Service Name</th>
+                            <th>Date</th>
+                            <th>Company</th>
+                            <th>Attacker IP</th>
+                            <th>Trap Name</th>
+                            <th>Logs</th>
                         </tr>
+                    </thead>
+                    <tbody>
+                        {filteredData.slice(startIndex, endIndex).map((item) => (
+                            <tr key={item.reportID}>
+                                <td>{item.reportID}</td>
+                                <td>{item.companies_services_name}</td>
+                                <td>{item.createAt}</td>
+                                <td>{item.companyName}</td>
+                                <td>{item.attackerIP}</td>
+                                <td>{item.trapName}</td>
+                                <td id={item.sessionLogID} style={{ cursor: 'pointer' }} onClick={() => toggleModalShow(item.sessionLogID)}><img
+                                    src="/images/Information_icon.png" style={{ width: '40px', height: '40px' }} /></td>
+                                <MyVerticallyCenteredModal
+                                    sessionLogID={item.sessionLogID}
+                                    ServiceName={item.companies_services_name}
+                                    TrapName={item.trapName}
+                                    show={modalShowMap[item.sessionLogID] || false} // Use modalShowMap to determine the show state
+                                    onHide={() => toggleModalShow(item.sessionLogID)}
+                                />
+                            </tr>
+                        ))}
+                    </tbody>
+                </Table>
+                <div className="pagination" id="tablePages">
+                    {pageNumbers.map((number) => (
+                        <button key={number} onClick={() => setCurrentPage(number)}>
+                            {number}
+                        </button>
                     ))}
-                </tbody>
-            </table>
-            <div className="pagination" id="tablePages">
-                {pageNumbers.map((number) => (
-                    <button key={number} onClick={() => setCurrentPage(number)}>
-                        {number}
-                    </button>
-                ))}
-            </div>
+                </div>
+            </Container>
         </div>
     );
 };
