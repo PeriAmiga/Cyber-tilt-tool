@@ -168,7 +168,7 @@ const ClientsTable = ({data, isCompany}) => {
                         <td>{item.userID}</td>
                         <td>{item.fullName}</td>
                         <td>{item.birthdate}</td>
-                        {isCompany && <td>{item.company}</td>}
+                        {isCompany && <td>{item.companyName}</td>}
                         <td>{item.email}</td>
                         <td>{item.phone}</td>
                     </tr>

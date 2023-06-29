@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import { apiGet } from "./services/apiService";
+import {apiGet, apiPost} from "./services/apiService";
 import "./Containers.css";
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
@@ -32,18 +32,37 @@ export default function Profile() {
         setFullName(user.fullName);
     }, []);
 
+    const logout = async () => {
+        await apiPost('/auth/logout', null);
+        navigate('/login');
+        document.location.reload();
+    };
 
-    const handleSave = () => {
-        // TODO: Save changes to the user's email and phone number
+    async function handleSave (){
         const updatedFullName = document.getElementById("fullName").value;
         const updatedPhone = document.getElementById("phone").value;
         let temp = { ...user };
         temp.fullName = updatedFullName;
         temp.phone = updatedPhone;
         setUser(temp);
+
+        const res = await updateProfile(user.email, temp.fullName, temp.phone);
+        if(res) {
+            alert("The profile has been updated successfully");
+            logout();
+        }
+
         // Disable edit mode
         setEditMode(false);
     };
+
+    async function updateProfile(email, fullName, phone) {
+        try {
+            return await apiGet('/auth/updateProfile', {email: email, fullName: fullName, phone: phone});
+        } catch (error) {
+            alert("Something didn't work, please try again.");
+        }
+    }
 
     return (
         user !== null && (
@@ -107,7 +126,11 @@ export default function Profile() {
                 />
             </InputGroup>
             {editMode && <Button onClick={handleSave} variant="success">Save</Button>}
-            <Button style={{"margin-left": "10px"}} variant="secondary" onClick={() => setEditMode(!editMode)}>
+            <Button style={{"margin-left": "10px"}} variant="secondary" onClick={() => {
+                if(editMode){
+                    document.location.reload();
+                }
+                setEditMode(!editMode)}}>
                 {editMode ? 'Cancel' : 'Edit'}
             </Button>
             <br/><br/>

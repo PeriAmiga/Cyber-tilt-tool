@@ -30,7 +30,6 @@ export default function CodeValidation() {
         else
         {
             const res = await sendTokenEmail(email, code);
-            console.log(res);
             if(res) {
                 setError('');
                 navigate('/newpassword', {state: {email}});

@@ -32,7 +32,7 @@ export default function ChangePassword() {
     }, []);
 
 
-    function handleClick(e){
+    async function handleClick(e){
         e.preventDefault();
         let oldPassword = oldPasswordRef.current.value;
         let newPassword = newPasswordRef.current.value;
@@ -68,12 +68,21 @@ export default function ChangePassword() {
             }
             else
             {
-                // check that the new password not equal to the old
-                // save the new password in the db
-                setError('');
-                alert("The password changed successfully");
-                navigate('/login');
+                const res = await changePassword(user.email, oldPassword, newPassword);
+                if(res) {
+                    setError('');
+                    alert("The password changed successfully");
+                    navigate('/login');
+                }
             }
+        }
+    }
+
+    async function changePassword(email, oldPassword, newPassword) {
+        try {
+            return await apiGet('/auth/changePassword', {email: email, oldPassword: oldPassword, newPassword: newPassword});
+        } catch (error) {
+            setError(error.response.data)
         }
     }
 

@@ -75,6 +75,7 @@ const data = [
 function SystemUsers() {
 
     const [user, setUser] = useState("");
+    const [data, setData] = useState([]);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -91,6 +92,17 @@ function SystemUsers() {
             return
         }
         getUser();
+
+        async function getUsersData() {
+            try {
+                const res = await apiGet('/company/users');
+                setData(res.data);
+            } catch (error) {
+                setData([])
+            }
+        }
+        getUsersData();
+
     }, []);
 
     return (

@@ -46,7 +46,41 @@ WHERE NOT EXISTS (
 /* Create User */
 
 /* Administrator */
+INSERT INTO
+    `db`.`User` (
+        `userID`,
+        `password`,
+        `fullName`,
+        `email`,
+        `phone`,
+        `birthdate`,
+        `registerDate`,
+        `isSysAdmin`,
+        `isCompanyAdmin`,
+        `isActive`,
+        `companyID`
+    )
+SELECT
+    1,
+    '$2b$12$EEmr3aYzuYBFK7n8OVrwae7MoxE/UbtCSB5B0/VhXePflS4sXFMPG',
+    'Super Admin',
+    'computersec03@gmail.com',
+    '050000000',
+    '2021-01-27',
+    '2023-01-27',
+    1,
+    1,
+    1,
+    1
+WHERE NOT EXISTS (
+        SELECT *
+        FROM `db`.`User`
+        WHERE
+            email = 'computersec03@gmail.com'
+    );
 
+
+/* Administrator */
 INSERT INTO
     `db`.`User` (
         `userID`,
@@ -70,7 +104,7 @@ SELECT
     '2021-01-27',
     '2023-01-27',
     1,
-    0,
+    1,
     1,
     1
 WHERE NOT EXISTS (

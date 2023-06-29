@@ -98,10 +98,10 @@ function RegisterPage() {
                 "fullName": fullName,
                 "phone": phone,
                 "birthdate": birthDate,
-                "companyID": 1, // TODO: Moshe - casting the company name to id
-                "isSysAdmin": false, // TODO: peri - only SysAdmin
-                "isCompanyAdmin": false, // TODO: peri - only CompanyAdmin
-                "isActive": true // TODO: peri - admin and company
+                "companyID": 2, // TODO: Moshe - casting the company name to id
+                "isSysAdmin": false,
+                "isCompanyAdmin": false,
+                "isActive": true
             })
             setError('');
             alert("The user created successfully");

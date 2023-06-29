@@ -54,7 +54,7 @@ const Layout = () => {
                         <Navbar.Brand>
                             <Nav.Item>
                                 <Nav.Link href="/home"><img src={logo} width="160px" alt="Logo" /></Nav.Link>
-                                <label>Hello ,{user.fullName}</label>
+                                <label>Hello, {user.fullName}</label>
                             </Nav.Item>
                         </Navbar.Brand>
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />

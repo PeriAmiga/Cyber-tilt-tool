@@ -13,10 +13,10 @@ function CompanyManagement() {
     useEffect(() => {
         async function getUser() {
             try {
-                const user2 = await apiGet('/auth/whoami');
-                if (!user.data.isCompanyAdmin)
+                const res = await apiGet('/auth/whoami');
+                if (!res.data.isSysAdmin)
                     throw Error();
-                setUser(user2.data);
+                setUser(res.data);
             } catch (error) {
                 setUser(null)
                 navigate('/error');

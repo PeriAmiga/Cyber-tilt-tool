@@ -21,7 +21,6 @@ export default function NewPassword() {
             .split('; ')
             .find(row => row.startsWith('newpassword='))
             .split('=')[1];
-        console.log(flagPage);
         if (!flagPage) {
             navigate('/error');
         }
@@ -80,7 +79,7 @@ export default function NewPassword() {
         try {
             return await apiGet('/auth/resetPassword', {email: email, password: password});
         } catch (error) {
-            setError("The password did not change, please try again")
+            setError(error.response.data)
         }
     }
 

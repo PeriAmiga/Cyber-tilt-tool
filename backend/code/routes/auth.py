@@ -19,6 +19,8 @@ from auth.BasicVerifier import BasicVerifier
 from auth.SessionData import SessionData
 from uuid import UUID, uuid4
 from schemas.user import UserEntity
+import bcrypt
+
 
 auth = APIRouter(
     prefix="/api/auth",
@@ -152,22 +154,56 @@ def check_token(email: str, token: str):
         response.set_cookie("newpassword", "true")
         return response
 
+@auth.get('/updateProfile')
+def update_profile(email: str, fullName: str, phone: str):
+    query = users.select().where(users.c.email == email)
+    db_select_user = conn.execute(query).fetchone()
+    if db_select_user is None:
+        return JSONResponse("Forbidden", status_code=status.HTTP_403_FORBIDDEN)
+    else:
+        update_query = users.update().where(
+            users.c.email == email).values(fullName=fullName, phone=phone)
+        conn.execute(update_query)
+        conn.commit()
+        response = JSONResponse(
+            "Profile Updated", status_code=status.HTTP_202_ACCEPTED)
+        return response
+
+@auth.get('/changePassword')
+def change_password(email: str, oldPassword: str, newPassword: str):
+    query = users.select().where(users.c.email == email)
+    db_select_user = conn.execute(query).fetchone()
+    if db_select_user is None:
+        return JSONResponse("Forbidden", status_code=status.HTTP_403_FORBIDDEN)
+    elif newPassword == oldPassword:
+        return JSONResponse("Please choose another password", status_code=status.HTTP_403_FORBIDDEN)
+    elif bcrypt.checkpw(oldPassword.encode('utf-8'), db_select_user[1].encode('utf-8')) == False:
+            return JSONResponse("The old password are not match", status_code=status.HTTP_403_FORBIDDEN)
+    else:
+        update_query = users.update().where(
+            users.c.email == email).values(password=hash(newPassword))
+        conn.execute(update_query)
+        conn.commit()
+        response = JSONResponse(
+            "Password Accepted", status_code=status.HTTP_202_ACCEPTED)
+        return response
 
 @auth.get('/resetPassword')
 def reset_password(email: str, password: str):
-    # check if the email
     query = users.select().where(users.c.email == email)
     db_select_user = conn.execute(query).fetchone()
     if db_select_user is None:
         response.delete_cookie("newpassword")
         return JSONResponse("Forbidden", status_code=status.HTTP_403_FORBIDDEN)
+    elif bcrypt.checkpw(password.encode('utf-8'), db_select_user[1].encode('utf-8')):
+        return JSONResponse("Please choose another password", status_code=status.HTTP_403_FORBIDDEN)
     else:
         update_query = users.update().where(
             users.c.email == email).values(password=hash(password))
         conn.execute(update_query)
         conn.commit()
         response = JSONResponse(
-            "Token Accepted", status_code=status.HTTP_202_ACCEPTED)
+            "Password Accepted", status_code=status.HTTP_202_ACCEPTED)
         response.delete_cookie("newpassword")
         return response
 
