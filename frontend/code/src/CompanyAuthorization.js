@@ -9,6 +9,7 @@ import Container from 'react-bootstrap/Container';
 function CompanyAuthorization() {
 
     const [user, setUser] = useState("");
+    const [users, setUsers] = useState([]);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -22,41 +23,20 @@ function CompanyAuthorization() {
                 setUser(null)
                 navigate('/error');
             }
-            return
         }
         getUser();
 
-    }, []);
+        async function getUsersData() {
+            try {
+                const res = await apiGet('/company/users');
+                setUsers(res.data);
+            } catch (error) {
+                setUsers([])
+            }
+        }
+        getUsersData();
 
-    const [users, setUsers] = useState([
-        {
-            userID: 1,
-            fullName: 'John Doe',
-            email: 'john.doe@example.com',
-            phone: '1234567890',
-            birthDate: '1990-01-01',
-            isAdmin: false,
-            isActive: true,
-        },
-        {
-            userID: 2,
-            fullName: 'Jane Smith',
-            email: 'jane.smith@example.com',
-            phone: '9876543210',
-            birthDate: '1985-05-15',
-            isAdmin: false,
-            isActive: true,
-        },
-        {
-            userID: 3,
-            fullName: 'Alice Johnson',
-            email: 'alice.johnson@example.com',
-            phone: '5555555555',
-            birthDate: '1992-09-30',
-            isAdmin: true,
-            isActive: true,
-        },
-    ]);
+    }, []);
 
     const [filteredUsers, setFilteredUsers] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
@@ -69,6 +49,14 @@ function CompanyAuthorization() {
             return user;
         });
         setUsers(updatedUsers);
+
+        const updatedFilteredUsers = filteredUsers.map((user) => {
+            if (user.userID === userId) {
+                return { ...user, [field]: value };
+            }
+            return user;
+        });
+        setFilteredUsers(updatedFilteredUsers);
     };
 
     const handleSearch = (e) => {
@@ -82,6 +70,14 @@ function CompanyAuthorization() {
         setFilteredUsers(filtered);
     };
 
+    async function updateAuthorization(userID, isCompanyAdmin, isSysAdmin, isActive) {
+        try {
+            return await apiGet('/auth/updateAuthorization', {userID: userID, isCompanyAdmin: isCompanyAdmin, isSysAdmin: isSysAdmin, isActive: isActive});
+        } catch (error) {
+            alert("Something didn't work, please try again.");
+        }
+    }
+
     const [currentPage, setCurrentPage] = useState(1);
     const rowsPerPage = 10;
     const totalPages = Math.ceil(users.length / rowsPerPage);
@@ -89,10 +85,11 @@ function CompanyAuthorization() {
     const endIndex = startIndex + rowsPerPage;
     const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
 
-    const toggleSave = (userID, isAdmin, isActive) => {
-        // TODO: api to update the user data
-
-        alert("The data has been successfully saved");
+    async function toggleSave(userID, isAdmin, isSysAdmin, isActive){
+        const res = await updateAuthorization(userID, isAdmin, isSysAdmin, isActive);
+        if(res) {
+            alert("The data has been updated successfully");
+        }
     }
 
     return (
@@ -135,20 +132,18 @@ function CompanyAuthorization() {
                             <td>{user.fullName}</td>
                             <td>{user.email}</td>
                             <td>{user.phone}</td>
-                            <td>{user.birthDate}</td>
+                            <td>{user.birthdate}</td>
                             <td>
                                 <input
-                                    id="isAdmin"
                                     type="checkbox"
-                                    checked={user.isAdmin}
+                                    checked={user.isCompanyAdmin}
                                     onChange={(e) =>
-                                        handleAuthorizationChange(user.userID, 'isAdmin', e.target.checked)
+                                        handleAuthorizationChange(user.userID, 'isCompanyAdmin', e.target.checked)
                                     }
                                 />
                             </td>
                             <td>
                                 <input
-                                    id="isActive"
                                     type="checkbox"
                                     checked={user.isActive}
                                     onChange={(e) =>
@@ -156,7 +151,7 @@ function CompanyAuthorization() {
                                     }
                                 />
                             </td>
-                            <td id={user.userID} style={{ cursor: 'pointer' }} onClick={() => toggleSave(user.userID, document.getElementById("isAdmin").value, document.getElementById("isActive").value)}>
+                            <td id={user.userID} style={{ cursor: 'pointer' }} onClick={() => toggleSave(user.userID, user.isCompanyAdmin, user.isSysAdmin, user.isActive)}>
                                 <img
                                     src="/images/save.png" alt="save" style={{ width: '40px', height: '40px' }}/></td>
                         </tr>
@@ -168,20 +163,18 @@ function CompanyAuthorization() {
                             <td>{user.fullName}</td>
                             <td>{user.email}</td>
                             <td>{user.phone}</td>
-                            <td>{user.birthDate}</td>
+                            <td>{user.birthdate}</td>
                             <td>
                                 <input
-                                    id="isAdmin"
                                     type="checkbox"
-                                    checked={user.isAdmin}
+                                    checked={user.isCompanyAdmin}
                                     onChange={(e) =>
-                                        handleAuthorizationChange(user.userID, 'isAdmin', e.target.checked)
+                                        handleAuthorizationChange(user.userID, 'isCompanyAdmin', e.target.checked)
                                     }
                                 />
                             </td>
                             <td>
                                 <input
-                                    id="isActive"
                                     type="checkbox"
                                     checked={user.isActive}
                                     onChange={(e) =>
@@ -189,7 +182,7 @@ function CompanyAuthorization() {
                                     }
                                 />
                             </td>
-                            <td id={user.userID} style={{ cursor: 'pointer' }} onClick={() => toggleSave(user.userID, document.getElementById("isAdmin").value, document.getElementById("isActive").value)}>
+                            <td id={user.userID} style={{ cursor: 'pointer' }} onClick={() => toggleSave(user.userID, user.isCompanyAdmin, user.isSysAdmin, user.isActive)}>
                                 <img
                                     src="/images/save.png" alt="save" style={{ width: '40px', height: '40px' }}/></td>
                         </tr>

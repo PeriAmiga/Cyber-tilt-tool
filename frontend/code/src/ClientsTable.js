@@ -58,7 +58,7 @@ const ClientsTable = ({data, isCompany}) => {
     };
 
     const filteredData = data.filter((item) =>
-            item.fullName.toLowerCase().includes(searchFullName.toLowerCase()) && item.email.toLowerCase().includes(searchEmail.toLowerCase()) && item.phone.toLowerCase().includes(searchPhone.toLowerCase()) && (isCompany ? item.company.toLowerCase().includes(searchCompany.toLowerCase()) : true) && (searchMinDate === '' || item.birthdate >= searchMinDate) && (searchMaxDate === '' || item.birthdate <= searchMaxDate)
+            item.fullName.toLowerCase().includes(searchFullName.toLowerCase()) && item.email.toLowerCase().includes(searchEmail.toLowerCase()) && item.phone.toLowerCase().includes(searchPhone.toLowerCase()) && (isCompany ? item.companyName.toLowerCase().includes(searchCompany.toLowerCase()) : true) && (searchMinDate === '' || item.birthdate >= searchMinDate) && (searchMaxDate === '' || item.birthdate <= searchMaxDate)
     );
 
     const totalPages = Math.ceil(filteredData.length / rowsPerPage);
@@ -77,7 +77,6 @@ const ClientsTable = ({data, isCompany}) => {
                 setUser(null)
                 navigate('/error');
             }
-            return
         }
         getUser();
 

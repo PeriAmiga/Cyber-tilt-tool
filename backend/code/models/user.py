@@ -1,4 +1,4 @@
-from sqlalchemy import Table, Column
+from sqlalchemy import Table, Column, ForeignKey
 from sqlalchemy.sql.sqltypes import Integer, String, DateTime, Boolean, Date
 from config.db import meta
 from pydantic import BaseModel
@@ -12,7 +12,7 @@ users = Table(
     Column('phone', String(15)),
     Column('birthdate', Date),
     Column('registerDate', DateTime),
-    Column('companyID', Integer),
+    Column('companyID', Integer,  ForeignKey('Company.companyID')),
     Column('isSysAdmin', Boolean),
     Column('isCompanyAdmin', Boolean),
     Column('isActive', Boolean),

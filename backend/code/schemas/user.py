@@ -22,22 +22,39 @@ class User(BaseModel):
     isSysAdmin: bool
     isCompanyAdmin: bool
     isActive: bool
+    companyName: Optional[str] = None
 
 
 def UserEntity(item, isDict=False) -> User:
-    user = User(
-        userID=int(item[0]),
-        password=item[1],
-        fullName=item[2],
-        email=item[3],
-        phone=item[4],
-        birthdate=item[5],
-        registerDate=item[6],
-        companyID=item[7],
-        isSysAdmin=bool(item[8]),
-        isCompanyAdmin=bool(item[9]),
-        isActive=bool(item[10])
-    )
+    if len(item) < 12:
+        user = User(
+            userID=int(item[0]),
+            password=item[1],
+            fullName=item[2],
+            email=item[3],
+            phone=item[4],
+            birthdate=item[5],
+            registerDate=item[6],
+            companyID=item[7],
+            isSysAdmin=bool(item[8]),
+            isCompanyAdmin=bool(item[9]),
+            isActive=bool(item[10])
+        )
+    else:
+        user = User(
+            userID=int(item[0]),
+            password=item[1],
+            fullName=item[2],
+            email=item[3],
+            phone=item[4],
+            birthdate=item[5],
+            registerDate=item[6],
+            companyID=item[7],
+            isSysAdmin=bool(item[8]),
+            isCompanyAdmin=bool(item[9]),
+            isActive=bool(item[10]),
+            companyName=item[12],
+        )
     if isDict:
         return user.dict()
     return user

@@ -8,52 +8,7 @@ import Container from 'react-bootstrap/Container';
 
 function SystemAuthorization() {
     const navigate = useNavigate();
-    const [users, setUsers] = useState([
-        {
-            userID: 1,
-            fullName: 'John Doe',
-            email: 'john.doe@example.com',
-            phone: '1234567890',
-            birthDate: '1990-01-01',
-            isAdmin: false,
-            isActive: true,
-            company: 'Company A',
-            isSysAdmin: false,
-        },
-        {
-            userID: 2,
-            fullName: 'Jane Smith',
-            email: 'jane.smith@example.com',
-            phone: '9876543210',
-            birthDate: '1985-05-15',
-            isAdmin: false,
-            isActive: true,
-            company: 'Company B',
-            isSysAdmin: false,
-        },
-        {
-            userID: 3,
-            fullName: 'Jane Smith',
-            email: 'jane.smith@example.com',
-            phone: '9876543210',
-            birthDate: '1985-05-15',
-            isAdmin: false,
-            isActive: true,
-            company: 'Google',
-            isSysAdmin: false,
-        },
-        {
-            userID: 4,
-            fullName: 'Alice Johnson',
-            email: 'alice.johnson@example.com',
-            phone: '5555555555',
-            birthDate: '1992-09-30',
-            isAdmin: true,
-            isActive: true,
-            company: 'Company C',
-            isSysAdmin: true,
-        },
-    ]);
+    const [users, setUsers] = useState([])
 
 
     const [filteredUsers, setFilteredUsers] = useState([]);
@@ -67,6 +22,14 @@ function SystemAuthorization() {
             return user;
         });
         setUsers(updatedUsers);
+
+        const updatedFilteredUsers = filteredUsers.map((user) => {
+            if (user.userID === userId) {
+                return { ...user, [field]: value };
+            }
+            return user;
+        });
+        setFilteredUsers(updatedFilteredUsers);
     };
 
     const handleSearch = (e) => {
@@ -76,7 +39,7 @@ function SystemAuthorization() {
             (user) =>
                 user.phone.toLowerCase().includes(searchTerm.toLowerCase()) ||
                 user.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                user.company.toLowerCase().includes(searchTerm.toLowerCase())
+                user.companyName.toLowerCase().includes(searchTerm.toLowerCase())
         );
         setFilteredUsers(filtered);
     };
@@ -90,6 +53,14 @@ function SystemAuthorization() {
 
     const [user, setUser] = useState("")
 
+    async function updateAuthorization(userID, isCompanyAdmin, isSysAdmin, isActive) {
+        try {
+            return await apiGet('/auth/updateAuthorization', {userID: userID, isCompanyAdmin: isCompanyAdmin, isSysAdmin: isSysAdmin, isActive: isActive});
+        } catch (error) {
+            alert("Something didn't work, please try again.");
+        }
+    }
+
     useEffect(() => {
         async function getUser() {
             try {
@@ -101,16 +72,26 @@ function SystemAuthorization() {
                 setUser(null)
                 navigate('/error');
             }
-            return
         }
         getUser();
 
+        async function getUsersData() {
+            try {
+                const res = await apiGet('/company/users');
+                setUsers(res.data);
+            } catch (error) {
+                setUsers([])
+            }
+        }
+        getUsersData();
+
     }, []);
 
-    const toggleSave = (userID, isCompanyAdmin, isSysAdmin, isActive) => {
-        // TODO: api to update the user data
-
-        alert("The data has been successfully saved");
+    async function toggleSave (userID, isCompanyAdmin, isSysAdmin, isActive){
+        const res = await updateAuthorization(userID, isCompanyAdmin,isSysAdmin, isActive);
+        if(res) {
+            alert("The data has been updated successfully");
+        }
     }
 
     return (
@@ -155,21 +136,19 @@ function SystemAuthorization() {
                             <td>{user.fullName}</td>
                             <td>{user.email}</td>
                             <td>{user.phone}</td>
-                            <td>{user.company}</td>
+                            <td>{user.companyName}</td>
                             <td>{user.birthDate}</td>
                             <td>
                                 <input
-                                    id="isCompanyAdmin"
                                     type="checkbox"
-                                    checked={user.isAdmin}
+                                    checked={user.isCompanyAdmin}
                                     onChange={(e) =>
-                                        handleAuthorizationChange(user.userID, 'isAdmin', e.target.checked)
+                                        handleAuthorizationChange(user.userID, 'isCompanyAdmin', e.target.checked)
                                     }
                                 />
                             </td>
                             <td>
                                 <input
-                                    id="isSysAdmin"
                                     type="checkbox"
                                     checked={user.isSysAdmin}
                                     onChange={(e) =>
@@ -179,7 +158,6 @@ function SystemAuthorization() {
                             </td>
                             <td>
                                 <input
-                                    id="isActive"
                                     type="checkbox"
                                     checked={user.isActive}
                                     onChange={(e) =>
@@ -187,7 +165,7 @@ function SystemAuthorization() {
                                     }
                                 />
                             </td>
-                            <td id={user.userID} style={{ cursor: 'pointer' }} onClick={() => toggleSave(user.userID, document.getElementById("isCompanyAdmin").value, document.getElementById("isSysAdmin").value, document.getElementById("isActive").value)}>
+                            <td id={user.userID} style={{ cursor: 'pointer' }} onClick={() => toggleSave(user.userID, user.isCompanyAdmin, user.isSysAdmin, user.isActive)}>
                                 <img
                                     src="/images/save.png" alt="save" style={{ width: '40px', height: '40px' }}/></td>
                         </tr>
@@ -199,21 +177,19 @@ function SystemAuthorization() {
                             <td>{user.fullName}</td>
                             <td>{user.email}</td>
                             <td>{user.phone}</td>
-                            <td>{user.company}</td>
+                            <td>{user.companyName}</td>
                             <td>{user.birthDate}</td>
                             <td>
                                 <input
-                                    id="isCompanyAdmin"
                                     type="checkbox"
-                                    checked={user.isAdmin}
+                                    checked={user.isCompanyAdmin}
                                     onChange={(e) =>
-                                        handleAuthorizationChange(user.userID, 'isAdmin', e.target.checked)
+                                        handleAuthorizationChange(user.userID, 'isCompanyAdmin', e.target.checked)
                                     }
                                 />
                             </td>
                             <td>
                                 <input
-                                    id="isSysAdmin"
                                     type="checkbox"
                                     checked={user.isSysAdmin}
                                     onChange={(e) =>
@@ -223,7 +199,6 @@ function SystemAuthorization() {
                             </td>
                             <td>
                                 <input
-                                    id="isActive"
                                     type="checkbox"
                                     checked={user.isActive}
                                     onChange={(e) =>
@@ -231,7 +206,7 @@ function SystemAuthorization() {
                                     }
                                 />
                             </td>
-                            <td id={user.userID} style={{ cursor: 'pointer' }} onClick={() => toggleSave(user.userID, document.getElementById("isCompanyAdmin").value, document.getElementById("isSysAdmin").value, document.getElementById("isActive").value)}>
+                            <td id={user.userID} style={{ cursor: 'pointer' }} onClick={() => toggleSave(user.userID, user.isCompanyAdmin, user.isSysAdmin, user.isActive)}>
                                 <img
                                     src="/images/save.png" alt="save" style={{ width: '40px', height: '40px' }}/></td>
                         </tr>

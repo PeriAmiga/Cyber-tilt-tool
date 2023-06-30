@@ -43,20 +43,17 @@ function RegisterCompany() {
                 setError('Please Enter an Address of the company');
             }
         } else {
-            // await apiPost('/user/register', { // TODO: api for registration of company
-            //     "password": password,
-            //     "email": email,
-            //     "fullName": fullName,
-            //     "phone": phone,
-            //     "birthdate": birthDate,
-            //     "companyID": 1, // TODO: Moshe - casting the company name to id
-            //     "isSysAdmin": false, // TODO: peri - only SysAdmin
-            //     "isCompanyAdmin": false, // TODO: peri - only CompanyAdmin
-            //     "isActive": true // TODO: peri - admin and company
-            // })
-            setError('');
-            alert("The company created successfully");
-            navigate('/home');
+            try{
+                await apiGet('/company/register', {
+                    "companyName": company,
+                    "address": address,
+                });
+                setError('');
+                alert("The company created successfully");
+                navigate('/home');
+            } catch{
+                setError("Something didn't work, please try again.");
+            }
         }
     }
 

@@ -28,8 +28,8 @@ async def get_all(session_data: SessionData = Depends(verifier)):
 
     res = ReportsEntity(data)
     res.sort(key=sorted)
-    return ORJSONResponse(res, status_code=status.HTTP_200_OK)
 
+    return ORJSONResponse(res, status_code=status.HTTP_200_OK)
 
 def sorted(e):
     return e['reportID']

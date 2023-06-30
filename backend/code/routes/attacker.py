@@ -5,7 +5,6 @@ from models.attacker import attackers
 from schemas.index import AttackerEntity
 from dto.attacker import AttackerDTO
 
-# TODO: imp auth
 attacker = APIRouter(
     prefix="/api/attacker",
     tags=["Attacker"],

@@ -15,10 +15,7 @@ class ToolHandler(FTPHandler):
         pass
 
     def on_login(self, username):
-        print("## on_login ##")
-        print("username:", username)
-        print(f"{self.remote_ip} {self.remote_port}")
-        self.session = init(self.remote_ip)
+        self.session = init(self.remote_ip, username)
         pass
 
     def on_logout(self, username):
@@ -41,8 +38,7 @@ class ToolHandler(FTPHandler):
 
     def on_incomplete_file_received(self, file):
         print("on_incomplete_file_received")
-        import os
-        os.remove(file)
+        pass
 
 
 def log(session, msg):
@@ -54,15 +50,26 @@ def log(session, msg):
     print(res.status_code)
 
 
-def init(attackerIP) -> str:
+def init(attackerIP, username) -> str:
     data = requests.post('http://backend/api/log/init',
                          {
                              "serviceID": os.environ.get('SERVICE_ID'),
                              "companyID": os.environ.get('COMPANY_ID'),
                              "attackerIP": attackerIP,
-                             "trapID": 0
+                             "trapID": get_tarp_id(username)
                          }
                          )
     print(data.text)
     print(data.status_code)
     return data.text
+
+def get_tarp_id(username):
+    # Options:
+    # 4 - Fake User
+    # 5 - Hidden Admin
+    if username == "Administrator" or username == "root"
+        return 5
+    if username == "user
+        return 4
+
+    return 4

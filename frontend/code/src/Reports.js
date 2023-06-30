@@ -14,7 +14,6 @@ function Reports() {
             try {
                 const user = await apiGet('/auth/whoami');
                 setUser(user.data);
-                console.log(user.data);
             } catch (error) {
                 setUser(null)
                 navigate('/error');

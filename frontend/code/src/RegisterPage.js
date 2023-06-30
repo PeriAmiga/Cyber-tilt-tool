@@ -1,6 +1,6 @@
 import React, {useState, useRef, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
-import {apiGet, apiPost} from './services/apiService';
+import {apiGet} from './services/apiService';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
@@ -92,20 +92,21 @@ function RegisterPage() {
             setError('The passwords are not match');
         }
         else {
-            await apiPost('/user/register', {
-                "password": password,
-                "email": email,
-                "fullName": fullName,
-                "phone": phone,
-                "birthdate": birthDate,
-                "companyID": 2, // TODO: Moshe - casting the company name to id
-                "isSysAdmin": false,
-                "isCompanyAdmin": false,
-                "isActive": true
-            })
-            setError('');
-            alert("The user created successfully");
-            navigate('/login');
+            try{
+                await apiGet('/user/register', {
+                    "password": password,
+                    "email": email,
+                    "fullName": fullName,
+                    "phone": phone,
+                    "birthdate": birthDate,
+                    "companyName": company,
+                });
+                setError('');
+                alert("The user created successfully");
+                navigate('/home');
+            } catch{
+                setError("Something didn't work, please try again.");
+            }
         }
     }
 

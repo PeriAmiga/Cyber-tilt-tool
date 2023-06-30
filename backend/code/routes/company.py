@@ -1,13 +1,12 @@
 from fastapi import APIRouter, status, Depends
 from fastapi.responses import ORJSONResponse, JSONResponse
 from config.db import conn
-from models.index import companies, users
+from models.index import companies, users, companies_Services, service
 from schemas.index import companiesEntity
 from .auth import cookie
 from auth.SessionData import SessionData
 from .auth import verifier
 from dto.company import CompanyDTO
-from models.user import loginUser, users
 from schemas.user import UsersEntity
 
 
@@ -40,9 +39,36 @@ async def create(companyDTO: CompanyDTO):
 @company.get("/users", dependencies=[Depends(cookie)])
 async def get_users(session_data: SessionData = Depends(verifier)):
     if session_data.isSysAdmin:
-        data = conn.execute(users.select()).fetchall()
+        q = users.join(companies)
+        data = conn.execute(q.select()).fetchall()
         return ORJSONResponse(UsersEntity(data, True), status_code=status.HTTP_200_OK)
     elif session_data.isCompanyAdmin:
         data = conn.execute(users.select().where(users.c.companyID == session_data.companyID)).fetchall()
         return ORJSONResponse(UsersEntity(data, True), status_code=status.HTTP_200_OK)
     return ORJSONResponse("UNAUTHORIZED", status_code=status.HTTP_401_UNAUTHORIZED)
+
+@company.get('/register')
+async def register(companyName: str, address: str):
+    # Checking that the company does not exist
+    db_select_company = conn.execute(companies.select().where(companies.c.name == companyName)).fetchone()
+    if db_select_company is not None:
+        return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content="BAD_REQUEST")
+
+    conn.execute(companies.insert().values(
+        name=companyName,
+        address=address,
+        isActivate=True
+    ))
+    conn.commit()
+
+    return JSONResponse(status_code=status.HTTP_201_CREATED, content="")
+
+#@company.get('/companies', dependencies=[Depends(cookie)])
+#async def companies(session_data: SessionData = Depends(verifier)):
+    #if session_data.isSysAdmin:
+        #q = companies.join(companies_Services)
+        #query = joined_table.select().where(companies.c.companyID == companies_Services.c.companyID)
+        #data = conn.execute(q.select()).fetchall()
+        #print("LOOK HERE:", data)
+        #return JSONResponse("data", status_code=status.HTTP_200_OK)
+    #return JSONResponse("UNAUTHORIZED", status_code=status.HTTP_401_UNAUTHORIZED)

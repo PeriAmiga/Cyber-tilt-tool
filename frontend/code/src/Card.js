@@ -20,6 +20,7 @@ function MyVerticallyCenteredModal(props) {
             try {
                 const user = await apiGet(`/log/${props.sessionLogID}`);
                 setLogs(user.data);
+                console.log(user.data);
             } catch (error) {
                 setLogs([])
                 console.error(error)
@@ -54,7 +55,7 @@ function MyVerticallyCenteredModal(props) {
                             <tr key={item.logID}>
                                 <td>{item.logID}</td>
                                 <td>{item.description}</td>
-                                <td>{item.createAt}</td>
+                                <td>{new Date(item.createAt).toLocaleString()}</td>
                             </tr>
                         ))}
                     </tbody>

@@ -20,7 +20,6 @@ function CompanyUsers() {
                 setUser(null);
                 navigate('/error');
             }
-            return
         }
         getUser();
 
@@ -36,7 +35,6 @@ function CompanyUsers() {
 
     }, []);
 
-    console.log(data);
     return (
         user && (<div id="reports">
             <h1 id="companyClients">{user.companyName} - Users</h1>

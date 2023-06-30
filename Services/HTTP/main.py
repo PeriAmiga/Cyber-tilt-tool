@@ -57,6 +57,10 @@ def write_attacker_details():
     f.write(f"Host Name: {host_name}\n")
     f.close()
 
+def init_report(host):
+
+
+
 def is_access_fake_login():
     ## get item by IP from ipfollow
     mycursor = mydb.cursor()
@@ -98,21 +102,19 @@ async def login(request:Request, user: User):
     is_login_sql_injection = any(str.lower() in user.username.lower() or str.lower() in user.password.lower() for str in SQL_INJECTION_LOGIN)
 
     if any(str.lower() in user.username.lower() or str.lower() in user.password.lower() for str in SQL_INJECTION_DAMAGE):
-        write_attacker_details()
         return HTMLResponse(content="No permissions!", status_code=403)
 
     if not is_login_sql_injection and (FAKE_ADMIN.get(user.username) is None or FAKE_ADMIN[user.username] != user.password):
         if not is_access_fake_login():
             return HTMLResponse(content="No permissions!", status_code=403)
 
-    write_attacker_details()
+    init_report(request.client.host)
 
     response = templates.TemplateResponse("menu.html", context={'request': request})
     session = uuid4()
     data = SessionData(username=user.username)
     await backend.create(session, data)
     cookie.attach_to_response(response, session)
-    print(f"created session for {user.username}")
     return response
 
 @app.get("/UsersDetails", dependencies=[Depends(cookie)])

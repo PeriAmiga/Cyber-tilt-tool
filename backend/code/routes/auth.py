@@ -208,6 +208,22 @@ def reset_password(email: str, password: str):
         return response
 
 
+@auth.get('/updateAuthorization')
+def update_profile(userID: int, isCompanyAdmin: bool, isSysAdmin: bool, isActive: bool):
+    query = users.select().where(users.c.userID == userID)
+    db_select_user = conn.execute(query).fetchone()
+    if db_select_user is None:
+        return JSONResponse("Forbidden", status_code=status.HTTP_403_FORBIDDEN)
+    else:
+        update_query = users.update().where(
+            users.c.userID == userID).values(isCompanyAdmin=isCompanyAdmin,isSysAdmin=isSysAdmin, isActive=isActive)
+        conn.execute(update_query)
+        conn.commit()
+        response = JSONResponse(
+            "User Updated", status_code=status.HTTP_202_ACCEPTED)
+        return response
+
+
 def reset_password_attempts(email: str, token: str):
     mycursor = conn.cursor()
     sql = "UPDATE User SET password_attempts = 0 WHERE email = %s"

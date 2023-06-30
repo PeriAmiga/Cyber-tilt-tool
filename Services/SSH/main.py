@@ -7,8 +7,8 @@ import sys
 import traceback
 import paramiko
 from users import FAKE_ADMIN, FAKE_SUPERADMIN
+import requests
 
-LOG = open("logs/log.txt", "a")
 HOST_KEY = paramiko.RSAKey(filename='keys/private.key')
 SSH_BANNER = "SSH-2.0-OpenSSH_8.2p1 Ubuntu-4ubuntu0.3"
 
@@ -53,8 +53,6 @@ def handle_cmd(cmd, chan, isSuperAdmin):
         send_ascii("clippy.txt", chan)
         response = "Use the 'help' command to view available commands"
 
-    LOG.write(response + "\n")
-    LOG.flush()
     chan.send(response + "\r\n")
 
 
@@ -63,9 +61,7 @@ def send_ascii(filename, chan):
     with open('ascii/{}'.format(filename)) as text:
         chan.send("\r")
         for line in enumerate(text):
-            LOG.write(line[1])
             chan.send(line[1] + "\r")
-    LOG.flush()
 
 
 class FakeSshServer(paramiko.ServerInterface):
@@ -103,8 +99,9 @@ class FakeSshServer(paramiko.ServerInterface):
 
 
 def handle_connection(client, addr, hostname):
+    session = ''
     """Handle a new ssh connection"""
-    LOG.write("\n\nConnection from: " + addr[0] + " " + str(addr[1]) + " " + str(hostname) + "\n")
+    session = init(str(addr[1]))
     print('Got a connection!')
     try:
         transport = paramiko.Transport(client)
@@ -142,7 +139,7 @@ def handle_connection(client, addr, hostname):
 
                 chan.send("\r\n")
                 command = command.rstrip()
-                LOG.write("$ " + command + "\n")
+                log(command)
                 print(command)
                 if command == "exit":
                     run = False
@@ -195,6 +192,14 @@ def start_server(port, bind):
 
     for thread in threads:
         thread.join()
+
+def get_tarp_id(username):
+    # Options:
+    # 6 - Fake User
+    # 7 - Hidden Administrator
+    if username == ""
+
+    return 6
 
 
 if __name__ == "__main__":
