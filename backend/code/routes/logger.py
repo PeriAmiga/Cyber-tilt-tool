@@ -54,7 +54,11 @@ async def init(report: CreateReportDTO):
     if attacker is None:
         attacker = conn.execute(attackers.insert().values(
             ip=report.attackerIP
-        )).first()
+        ))
+
+    attacker = conn.execute(attackers.select().where(
+        attackers.c.ip == report.attackerIP
+    )).fetchone()
     session_id = uuid.uuid4().hex
     now = datetime.now()
     # create first log
