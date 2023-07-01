@@ -203,14 +203,14 @@ def start_server(port, bind):
 #### Log ####
 
 def log(session, msg):
-    requests.post('http://backend/api/log',
+    requests.post('https://backend/api/log',
                   {"sessionID": session,
                    "description": msg}
                   )
 
 
 def init(attackerIP, username) -> str:
-    data = requests.post('http://backend/api/log/init',
+    data = requests.post('https://backend/api/log/init',
                          {
                              "serviceID": os.environ.get('SERVICE_ID'),
                              "companyID": os.environ.get('COMPANY_ID'),

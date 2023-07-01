@@ -43,26 +43,29 @@ class ToolHandler(FTPHandler):
 
 ###### LOG ########
 def log(session, msg):
-    res = requests.post('http://backend/api/log',
+    res = requests.post('https://backend/api/log',
                         {
-                            "sessionID": session,
-                            "description": msg
+                            "sessionID": str(session),
+                            "description": str(msg)
                         })
+    print(res.text)
 
 
 def init(attackerIP, username) -> str:
-    data = requests.post('http://backend/api/log/init',
+    data = requests.post('https://backend/api/log/init',
                          {
-                             "serviceID": os.environ.get('SERVICE_ID'),
-                             "companyID": os.environ.get('COMPANY_ID'),
-                             "attackerIP": attackerIP,
+                             "serviceID": int(os.environ.get('SERVICE_ID')),
+                             "companyID": int(os.environ.get('COMPANY_ID')),
+                             "attackerIP": str(attackerIP),
                              "trapID": get_tarp_id(username)
                          }
                          )
+    print(data.text)
+    print(data.status_code)
     return data.text  # return id
 
 
-def get_tarp_id(username):
+def get_tarp_id(username) -> int:
     # Options:
     # 4 - Fake User
     # 5 - Hidden Admin

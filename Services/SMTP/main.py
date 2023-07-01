@@ -121,7 +121,7 @@ def log(session, command, details=""):
     msg = f"The command is: {command}"
     if details != "":
         msg += f"The details are: {details}"
-    requests.post('http://backend/api/log',
+    requests.post('https://backend/api/log',
                   {
                       "sessionID": session,
                       "description": msg
@@ -129,7 +129,7 @@ def log(session, command, details=""):
 
 
 def init_report(attackerIP, username) -> str:
-    data = requests.post('http://backend/api/log/init',
+    data = requests.post('https://backend/api/log/init',
                          {
                              "serviceID": os.environ.get('SERVICE_ID'),
                              "companyID": os.environ.get('COMPANY_ID'),

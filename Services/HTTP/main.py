@@ -174,7 +174,7 @@ app.mount("/", StaticFiles(directory="dist", html=True), name="static")
 
 ###### LOG ########
 def log(session, msg):
-    res = requests.post('http://backend/api/log',
+    res = requests.post('https://backend/api/log',
                         {
                             "sessionID": session,
                             "description": msg
@@ -184,7 +184,7 @@ def log(session, msg):
 
 
 def init_report(attackerIP, username) -> str:
-    data = requests.post('http://backend/api/log/init',
+    data = requests.post('https://backend/api/log/init',
                          {
                              "serviceID": os.environ.get('SERVICE_ID'),
                              "companyID": os.environ.get('COMPANY_ID'),
