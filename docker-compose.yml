@@ -77,15 +77,16 @@ services:
       db:
         condition: service_healthy
 
-  ## Client
-  #frontend:
-  #  build: /frontend
-  #  ports:
-  #    - 5001:3000
-  #  environment:
-  #    - BROWSER=none
-  #  depends_on:
-  #    - backend
+  # Client
+  frontend:
+    build: /frontend
+    ports:
+      - 5001:3000
+    environment:
+      - BROWSER=none
+      - docker=True
+    depends_on:
+      - backend
 
   ## Database
   db:

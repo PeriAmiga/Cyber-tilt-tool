@@ -1,8 +1,9 @@
 from smtplib import SMTP
+import checker
 
 
 def health():
-    assert 1 == 1  # TODO
+    assert checker.check('localhost', 2525) == True
 
 
 def test_authentication_required():

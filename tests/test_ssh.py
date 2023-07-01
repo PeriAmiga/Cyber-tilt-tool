@@ -1,3 +1,5 @@
+import checker
+
 
 def test_health():
-    assert 1 == 1  # TODO
+    assert checker.check('localhost', 2222) == True
