@@ -45,7 +45,8 @@ WHERE NOT EXISTS (
 
 /* Create User */
 
-/* Administrator */
+/* computersec03 */
+
 INSERT INTO
     `db`.`User` (
         `userID`,
@@ -79,8 +80,8 @@ WHERE NOT EXISTS (
             email = 'computersec03@gmail.com'
     );
 
-
 /* Administrator */
+
 INSERT INTO
     `db`.`User` (
         `userID`,
@@ -96,7 +97,7 @@ INSERT INTO
         `companyID`
     )
 SELECT
-    1,
+    2,
     '$2b$12$EEmr3aYzuYBFK7n8OVrwae7MoxE/UbtCSB5B0/VhXePflS4sXFMPG',
     'Administrator',
     'admin@admin.com',
@@ -131,7 +132,7 @@ INSERT INTO
         `companyID`
     )
 SELECT
-    2,
+    3,
     '$2b$12$EEmr3aYzuYBFK7n8OVrwae7MoxE/UbtCSB5B0/VhXePflS4sXFMPG',
     'User1, Intel',
     'user1@intel.com',
@@ -166,7 +167,7 @@ INSERT INTO
         `companyID`
     )
 SELECT
-    3,
+    4,
     '$2b$12$EEmr3aYzuYBFK7n8OVrwae7MoxE/UbtCSB5B0/VhXePflS4sXFMPG',
     'Admin1, Intel',
     'admin1@intel.com',
@@ -201,7 +202,7 @@ INSERT INTO
         `companyID`
     )
 SELECT
-    4,
+    5,
     '$2b$12$EEmr3aYzuYBFK7n8OVrwae7MoxE/UbtCSB5B0/VhXePflS4sXFMPG',
     'User1, Apple',
     'user1@apple.com',
@@ -236,7 +237,7 @@ INSERT INTO
         `companyID`
     )
 SELECT
-    5,
+    6,
     '$2b$12$EEmr3aYzuYBFK7n8OVrwae7MoxE/UbtCSB5B0/VhXePflS4sXFMPG',
     'Admin1, Apple',
     'admin1@apple.com',

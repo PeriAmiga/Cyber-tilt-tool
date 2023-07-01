@@ -7,47 +7,47 @@ class ToolHandler(FTPHandler):
     session = ""
 
     def on_connect(self):
-        print("on_connect")
-        print(f"IP:{self.remote_ip} Port:{self.remote_port}")
+        log(session=self.session, msg="on_connect")
+        log(session=self.session,
+            msg=f"IP:{self.remote_ip} Port:{self.remote_port}")
 
     def on_disconnect(self):
-        print("on_disconnect")
+        log(session=self.session, msg="on_disconnect")
         pass
 
     def on_login(self, username):
         self.session = init(self.remote_ip, username)
+        log(session=self.session, msg="on_login")
         pass
 
     def on_logout(self, username):
-        print("on_logout")
-        print("username:", username)
-        print(f"{self.remote_ip} {self.remote_port}")
+        log(session=self.session, msg=f"on_logout '{username}'")
         pass
 
     def on_file_sent(self, file):
-        print("on_file_sent")
+        log(session=self.session, msg="on_file_sent")
         pass
 
     def on_file_received(self, file):
-        print("on_file_received")
+        log(session=self.session, msg="on_file_received")
         pass
 
     def on_incomplete_file_sent(self, file):
-        print("on_incomplete_file_sent")
+        log(session=self.session, msg="on_incomplete_file_sent")
         pass
 
     def on_incomplete_file_received(self, file):
-        print("on_incomplete_file_received")
+        log(session=self.session, msg="on_incomplete_file_received")
         pass
 
 
+###### LOG ########
 def log(session, msg):
     res = requests.post('http://backend/api/log',
-                        {"sessionID": session,
-                         "description": msg}
-                        )
-    print(res.text)
-    print(res.status_code)
+                        {
+                            "sessionID": session,
+                            "description": msg
+                        })
 
 
 def init(attackerIP, username) -> str:
@@ -59,17 +59,16 @@ def init(attackerIP, username) -> str:
                              "trapID": get_tarp_id(username)
                          }
                          )
-    print(data.text)
-    print(data.status_code)
-    return data.text
+    return data.text  # return id
+
 
 def get_tarp_id(username):
     # Options:
     # 4 - Fake User
     # 5 - Hidden Admin
-    if username == "Administrator" or username == "root"
+    if username == "Administrator" or username == "root":
         return 5
-    if username == "user
+    if username == "user":
         return 4
 
     return 4

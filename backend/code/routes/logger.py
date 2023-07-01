@@ -63,6 +63,7 @@ async def init(report: CreateReportDTO):
         createAt=now.strftime("%Y-%m-%d %H:%M:%S"),
         description="INIT Report"
     ))
+    conn.commit()
     # get id of link of company to service
     companies_services_data = conn.execute(companies_Services.select().where(
         (companies_Services.c.companyID == report.companyID) & (
@@ -71,7 +72,7 @@ async def init(report: CreateReportDTO):
     # create report
     conn.execute(reports.insert().values(
         companies_services_id=int(companies_services_data[0]),
-        attackerID=attacker[0],
+        attackerID=int(attacker[0]),
         trapID=report.trapID,
         sessionLogID=session_id,
         createAt=now.strftime("%Y-%m-%d %H:%M:%S"),

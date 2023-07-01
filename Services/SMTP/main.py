@@ -1,17 +1,8 @@
 import asyncio
 from users import FAKE_ADMIN, FAKE_EMAILS
 from datetime import timedelta, datetime
-
-
-def write_attacker_details(client_ip, client_port, command, details=""):
-    f = open("loginIP.txt", "a")
-    f.write(f'{datetime.now().strftime("%d/%m/%Y %H:%M:%S")}: ')
-    f.write(f"Client IP: {client_ip}:{client_port}")
-    f.write(f", The command is: {command}")
-    if (details != ""):
-        f.write(f", The details are: {details}")
-    f.write("\n")
-    f.close()
+import requests
+import os
 
 
 async def handle_client(reader, writer):
@@ -22,6 +13,8 @@ async def handle_client(reader, writer):
     client_addr = writer.get_extra_info("peername")
     client_ip = client_addr[0]
     client_port = client_addr[1]
+    username = ''
+    session = init_report(client_ip, username)
     print(f"New connection from {client_ip}:{client_port}")
     await writer.drain()
 
@@ -31,7 +24,7 @@ async def handle_client(reader, writer):
         if not data:
             break
         command = data.strip().decode().upper()
-
+        log(session, command=command)
         if command == "QUIT":
             writer.write(b"221 Bye\r\n")
             await writer.drain()
@@ -50,8 +43,7 @@ async def handle_client(reader, writer):
             if command.count(' ') >= 1:
                 email = command.split(" ")[1].lower()
                 details = f"The mail that checked is: {email}"
-                write_attacker_details(
-                    client_ip, client_port, command, details)
+                log(session, command, details)
                 if email in FAKE_EMAILS:
                     writer.write(b"250 OK\r\n")
                 else:
@@ -67,7 +59,7 @@ async def handle_client(reader, writer):
                 writer.write(
                     f"250 - Username: {user} Password: {FAKE_ADMIN[user]}\r\n".encode())
             writer.write(b"250 End of List\r\n")
-            write_attacker_details(client_ip, client_port, command)
+            log(session, command)
             await writer.drain()
 
         elif command.startswith("AUTH LOGIN"):
@@ -83,8 +75,7 @@ async def handle_client(reader, writer):
             password = (await reader.readline()).strip().decode()
             if (FAKE_ADMIN.get(username) is not None and FAKE_ADMIN[username] == password):
                 details = f"Username is: {username}, Password is: {password}"
-                write_attacker_details(
-                    client_ip, client_port, command, details)
+                log(session, command, details)
                 # authentication succeeded
                 writer.write(b"235 Authentication successful\r\n")
                 authenticated = True
@@ -123,6 +114,40 @@ async def handle_client(reader, writer):
             await writer.drain()
 
     writer.close()
+
+
+###### LOG ########
+def log(session, command, details=""):
+    msg = f"The command is: {command}"
+    if details != "":
+        msg += f"The details are: {details}"
+    requests.post('http://backend/api/log',
+                  {
+                      "sessionID": session,
+                      "description": msg
+                  })
+
+
+def init_report(attackerIP, username) -> str:
+    data = requests.post('http://backend/api/log/init',
+                         {
+                             "serviceID": os.environ.get('SERVICE_ID'),
+                             "companyID": os.environ.get('COMPANY_ID'),
+                             "attackerIP": attackerIP,
+                             "trapID": get_tarp_id(username)
+                         }
+                         )
+    return data.text  # return id
+
+
+def get_tarp_id(username):
+    # Options:
+    # 4 - Fake User
+    # 5 - Hidden User
+    if username in FAKE_ADMIN:
+        return 5
+
+    return 4
 
 
 async def main():

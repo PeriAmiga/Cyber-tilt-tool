@@ -20,4 +20,4 @@ def TokenEntity(item) -> dict:
 
 
 def TokensEntity(entity) -> list:
-    return [ReportEntity(item) for item in entity]
+    return [TokenEntity(item) for item in entity]

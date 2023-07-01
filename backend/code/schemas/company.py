@@ -1,5 +1,6 @@
 
 from pydantic import BaseModel
+from typing import Optional
 
 
 class Company(BaseModel):
@@ -7,6 +8,7 @@ class Company(BaseModel):
     name: str
     address: str
     isActivate: bool
+    serviceName: Optional[any] = None  # ??
 
 
 def CompanyEntity(item, isDict=True) -> Company:
@@ -21,5 +23,5 @@ def CompanyEntity(item, isDict=True) -> Company:
     return company
 
 
-def companiesEntity(entity, isDict=True) -> list:
+def CompaniesEntity(entity, isDict=True) -> list:
     return [CompanyEntity(item, isDict) for item in entity]

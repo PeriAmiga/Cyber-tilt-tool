@@ -6,6 +6,8 @@ import socket
 import sys
 import traceback
 import paramiko
+import requests
+import os
 from users import FAKE_ADMIN, FAKE_SUPERADMIN
 import requests
 
@@ -13,7 +15,7 @@ HOST_KEY = paramiko.RSAKey(filename='keys/private.key')
 SSH_BANNER = "SSH-2.0-OpenSSH_8.2p1 Ubuntu-4ubuntu0.3"
 
 
-def handle_cmd(cmd, chan, isSuperAdmin):
+def handle_cmd(cmd, chan, isSuperAdmin, session):
     """Branching statements to handle and prepare a response for a command"""
     response = ""
     if cmd.startswith("sudo"):
@@ -53,6 +55,7 @@ def handle_cmd(cmd, chan, isSuperAdmin):
         send_ascii("clippy.txt", chan)
         response = "Use the 'help' command to view available commands"
 
+    log(session, cmd)
     chan.send(response + "\r\n")
 
 
@@ -66,6 +69,8 @@ def send_ascii(filename, chan):
 
 class FakeSshServer(paramiko.ServerInterface):
     """Settings for paramiko server interface"""
+    username = ''
+
     def __init__(self):
         self.event = threading.Event()
         self._is_super_admin = False
@@ -79,13 +84,15 @@ class FakeSshServer(paramiko.ServerInterface):
         return paramiko.OPEN_FAILED_ADMINISTRATIVELY_PROHIBITED
 
     def check_auth_password(self, username, password):
+        self.username = username
+
         if (FAKE_ADMIN.get(username) is not None and FAKE_ADMIN[username] == password):
             return paramiko.AUTH_SUCCESSFUL
         elif (FAKE_SUPERADMIN.get(username) is not None and FAKE_SUPERADMIN[username] == password):
             self._is_super_admin = True
             return paramiko.AUTH_SUCCESSFUL
-        else:
-            return paramiko.AUTH_FAILED
+
+        return paramiko.AUTH_FAILED
 
     def get_allowed_auths(self, username):
         return 'password'
@@ -99,10 +106,9 @@ class FakeSshServer(paramiko.ServerInterface):
 
 
 def handle_connection(client, addr, hostname):
-    session = ''
     """Handle a new ssh connection"""
-    session = init(str(addr[1]))
     print('Got a connection!')
+    session = ''
     try:
         transport = paramiko.Transport(client)
         transport.add_server_key(HOST_KEY)
@@ -126,6 +132,7 @@ def handle_connection(client, addr, hostname):
             raise Exception("No shell request")
 
         try:
+            session = init(attackerIP=str(addr[0]), username=server.username)
             chan.send("Welcome to the my control server\r\n\r\n")
             run = True
             while run:
@@ -139,12 +146,11 @@ def handle_connection(client, addr, hostname):
 
                 chan.send("\r\n")
                 command = command.rstrip()
-                log(command)
-                print(command)
+                log(session, f"command: {command}")
                 if command == "exit":
                     run = False
                 else:
-                    handle_cmd(command, chan, server.is_super())
+                    handle_cmd(command, chan, server.is_super(), session)
 
         except Exception as err:
             print('!!! Exception: {}: {}'.format(err.__class__, err))
@@ -193,11 +199,36 @@ def start_server(port, bind):
     for thread in threads:
         thread.join()
 
+
+#### Log ####
+
+def log(session, msg):
+    requests.post('http://backend/api/log',
+                  {"sessionID": session,
+                   "description": msg}
+                  )
+
+
+def init(attackerIP, username) -> str:
+    data = requests.post('http://backend/api/log/init',
+                         {
+                             "serviceID": os.environ.get('SERVICE_ID'),
+                             "companyID": os.environ.get('COMPANY_ID'),
+                             "attackerIP": attackerIP,
+                             "trapID": get_tarp_id(username)
+                         }
+                         )
+    return data.text
+
+
 def get_tarp_id(username):
     # Options:
     # 6 - Fake User
-    # 7 - Hidden Administrator
-    if username == ""
+    # 7 - Hidden Admin
+    if username in FAKE_ADMIN:
+        return 6
+    if username == FAKE_SUPERADMIN:
+        return 7
 
     return 6
 
