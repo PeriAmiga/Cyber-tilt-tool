@@ -46,19 +46,20 @@ def log(session, msg):
     res = requests.post('https://backend/api/log',
                         {
                             "sessionID": str(session),
-                            "description": str(msg)
-                        })
+                            "description": msg
+                        }, verify=False)
     print(res.text)
+    print(res.status_code)
 
 
 def init(attackerIP, username) -> str:
     data = requests.post('https://backend/api/log/init',
                          {
                              "serviceID": int(os.environ.get('SERVICE_ID')),
-                             "companyID": int(os.environ.get('COMPANY_ID')),
+                             "companyID": str(os.environ.get('COMPANY_ID')),
                              "attackerIP": str(attackerIP),
                              "trapID": get_tarp_id(username)
-                         }
+                         }, verify=False
                          )
     print(data.text)
     print(data.status_code)
