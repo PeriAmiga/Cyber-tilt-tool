@@ -20,7 +20,6 @@ function MyVerticallyCenteredModal(props) {
             try {
                 const user = await apiGet(`/log/${props.sessionLogID}`);
                 setLogs(user.data);
-                console.log(user.data);
             } catch (error) {
                 setLogs([])
                 console.error(error)

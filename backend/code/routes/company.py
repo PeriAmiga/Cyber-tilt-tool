@@ -66,13 +66,26 @@ async def register(companyName: str, address: str):
 
 
 @company.get('/companies', dependencies=[Depends(cookie)])
-async def companies(session_data: SessionData = Depends(verifier)):
+async def get_companies(session_data: SessionData = Depends(verifier)):
     if session_data.isSysAdmin:
         q = companies.join(
             companies_Services, companies_Services.c.companyID == companies.c.companyID).join(
             services, services.c.serviceID == companies_Services.c.serviceID)
         data = conn.execute(q.select()).fetchall()
         print("LOOK HERE:", data)
-        return JSONResponse(CompaniesEntity(data), status_code=status.HTTP_200_OK)
+        companies_with_services = CompaniesEntity(data, False)
+        out = {}
+
+        for item in companies_with_services:
+            if out.get(item.name) == None:
+                out[item.name] = {}
+            out[item.name]['companyID'] = item.companyID
+            out[item.name]['address'] = item.address
+            out[item.name]['isActivate'] = item.isActivate
+            if out[item.name].get('services') is None:
+                out[item.name]['services'] = []
+            out[item.name]['services'].append(item.serviceName)
+
+        return JSONResponse(out, status_code=status.HTTP_200_OK)
 
     return JSONResponse("UNAUTHORIZED", status_code=status.HTTP_401_UNAUTHORIZED)

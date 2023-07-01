@@ -19,7 +19,6 @@ export const apiGet = async (path, params = {}) => {
 export const apiPost = async (path, body) => {
     try {
         const resp = await _interfaceAxios.post(path, body);
-        console.log("apiPost", resp)
         return resp;
     } catch (err) {
         throw err;

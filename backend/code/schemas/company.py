@@ -8,15 +8,17 @@ class Company(BaseModel):
     name: str
     address: str
     isActivate: bool
-    serviceName: Optional[any] = None  # ??
+    serviceName: str
 
 
 def CompanyEntity(item, isDict=True) -> Company:
+    print('CompanyEntity', item)
     company = Company(
         companyID=int(item[0]),
         name=item[1],
         address=item[2],
         isActivate=item[3],
+        serviceName=item[10]
     )
     if isDict:
         return company.dict()

@@ -1,19 +1,17 @@
-function updateTable(table){
+function updateTable(table) {
     const divTable = document.querySelector(".table");
-    if(divTable.firstChild != null)
-    {
+    if (divTable.firstChild != null) {
         divTable.removeChild(divTable.firstChild);
     }
     divTable.appendChild(table);
 }
 
-function usersdetails(){
+function usersdetails() {
     fetch('/UsersDetails', {
         method: 'GET',
     })
         .then((response) => response.json())
         .then((result) => {
-            console.log('Success:', result);
             let array = result;
             const table = document.createElement('table');
             const header = document.createElement('tr');
@@ -36,7 +34,7 @@ function usersdetails(){
             header.append(col5);
             header.append(col6);
             table.append(header);
-            array.forEach(function(element){
+            array.forEach(function (element) {
                 const pname = document.createTextNode(element.PrivateName);
                 const lname = document.createTextNode(element.LastName);
                 const id = document.createTextNode(element.ID);
@@ -64,7 +62,7 @@ function usersdetails(){
                 row.append(col6);
                 table.append(row);
                 updateTable(table);
-                })
+            })
 
         })
         .catch((error) => {
@@ -72,13 +70,12 @@ function usersdetails(){
         });
 }
 
-function employmentsdetails(){
+function employmentsdetails() {
     fetch('/EmploymentsDetails', {
         method: 'GET',
     })
         .then((response) => response.json())
         .then((result) => {
-            console.log('Success:', result);
             let array = result;
             const table = document.createElement('table');
             const header = document.createElement('tr');
@@ -104,7 +101,7 @@ function employmentsdetails(){
             header.append(col6);
             header.append(col7);
             table.append(header);
-            array.forEach(function(element){
+            array.forEach(function (element) {
                 const pname = document.createTextNode(element.PrivateName);
                 const lname = document.createTextNode(element.LastName);
                 const userid = document.createTextNode(element.UserID);
@@ -144,13 +141,12 @@ function employmentsdetails(){
         });
 }
 
-function administratordetails(){
+function administratordetails() {
     fetch('/AdministratorDetails', {
         method: 'GET',
     })
         .then((response) => response.json())
         .then((result) => {
-            console.log('Success:', result);
             let array = result;
             const table = document.createElement('table');
             const header = document.createElement('tr');
@@ -176,7 +172,7 @@ function administratordetails(){
             header.append(col6);
             header.append(col7);
             table.append(header);
-            array.forEach(function(element){
+            array.forEach(function (element) {
                 const pname = document.createTextNode(element.PrivateName);
                 const lname = document.createTextNode(element.LastName);
                 const userid = document.createTextNode(element.UserID);
@@ -216,7 +212,7 @@ function administratordetails(){
         });
 }
 
-const logout = async() => {
+const logout = async () => {
     await fetch('/logout', {
         method: 'post',
     })
