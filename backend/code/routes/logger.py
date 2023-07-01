@@ -52,10 +52,10 @@ async def init(report: CreateReportDTO):
         attackers.c.ip == report.attackerIP
     )).fetchone()
     if attacker is None:
-        attacker = conn.execute(attackers.insert().values(
+        conn.execute(attackers.insert().values(
             ip=report.attackerIP
         ))
-
+    conn.commit()
     attacker = conn.execute(attackers.select().where(
         attackers.c.ip == report.attackerIP
     )).fetchone()
