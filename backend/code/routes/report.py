@@ -13,19 +13,16 @@ report = APIRouter(
     default_response_class=ORJSONResponse
 )
 
-
 @report.get("", dependencies=[Depends(cookie)])
 async def get_all(session_data: SessionData = Depends(verifier)):
     if session_data is None:
         return ORJSONResponse("UNAUTHORIZED", status_code=status.HTTP_401_UNAUTHORIZED)
-    if session_data.isSysAdmin:
-        q = reports.join(companies_Services)
-    else:
-        q = reports.join(
-            companies_Services, companies_Services.c.companyID == session_data.companyID)
+    q = reports.join(companies_Services)
     q = q.join(attackers).join(traps).join(companies)
-    data = conn.execute(q.select()).fetchall()
-
+    if session_data.isSysAdmin:
+        data = conn.execute(q.select()).fetchall()
+    else:
+        data = conn.execute(q.select().where(companies.c.companyID == session_data.companyID)).fetchall()
     res = ReportsEntity(data)
     res.sort(key=sorted)
 
