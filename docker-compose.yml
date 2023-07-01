@@ -25,6 +25,8 @@ services:
       - SERVICE_ID=2
     depends_on:
       - backend
+    volumes:
+      - ./Services/FTP:/app
   service_ftp_apple:
     build: /Services/FTP
     ports:
