@@ -45,12 +45,25 @@ class ToolHandler(FTPHandler):
 
 ###### LOG ########
 def log(session, msg):
-    print("success")
+    requests.post('https://backend/api/log',
+                  json={
+                      "sessionID": session,
+                      "description": msg
+                  }, verify=False)
 
 
 def init(attackerIP, username) -> str:
-    print("success")
-    return "success"
+    obj = {
+        "serviceID": os.environ.get('SERVICE_ID'),
+        "companyID": os.environ.get('COMPANY_ID'),
+        "attackerIP": attackerIP,
+        "trapID": get_tarp_id(username)
+    }
+    print(obj)
+    data = requests.post('https://backend/api/log/init',
+                         json=obj, verify=False
+                         )
+    return data.text  # return id
 
 
 def get_tarp_id(username) -> int:

@@ -122,22 +122,22 @@ def log(session, command, details=""):
     if details != "":
         msg += f"The details are: {details}"
     requests.post('https://backend/api/log',
-                  json = {
+                  json={
                       "sessionID": session,
                       "description": msg
                   }, verify=False)
 
 
 def init_report(attackerIP, username) -> str:
-    obj =  {
-                                       "serviceID": os.environ.get('SERVICE_ID'),
-                                       "companyID": os.environ.get('COMPANY_ID'),
-                                       "attackerIP": attackerIP,
-                                       "trapID": get_tarp_id(username)
-                                   }
+    obj = {
+        "serviceID": os.environ.get('SERVICE_ID'),
+        "companyID": os.environ.get('COMPANY_ID'),
+        "attackerIP": attackerIP,
+        "trapID": get_tarp_id(username)
+    }
     print(obj)
     data = requests.post('https://backend/api/log/init',
-                         json = obj, verify=False
+                         json=obj, verify=False
                          )
     return data.text  # return id
 
